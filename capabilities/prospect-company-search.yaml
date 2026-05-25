@@ -1,0 +1,83 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adapt Prospect API — Company Search
+  description: >-
+    Adapt Prospect API — Company Search. 1 operation. Lead operation: Adapt Search Companies.
+    Self-contained Naftiko capability covering one Adapt business surface.
+  tags:
+    - Adapt
+    - Companies
+    - Search
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+  - namespace: env
+    keys:
+      ADAPT_EMAIL: ADAPT_EMAIL
+      ADAPT_API_KEY: ADAPT_API_KEY
+capability:
+  consumes:
+    - type: http
+      namespace: prospect-company-search
+      baseUri: https://api.adapt.io/v3
+      description: Adapt Prospect API — Company Search business capability. Self-contained, no shared references.
+      resources:
+        - name: company-search
+          path: /company/search
+          operations:
+            - name: searchcompanies
+              method: POST
+              description: Adapt Search Companies
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  description: Company search request body (JSON).
+                  required: true
+      authentication:
+        type: composite
+        headers:
+          email: '{{env.ADAPT_EMAIL}}'
+          apiKey: '{{env.ADAPT_API_KEY}}'
+  exposes:
+    - type: rest
+      namespace: prospect-company-search-rest
+      port: 8080
+      description: REST adapter for Adapt Prospect API — Company Search.
+      resources:
+        - path: /v3/company/search
+          name: company-search
+          description: REST surface for company search.
+          operations:
+            - method: POST
+              name: searchcompanies
+              description: Adapt Search Companies
+              call: prospect-company-search.searchcompanies
+              with:
+                body: rest.body
+              outputParameters:
+                - type: object
+                  mapping: $.
+    - type: mcp
+      namespace: prospect-company-search-mcp
+      port: 9090
+      transport: http
+      description: MCP adapter for Adapt Prospect API — Company Search.
+      tools:
+        - name: adapt-search-companies
+          description: Adapt Search Companies
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: prospect-company-search.searchcompanies
+          with:
+            body: tools.body
+          outputParameters:
+            - type: object
+              mapping: $.

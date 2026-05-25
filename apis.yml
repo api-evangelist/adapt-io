@@ -1,0 +1,162 @@
+aid: adapt-io
+name: Adapt
+description: >-
+  Adapt (adapt.io) is a B2B lead intelligence and sales acceleration platform
+  that provides a database of 250M+ verified business contacts, 16M+ decision
+  makers, and 12M+ company profiles, refreshed at roughly 5M records per day.
+  Adapt sells the data three ways — through a web Prospector for list building
+  and ABM, a LinkedIn/website Chrome extension for in-context contact discovery,
+  and a public REST API for programmatic search, enrichment, and contact
+  purchase. The Prospect API exposes four operations (contact search, company
+  search, contact enrichment, and contact purchase / fetch) with 50+
+  firmographic, technographic, and demographic attributes per record, header-
+  based authentication via account email + API key, and a 250 requests-per-
+  minute rate limit. Pricing is published for self-serve Free, Starter ($49/mo)
+  and Basic ($99/mo) tiers; API access is gated to the custom enterprise plan
+  with negotiated email, phone, and enrichment credit allotments. Adapt is
+  primarily used by sales, marketing, and RevOps teams for outbound campaigns,
+  CRM enrichment, lead scoring, ICP list building, and data hygiene, with
+  CRM exports to Salesforce, HubSpot, Pipedrive, Zoho, Outreach, and Salesgear.
+type: Index
+position: Provider
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - B2B Data
+  - Contact Data
+  - Company Data
+  - Lead Intelligence
+  - Sales Intelligence
+  - Sales Acceleration
+  - Data Enrichment
+  - Prospecting
+  - Lead Generation
+  - Email Finder
+  - ABM
+  - CRM Enrichment
+  - Marketing
+  - Sales
+url: https://raw.githubusercontent.com/api-evangelist/adapt-io/refs/heads/main/apis.yml
+created: '2026-05-25'
+modified: '2026-05-25'
+specificationVersion: '0.20'
+apis:
+  - aid: adapt-io:adapt-prospect-api
+    name: Adapt Prospect API
+    description: >-
+      REST API for searching Adapt's B2B contact and company database, enriching
+      known contacts by email/LinkedIn/name+domain, and purchasing contacts to
+      reveal verified email addresses and phone numbers. JSON over HTTPS with
+      header-based authentication (email + apiKey). Default rate limit of 250
+      requests per minute per account; pagination via cursorMark; credit
+      consumption surfaced through `x-call-credit-type` and
+      `*-remaining-credits` response headers.
+    humanURL: https://www.adapt.io/api-docs/v3/
+    baseURL: https://api.adapt.io/v3
+    version: v3
+    tags:
+      - Contacts
+      - Companies
+      - Enrichment
+      - Search
+      - B2B Data
+    properties:
+      - type: Documentation
+        url: https://www.adapt.io/api-docs/v3/
+      - type: Documentation
+        url: https://www.adapt.io/platform/api
+      - type: OpenAPI
+        url: openapi/adapt-prospect-api-openapi.yml
+      - type: NaftikoCapability
+        url: capabilities/prospect-contact-search.yaml
+      - type: NaftikoCapability
+        url: capabilities/prospect-company-search.yaml
+      - type: NaftikoCapability
+        url: capabilities/prospect-enrichment.yaml
+      - type: NaftikoCapability
+        url: capabilities/prospect-purchase.yaml
+      - type: JSONSchema
+        url: json-schema/adapt-contact-schema.json
+      - type: JSONSchema
+        url: json-schema/adapt-company-schema.json
+      - type: JSONLD
+        url: json-ld/adapt-io-context.jsonld
+      - type: Examples
+        url: examples/adapt-contact-search-example.json
+      - type: Examples
+        url: examples/adapt-contact-enrich-example.json
+common:
+  - type: Website
+    url: https://www.adapt.io
+  - type: Portal
+    url: https://www.adapt.io/platform/api
+  - type: Documentation
+    url: https://www.adapt.io/api-docs/v3/
+  - type: GettingStarted
+    url: https://www.adapt.io/api-docs/v3/
+  - type: SignUp
+    url: https://app.adapt.io/users/sign_up
+  - type: Login
+    url: https://app.adapt.io/users/sign_in
+  - type: Pricing
+    url: https://www.adapt.io/pricing
+  - type: Plans
+    url: plans/adapt-io-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/adapt-io-rate-limits.yml
+  - type: FinOps
+    url: finops/adapt-io-finops.yml
+  - type: Product
+    url: https://www.adapt.io/platform/prospecting
+  - type: Product
+    url: https://www.adapt.io/platform/api
+  - type: Product
+    url: https://www.adapt.io/data-os
+  - type: Product
+    url: https://www.adapt.io/our-data
+  - type: Extension
+    url: https://chromewebstore.google.com/detail/adapt-prospector/lkfklokpfbpcmpdacencdkjncpojdgff
+    name: Adapt Prospector Chrome Extension
+  - type: Directory
+    url: https://www.adapt.io/directory/industry
+  - type: Blog
+    url: https://blog.adapt.io
+  - type: Company
+    url: https://www.adapt.io/about-us
+  - type: Customers
+    url: https://www.adapt.io/customers
+  - type: ContactUs
+    url: https://www.adapt.io/contact-us
+  - type: PrivacyPolicy
+    url: https://www.adapt.io/privacy-policy
+  - type: TermsOfService
+    url: https://www.adapt.io/terms-of-service
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/adapt-io
+  - type: Twitter
+    url: https://twitter.com/adapt_io
+  - type: Features
+    data:
+      - 250M+ verified B2B contact database with 50+ attributes per record
+      - 16M+ decision-maker profiles and 12M+ company profiles
+      - ~5M records refreshed daily through ML-assisted data hygiene
+      - Prospect API with contact search, company search, enrichment, and purchase endpoints
+      - Header-based authentication (email + apiKey) with 250 requests-per-minute rate limit
+      - Cursor-based pagination via cursorMark for high-volume search
+      - Email deliverability scoring with 75 / 85 / 95 minimum thresholds
+      - Technographic filtering (technology stack) and exact-title matching
+      - Suppression list support to filter previously-contacted or owned contacts
+      - Chrome extension for in-context prospecting from LinkedIn and company websites
+      - CRM export to Salesforce, HubSpot, Pipedrive, Zoho, Outreach, and Salesgear
+      - Job-change alerts and department-growth tracking on the Custom plan
+      - Free, Starter ($49/mo), Basic ($99/mo), and Custom (API-enabled) plans
+      - 7-day free trial without credit card and 20% annual-billing discount
+    sources:
+      - https://www.adapt.io
+      - https://www.adapt.io/pricing
+      - https://www.adapt.io/our-data
+      - https://www.adapt.io/platform/api
+      - https://www.adapt.io/api-docs/v3/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

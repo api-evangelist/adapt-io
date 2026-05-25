@@ -1,0 +1,197 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Adapt
+providerId: adapt-io
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - B2B Data
+  - Lead Intelligence
+  - Sales Intelligence
+description: >-
+  Reconciled plans and pricing for Adapt's B2B lead intelligence platform. Sources:
+  adapt.io/pricing. API access is gated to the Custom plan; self-serve tiers do not
+  expose Prospect API credentials.
+sources:
+  - https://www.adapt.io/pricing
+  - https://www.adapt.io/platform/api
+plans:
+  - id: adapt-free
+    name: Free
+    type: free
+    description: Try-it tier for individual prospectors. No credit card. 7-day evaluation.
+    entries:
+      - label: Email credits
+        name: email_credits
+        type: included
+        metric: credits
+        limit: 25
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+      - label: Enrichment credits
+        name: enrichment_credits
+        type: included
+        metric: credits
+        limit: 25
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+      - label: Contacts per day
+        name: contacts_per_day
+        type: included
+        metric: contacts
+        limit: 25
+        timeFrame: day
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+    elements:
+      - Chrome extension
+      - Advanced filters
+      - List building
+      - Email support
+  - id: adapt-starter
+    name: Starter
+    type: subscription
+    description: Self-serve entry tier for small sales teams. $49/mo or 20% off annual.
+    entries:
+      - label: Subscription
+        name: subscription
+        type: flat
+        metric: user
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '49.00'
+        userMultiplied: true
+      - label: Email credits
+        name: email_credits
+        type: included
+        metric: credits
+        limit: 500
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+      - label: Enrichment credits
+        name: enrichment_credits
+        type: included
+        metric: credits
+        limit: 500
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+      - label: Contacts per day
+        name: contacts_per_day
+        type: included
+        metric: contacts
+        limit: 50
+        timeFrame: day
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+    elements:
+      - CSV export
+      - Saved searches
+      - ABM list building
+      - Priority email support
+  - id: adapt-basic
+    name: Basic
+    type: subscription
+    description: Self-serve tier with phone data and CRM exports. $99/mo or 20% off annual.
+    entries:
+      - label: Subscription
+        name: subscription
+        type: flat
+        metric: user
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '99.00'
+        userMultiplied: true
+      - label: Email credits
+        name: email_credits
+        type: included
+        metric: credits
+        limit: 1000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+      - label: Phone credits
+        name: phone_credits
+        type: included
+        metric: credits
+        limit: 100
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+      - label: Enrichment credits
+        name: enrichment_credits
+        type: included
+        metric: credits
+        limit: 1000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+      - label: Contacts per day
+        name: contacts_per_day
+        type: included
+        metric: contacts
+        limit: 100
+        timeFrame: day
+        geo: global
+        unit: 1
+        price: '0'
+        userMultiplied: false
+    elements:
+      - Phone numbers
+      - CRM export — Salesforce, HubSpot, Pipedrive, Zoho, Outreach, Salesgear
+      - Contact-per-company limits
+      - Basic reporting
+  - id: adapt-custom
+    name: Custom
+    type: enterprise
+    description: >-
+      Negotiated tier with API access, dedicated account management, and advanced
+      data governance. Pricing on request.
+    entries:
+      - label: Subscription
+        name: subscription
+        type: negotiated
+        metric: user
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'contact-sales'
+        userMultiplied: true
+    elements:
+      - Prospect API access (contact search, company search, enrichment, purchase)
+      - Suppression lists
+      - Job-change alerts
+      - Department-growth tracking
+      - Team management
+      - Advanced reporting
+      - Dedicated account manager
+      - Onboarding support
+      - Chat and call support

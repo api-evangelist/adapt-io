@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adapt-io/main/json-schema/adapt-company-schema.json",
+  "title": "Adapt Company",
+  "description": "A B2B company record returned by the Adapt Prospect API. Includes firmographic attributes and an indicator of how many Adapt contacts are known at the company.",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "website": { "type": "string", "format": "uri" },
+    "domain": { "type": "string" },
+    "phoneNumber": { "type": "string" },
+    "industry": { "type": "string" },
+    "subIndustry": { "type": "string" },
+    "headCount": { "type": "string", "description": "Employee range bucket (e.g. '11-50', '51-200')." },
+    "revenue": { "type": "string", "description": "Revenue bracket bucket (e.g. '$1M-$10M')." },
+    "city": { "type": "string" },
+    "state": { "type": "string" },
+    "country": { "type": "string" },
+    "numberOfContacts": { "type": "integer", "description": "Count of Adapt contacts available at this company." }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "operation": "POST /contact/enrich",
+  "description": "Enrich a known contact by LinkedIn URL and ask for both email and phone in the response.",
+  "request": {
+    "method": "POST",
+    "url": "https://api.adapt.io/v3/contact/enrich",
+    "headers": {
+      "email": "you@yourcompany.com",
+      "apiKey": "YOUR_ADAPT_API_KEY",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "linkedinURL": "https://www.linkedin.com/in/jane-doe-vpe",
+      "include": ["EMAIL", "PHONE"]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "x-call-credit-type": "enrichment,email,phone",
+      "enrich-remaining-credits": 4998
+    },
+    "body": {
+      "id": "c_8a5d1f0e",
+      "email": "jane.doe@acme.example",
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "title": "VP Engineering",
+      "department": "Engineering",
+      "level": "VP-Level",
+      "city": "San Francisco",
+      "state": "California",
+      "country": "United States",
+      "phoneNumber": ["+1-415-555-0142"],
+      "emailDeliverabilityScore": 95,
+      "linkedinURL": "https://www.linkedin.com/in/jane-doe-vpe",
+      "company": {
+        "name": "Acme Software",
+        "domain": "acme.example",
+        "industry": "Computer Software",
+        "headCount": "201-500",
+        "city": "San Francisco",
+        "state": "California",
+        "country": "United States"
+      }
+    }
+  }
+}

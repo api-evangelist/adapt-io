@@ -1,0 +1,60 @@
+{
+  "operation": "POST /contact/search",
+  "description": "Search for VP-level Engineering decision makers at US software companies with 200-1000 employees.",
+  "request": {
+    "method": "POST",
+    "url": "https://api.adapt.io/v3/contact/search",
+    "headers": {
+      "email": "you@yourcompany.com",
+      "apiKey": "YOUR_ADAPT_API_KEY",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "title": ["VP Engineering", "Vice President Engineering"],
+      "level": ["VP-Level"],
+      "department": ["Engineering"],
+      "companyIndustry": ["Computer Software"],
+      "companyHeadCount": ["201-500", "501-1000"],
+      "country": ["United States"],
+      "minimumEmailDeliverabilityScore": 85,
+      "required": ["EMAIL"],
+      "limit": 25
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "x-call-credit-type": "search",
+      "search-remaining-credits": 9875
+    },
+    "body": {
+      "contacts": [
+        {
+          "id": "c_8a5d1f0e",
+          "firstName": "Jane",
+          "lastName": "Doe",
+          "title": "VP Engineering",
+          "department": "Engineering",
+          "level": "VP-Level",
+          "city": "San Francisco",
+          "state": "California",
+          "country": "United States",
+          "emailDeliverabilityScore": 95,
+          "linkedinURL": "https://www.linkedin.com/in/jane-doe-vpe",
+          "company": {
+            "name": "Acme Software",
+            "domain": "acme.example",
+            "industry": "Computer Software",
+            "headCount": "201-500",
+            "city": "San Francisco",
+            "state": "California",
+            "country": "United States",
+            "numberOfContacts": 142
+          }
+        }
+      ],
+      "cursorMark": "AoEpY29udGFjdC1zZWFyY2g6MjU=",
+      "totalResults": 312
+    }
+  }
+}

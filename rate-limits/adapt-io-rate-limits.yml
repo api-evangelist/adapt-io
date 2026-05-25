@@ -1,0 +1,67 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Adapt
+providerId: adapt-io
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - B2B Data
+  - Rate Limiting
+  - Quotas
+description: >-
+  Reconciled rate limits for the Adapt Prospect API v3. Account-level fixed-window
+  rate limit of 250 requests per minute, with per-operation credit consumption
+  (email, phone, enrichment, search) drawn from plan allotments.
+sources:
+  - https://www.adapt.io/api-docs/v3/
+  - https://www.adapt.io/pricing
+headers:
+  limit: x-ratelimit-limit
+  remaining: x-ratelimit-remaining
+  reset: x-ratelimit-reset
+  retryAfter: x-ratelimit-retry-after
+responseCodes:
+  throttled: 429
+  quotaExceeded: 403
+algorithm: fixed-window
+window: 60s
+limits:
+  - tier: Account
+    scope: account
+    rpm: 250
+    description: Default rate limit applied to every Adapt account with API access.
+quotas:
+  - name: Email credits
+    header: email-remaining-credits
+    appliesTo:
+      - POST /contact/fetch
+    description: Consumed when revealing a verified email via Purchase Contacts.
+  - name: Phone credits
+    header: phone-remaining-credits
+    appliesTo:
+      - POST /contact/fetch
+    description: Consumed when revealing a verified phone number via Purchase Contacts.
+  - name: Enrichment credits
+    header: enrich-remaining-credits
+    appliesTo:
+      - POST /contact/enrich
+    description: Consumed per successful enrichment match.
+  - name: Search credits
+    header: search-remaining-credits
+    appliesTo:
+      - POST /contact/search
+      - POST /company/search
+    description: Consumed per search request; quota tied to plan tier.
+errorCodes:
+  - status: 429
+    code: APP-429-001
+    meaning: Rate limit exceeded. Wait per x-ratelimit-retry-after seconds.
+  - status: 403
+    code: APP-403-003
+    meaning: Insufficient credits for the requested operation.
+notes:
+  - Account-level scope — concurrent processes share the 250 rpm budget.
+  - Pagination via cursorMark; one search request returns one page of results.
+  - Purchase Contacts is capped at 50 contactIds per request body.

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adapt-io/main/json-schema/adapt-contact-schema.json",
+  "title": "Adapt Contact",
+  "description": "A B2B contact record returned by the Adapt Prospect API. Email is populated only after the contact has been purchased via POST /contact/fetch.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "description": "Adapt contact identifier; used to purchase the contact via /contact/fetch." },
+    "email": { "type": "string", "format": "email", "description": "Verified work email. Populated only on enrichment or purchase." },
+    "firstName": { "type": "string" },
+    "lastName": { "type": "string" },
+    "title": { "type": "string", "description": "Job title at the current company." },
+    "department": {
+      "type": "string",
+      "enum": ["Engineering", "Finance", "HR", "IT", "Marketing", "Operations", "Sales", "Support", "Other"]
+    },
+    "level": {
+      "type": "string",
+      "enum": ["C-Level", "VP-Level", "Director-Level", "Manager-Level", "Staff", "Other"]
+    },
+    "city": { "type": "string" },
+    "state": { "type": "string" },
+    "country": { "type": "string" },
+    "phoneNumber": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Direct dial and mobile numbers. Populated only after purchase."
+    },
+    "emailDeliverabilityScore": {
+      "type": "integer",
+      "description": "Email deliverability confidence; common thresholds are 75, 85, and 95."
+    },
+    "linkedinURL": { "type": "string", "format": "uri" },
+    "company": { "$ref": "https://raw.githubusercontent.com/api-evangelist/adapt-io/main/json-schema/adapt-company-schema.json" }
+  },
+  "required": ["id"]
+}

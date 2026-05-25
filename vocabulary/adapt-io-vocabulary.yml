@@ -1,0 +1,66 @@
+name: Adapt Vocabulary
+description: >-
+  Operational and capability vocabulary for the Adapt B2B lead intelligence
+  platform. Maps Adapt's product surfaces (Prospector, Chrome extension,
+  Prospect API) and data dimensions (contact, company, technographic,
+  intent) onto the API Evangelist taxonomy.
+provider: Adapt
+providerId: adapt-io
+created: '2026-05-25'
+modified: '2026-05-25'
+terms:
+  - name: Contact
+    definition: An individual B2B record with name, title, department, level, location, and (after purchase) verified email and phone.
+    aliases: [Lead, Prospect, Decision Maker]
+    relatedTo: [Company, EmailDeliverabilityScore]
+  - name: Company
+    definition: An organization profile with firmographics — industry, sub-industry, head count, revenue, location, contact count.
+    aliases: [Account, Organization]
+    relatedTo: [Contact, Industry, Revenue]
+  - name: Department
+    definition: Functional grouping a contact reports into.
+    values: [Engineering, Finance, HR, IT, Marketing, Operations, Sales, Support, Other]
+  - name: Level
+    definition: Seniority of a contact's role.
+    values: [C-Level, VP-Level, Director-Level, Manager-Level, Staff, Other]
+  - name: EmailDeliverabilityScore
+    definition: Integer confidence that an email will not bounce. Common minimum thresholds in the API are 75, 85, and 95.
+  - name: Technographic
+    definition: A technology a company uses, surfaced via the `technology` filter on contact search.
+  - name: Firmographic
+    definition: Company-level attributes used as filters — industry, head count, revenue, location.
+  - name: SearchCredits
+    definition: Credits consumed when calling /contact/search and /company/search.
+  - name: EmailCredits
+    definition: Credits consumed when purchasing a verified email via /contact/fetch.
+  - name: PhoneCredits
+    definition: Credits consumed when purchasing a verified phone number via /contact/fetch.
+  - name: EnrichmentCredits
+    definition: Credits consumed by /contact/enrich.
+  - name: SuppressionList
+    definition: Account-managed list of contacts or domains to exclude from search and enrichment results.
+  - name: ABM
+    definition: Account-Based Marketing. Adapt supports ABM list building, head-count and revenue targeting, and contact-per-company caps.
+dimensions:
+  data:
+    - Contact
+    - Company
+    - Technographic
+    - Firmographic
+    - Demographic
+  operations:
+    - Search
+    - Enrich
+    - Purchase
+  surfaces:
+    - Prospect API
+    - Chrome Extension
+    - Web Prospector
+    - CRM Export
+  integrations:
+    - Salesforce
+    - HubSpot
+    - Pipedrive
+    - Zoho
+    - Outreach
+    - Salesgear
