@@ -1,22 +1,17 @@
 aid: adapt-io
 name: Adapt
 description: >-
-  Adapt (adapt.io) is a B2B lead intelligence and sales acceleration platform
-  that provides a database of 250M+ verified business contacts, 16M+ decision
-  makers, and 12M+ company profiles, refreshed at roughly 5M records per day.
-  Adapt sells the data three ways — through a web Prospector for list building
-  and ABM, a LinkedIn/website Chrome extension for in-context contact discovery,
-  and a public REST API for programmatic search, enrichment, and contact
-  purchase. The Prospect API exposes four operations (contact search, company
-  search, contact enrichment, and contact purchase / fetch) with 50+
-  firmographic, technographic, and demographic attributes per record, header-
-  based authentication via account email + API key, and a 250 requests-per-
-  minute rate limit. Pricing is published for self-serve Free, Starter ($49/mo)
-  and Basic ($99/mo) tiers; API access is gated to the custom enterprise plan
-  with negotiated email, phone, and enrichment credit allotments. Adapt is
-  primarily used by sales, marketing, and RevOps teams for outbound campaigns,
-  CRM enrichment, lead scoring, ICP list building, and data hygiene, with
-  CRM exports to Salesforce, HubSpot, Pipedrive, Zoho, Outreach, and Salesgear.
+  Adapt (adapt.io) is a B2B lead intelligence and sales acceleration platform that provides a database of 250M+ verified
+  business contacts, 16M+ decision makers, and 12M+ company profiles, refreshed at roughly 5M records per day. Adapt
+  sells the data three ways — through a web Prospector for list building and ABM, a LinkedIn/website Chrome extension
+  for in-context contact discovery, and a public REST API for programmatic search, enrichment, and contact purchase. The
+  Prospect API exposes four operations (contact search, company search, contact enrichment, and contact purchase /
+  fetch) with 50+ firmographic, technographic, and demographic attributes per record, header- based authentication via
+  account email + API key, and a 250 requests-per- minute rate limit. Pricing is published for self-serve Free, Starter
+  ($49/mo) and Basic ($99/mo) tiers; API access is gated to the custom enterprise plan with negotiated email, phone, and
+  enrichment credit allotments. Adapt is primarily used by sales, marketing, and RevOps teams for outbound campaigns,
+  CRM enrichment, lead scoring, ICP list building, and data hygiene, with CRM exports to Salesforce, HubSpot, Pipedrive,
+  Zoho, Outreach, and Salesgear.
 type: Index
 position: Provider
 access: 3rd-Party
@@ -44,12 +39,10 @@ apis:
   - aid: adapt-io:adapt-prospect-api
     name: Adapt Prospect API
     description: >-
-      REST API for searching Adapt's B2B contact and company database, enriching
-      known contacts by email/LinkedIn/name+domain, and purchasing contacts to
-      reveal verified email addresses and phone numbers. JSON over HTTPS with
-      header-based authentication (email + apiKey). Default rate limit of 250
-      requests per minute per account; pagination via cursorMark; credit
-      consumption surfaced through `x-call-credit-type` and
+      REST API for searching Adapt's B2B contact and company database, enriching known contacts by
+      email/LinkedIn/name+domain, and purchasing contacts to reveal verified email addresses and phone numbers. JSON
+      over HTTPS with header-based authentication (email + apiKey). Default rate limit of 250 requests per minute per
+      account; pagination via cursorMark; credit consumption surfaced through `x-call-credit-type` and
       `*-remaining-credits` response headers.
     humanURL: https://www.adapt.io/api-docs/v3/
     baseURL: https://api.adapt.io/v3
@@ -67,14 +60,6 @@ apis:
         url: https://www.adapt.io/platform/api
       - type: OpenAPI
         url: openapi/adapt-prospect-api-openapi.yml
-      - type: NaftikoCapability
-        url: capabilities/prospect-contact-search.yaml
-      - type: NaftikoCapability
-        url: capabilities/prospect-company-search.yaml
-      - type: NaftikoCapability
-        url: capabilities/prospect-enrichment.yaml
-      - type: NaftikoCapability
-        url: capabilities/prospect-purchase.yaml
       - type: JSONSchema
         url: json-schema/adapt-contact-schema.json
       - type: JSONSchema
