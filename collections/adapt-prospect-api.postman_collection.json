@@ -1,0 +1,1652 @@
+{
+  "item": [
+    {
+      "id": "93301207-fa2d-4c06-ae0d-c5aed8247d4c",
+      "name": "Contact Search",
+      "description": {
+        "content": "Search the contact database using contact and company filters.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "36feb70d-0bf5-45d5-b2d6-bc86050c8c7c",
+          "name": "Search Contacts",
+          "request": {
+            "name": "Search Contacts",
+            "description": {
+              "content": "Search Adapt's B2B contact database using a combination of contact and\ncompany filters. Returns contact metadata without email addresses; emails\nare revealed via the `/contact/fetch` purchase endpoint.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contact",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"excludeTitle\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"titleExactMatch\": \"<boolean>\",\n  \"department\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"level\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyDomain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyHeadCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyRevenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companySubIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"technology\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"locationPreference\": \"<string>\",\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dontDisplayOwnedContact\": \"<boolean>\",\n  \"minimumEmailDeliverabilityScore\": \"<integer>\",\n  \"required\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1819f191-f65a-4cf2-8b66-859371cf8ef0",
+              "name": "Search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"excludeTitle\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"titleExactMatch\": \"<boolean>\",\n  \"department\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"level\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyDomain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyHeadCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyRevenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companySubIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"technology\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"locationPreference\": \"<string>\",\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dontDisplayOwnedContact\": \"<boolean>\",\n  \"minimumEmailDeliverabilityScore\": \"<integer>\",\n  \"required\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Credit types consumed by this call.",
+                  "key": "x-call-credit-type",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Search credits remaining for the account.",
+                  "key": "search-remaining-credits",
+                  "value": "3365"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contacts\": [\n    {\n      \"id\": \"string\",\n      \"email\": \"xDewO@weZUgbRoCkHSyQUdnLAgrr.ayu\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"title\": \"string\",\n      \"department\": \"string\",\n      \"level\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"country\": \"string\",\n      \"phoneNumber\": [\n        \"string\",\n        \"string\"\n      ],\n      \"emailDeliverabilityScore\": 757,\n      \"linkedinURL\": \"http://vaQwgjKiKyTFxLPvbPUnPCUS.itJ,6\",\n      \"company\": {\n        \"name\": \"string\",\n        \"website\": \"https://HgxPigwzquFniehCmjZFgaCWYgQrm.fwyFhrtqnBx.,AmH11w0cD,utKrKn7vVWAuJcS0DL4B7iD2Ounr6\",\n        \"domain\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"industry\": \"string\",\n        \"subIndustry\": \"string\",\n        \"headCount\": \"string\",\n        \"revenue\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"country\": \"string\",\n        \"numberOfContacts\": 3196\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"email\": \"lDO7Poy@sLRMBvYoLekwxgRapmP.zjc\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"title\": \"string\",\n      \"department\": \"string\",\n      \"level\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"country\": \"string\",\n      \"phoneNumber\": [\n        \"string\",\n        \"string\"\n      ],\n      \"emailDeliverabilityScore\": 3419,\n      \"linkedinURL\": \"http://pEK.ggwi6vmdF0SbZnvc0NgpGJ,InAOD9jiE\",\n      \"company\": {\n        \"name\": \"string\",\n        \"website\": \"https://WWjeoJItrBllwfFvUWBMmCOVln.cegMEbkj.Tl1y2k81WZIxoNJxxEUzg58vEexK8ZmZ4qWZRvnh\",\n        \"domain\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"industry\": \"string\",\n        \"subIndustry\": \"string\",\n        \"headCount\": \"string\",\n        \"revenue\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"country\": \"string\",\n        \"numberOfContacts\": 3511\n      }\n    }\n  ],\n  \"cursorMark\": \"string\",\n  \"totalResults\": 663\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99f38c26-20cc-4d94-a84f-80a77b50d3ae",
+              "name": "Invalid request payload (APP-400-001).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"excludeTitle\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"titleExactMatch\": \"<boolean>\",\n  \"department\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"level\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyDomain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyHeadCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyRevenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companySubIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"technology\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"locationPreference\": \"<string>\",\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dontDisplayOwnedContact\": \"<boolean>\",\n  \"minimumEmailDeliverabilityScore\": \"<integer>\",\n  \"required\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07142730-d392-4a23-bdcb-fffd00a66c9c",
+              "name": "Invalid credentials (APP-401-001).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"excludeTitle\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"titleExactMatch\": \"<boolean>\",\n  \"department\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"level\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyDomain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyHeadCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyRevenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companySubIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"technology\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"locationPreference\": \"<string>\",\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dontDisplayOwnedContact\": \"<boolean>\",\n  \"minimumEmailDeliverabilityScore\": \"<integer>\",\n  \"required\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6806c86-e3b9-482b-8694-dd5e93e7c9a7",
+              "name": "Subscription missing (APP-403-001), API access denied (APP-403-002),\nor insufficient credits (APP-403-003).\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"excludeTitle\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"titleExactMatch\": \"<boolean>\",\n  \"department\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"level\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyDomain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyHeadCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyRevenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companySubIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"technology\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"locationPreference\": \"<string>\",\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dontDisplayOwnedContact\": \"<boolean>\",\n  \"minimumEmailDeliverabilityScore\": \"<integer>\",\n  \"required\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e815a0ad-d30d-42e3-a5f2-78ef87bc04ea",
+              "name": "Rate limit exceeded (APP-429-001). 250 requests per minute.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"excludeTitle\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"titleExactMatch\": \"<boolean>\",\n  \"department\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"level\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyDomain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyHeadCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyRevenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companySubIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"technology\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"locationPreference\": \"<string>\",\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dontDisplayOwnedContact\": \"<boolean>\",\n  \"minimumEmailDeliverabilityScore\": \"<integer>\",\n  \"required\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-ratelimit-limit",
+                  "value": "3365",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-ratelimit-reset",
+                  "value": "3365",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-ratelimit-retry-after",
+                  "value": "3365",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8aa844a-feb4-46af-a64d-7d568e31faa8",
+              "name": "Server error (APP-500-001).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"excludeTitle\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"titleExactMatch\": \"<boolean>\",\n  \"department\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"level\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyDomain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyHeadCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyRevenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companySubIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"technology\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"locationPreference\": \"<string>\",\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dontDisplayOwnedContact\": \"<boolean>\",\n  \"minimumEmailDeliverabilityScore\": \"<integer>\",\n  \"required\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f5ded0b4-1caf-4503-b19b-3119767e005d",
+      "name": "Company Search",
+      "description": {
+        "content": "Search the company database using firmographic filters.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8d8a5d97-2071-47b4-bb83-751fce880adf",
+          "name": "Search Companies",
+          "request": {
+            "name": "Search Companies",
+            "description": {
+              "content": "Search Adapt's company database by name, domain, industry, sub-industry,\nhead count, revenue, and location. Returns company metadata including\nthe number of contacts known per company.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "company",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"domain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"headCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"revenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"industry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "86c726bd-5917-4882-a583-7e59f255f7cd",
+              "name": "Search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"domain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"headCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"revenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"industry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-call-credit-type",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "search-remaining-credits",
+                  "value": "3365",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"companies\": [\n    {\n      \"name\": \"string\",\n      \"website\": \"https://stijyeIhjETgONAwDjXXxPThod.mkqgRHf9IpeYIBUM-L5EVlVxo5cT5U+hS9HHuAIFkUU4JQODuVQ+T+EcyHndfNhsWtDvBqPZpFzYqI3nKkyAVZe-k\",\n      \"domain\": \"string\",\n      \"phoneNumber\": \"string\",\n      \"industry\": \"string\",\n      \"subIndustry\": \"string\",\n      \"headCount\": \"string\",\n      \"revenue\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"country\": \"string\",\n      \"numberOfContacts\": 5434\n    },\n    {\n      \"name\": \"string\",\n      \"website\": \"https://YVmcRvykxF.gsogW\",\n      \"domain\": \"string\",\n      \"phoneNumber\": \"string\",\n      \"industry\": \"string\",\n      \"subIndustry\": \"string\",\n      \"headCount\": \"string\",\n      \"revenue\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"country\": \"string\",\n      \"numberOfContacts\": 7580\n    }\n  ],\n  \"cursorMark\": \"string\",\n  \"totalResults\": 2534\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d4d4866-c394-4408-9e26-30fc24f5a983",
+              "name": "Invalid request payload (APP-400-001).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"domain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"headCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"revenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"industry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "214725d3-559a-4a5b-b83b-ee09d2edba2d",
+              "name": "Invalid credentials (APP-401-001).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"domain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"headCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"revenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"industry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13810069-2a20-4f04-a503-7da89d7d9b08",
+              "name": "Subscription missing (APP-403-001), API access denied (APP-403-002),\nor insufficient credits (APP-403-003).\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"domain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"headCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"revenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"industry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b08498a9-8527-4e8b-9976-6135b1978352",
+              "name": "Rate limit exceeded (APP-429-001). 250 requests per minute.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"domain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"headCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"revenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"industry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-ratelimit-limit",
+                  "value": "3365",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-ratelimit-reset",
+                  "value": "3365",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-ratelimit-retry-after",
+                  "value": "3365",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a86874c8-2a81-48c2-af60-ea51f4fd62e5",
+              "name": "Server error (APP-500-001).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"domain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"headCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"revenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"industry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"subIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5834bce1-59b1-491a-b98b-4104f5908864",
+      "name": "Contact Enrichment",
+      "description": {
+        "content": "Enrich a known contact with verified email and phone data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ada2d8b1-42e1-4ab7-b16a-6ef65cd89e32",
+          "name": "Enrich Contact",
+          "request": {
+            "name": "Enrich Contact",
+            "description": {
+              "content": "Enrich a known contact by email address, LinkedIn URL, or by the\ncombination of first name, last name, and company domain. The `include`\nparameter controls whether email, phone, or both are returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contact",
+                "enrich"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<email>\",\n  \"linkedinURL\": \"<uri>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ef625254-27fe-4273-a46d-9f7bff663289",
+              "name": "Enriched contact",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "enrich"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"linkedinURL\": \"<uri>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-call-credit-type",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "enrich-remaining-credits",
+                  "value": "3365",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"email\": \"H2svb@zHRfPKFVAhOFKUAdQwhzpgWBnc.mb\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"title\": \"string\",\n  \"department\": \"string\",\n  \"level\": \"string\",\n  \"city\": \"string\",\n  \"state\": \"string\",\n  \"country\": \"string\",\n  \"phoneNumber\": [\n    \"string\",\n    \"string\"\n  ],\n  \"emailDeliverabilityScore\": 2917,\n  \"linkedinURL\": \"http://xfvIikUfzHswPhUDm.vyxsr-cvfUYIe0UVruC5w7Nn8fXbIAvVXGabHoGkaIh5vG0Sy4bdilwK7LyNKF4WjlY\",\n  \"company\": {\n    \"name\": \"string\",\n    \"website\": \"http://RkF.bjkwCoIxoROeNtQ81xQwrjHAd\",\n    \"domain\": \"string\",\n    \"phoneNumber\": \"string\",\n    \"industry\": \"string\",\n    \"subIndustry\": \"string\",\n    \"headCount\": \"string\",\n    \"revenue\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"numberOfContacts\": 1505\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99743750-a07a-4eb8-9300-04e36d59c44d",
+              "name": "Invalid request payload (APP-400-001).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "enrich"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"linkedinURL\": \"<uri>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0298d2c2-ae76-436b-a465-dd83c63081af",
+              "name": "Invalid credentials (APP-401-001).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "enrich"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"linkedinURL\": \"<uri>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c074b46-2505-46b3-8514-1c4853ad6454",
+              "name": "Subscription missing (APP-403-001), API access denied (APP-403-002),\nor insufficient credits (APP-403-003).\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "enrich"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"linkedinURL\": \"<uri>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "122ab124-4eec-4cf5-b958-e6f0620b78e8",
+              "name": "Rate limit exceeded (APP-429-001). 250 requests per minute.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "enrich"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"linkedinURL\": \"<uri>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-ratelimit-limit",
+                  "value": "3365",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-ratelimit-reset",
+                  "value": "3365",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-ratelimit-retry-after",
+                  "value": "3365",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d963da4c-1c34-42cf-ae1c-ea80b8e9ce93",
+              "name": "Server error (APP-500-001).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "enrich"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"linkedinURL\": \"<uri>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e6b240b2-d2b7-42a6-85ce-d6754e0b0b38",
+      "name": "Contact Purchase",
+      "description": {
+        "content": "Purchase contacts returned from search to reveal email and phone.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "734d1886-b6bf-4afd-bea3-30a7fac46bc2",
+          "name": "Purchase Contacts",
+          "request": {
+            "name": "Purchase Contacts",
+            "description": {
+              "content": "Purchase up to 50 contacts returned from `/contact/search` to reveal\nverified email addresses and phone numbers. Consumes email and phone\ncredits from the account's plan.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contact",
+                "fetch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contactIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c96459b1-c1e8-4e4f-8ec2-53eb8bf69681",
+              "name": "Purchased contacts with email and phone details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "fetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contactIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-call-credit-type",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "email-remaining-credits",
+                  "value": "3365",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "phone-remaining-credits",
+                  "value": "3365",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"email\": \"EHLIdjwvltbL5@sawNICUfGEIGs.cvrz\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"title\": \"string\",\n    \"department\": \"string\",\n    \"level\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"phoneNumber\": [\n      \"string\",\n      \"string\"\n    ],\n    \"emailDeliverabilityScore\": 2796,\n    \"linkedinURL\": \"https://yZntUgmhHZFePlV.qnxEJvtmTp\",\n    \"company\": {\n      \"name\": \"string\",\n      \"website\": \"http://PveIbauTNJjtwaQmZN.klrcL.cCRe6ogQrfKH.IxFO5KGYwglyhXZRGKUxsnmY9VMDabHL\",\n      \"domain\": \"string\",\n      \"phoneNumber\": \"string\",\n      \"industry\": \"string\",\n      \"subIndustry\": \"string\",\n      \"headCount\": \"string\",\n      \"revenue\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"country\": \"string\",\n      \"numberOfContacts\": 6805\n    }\n  },\n  {\n    \"id\": \"string\",\n    \"email\": \"HjGQJ3sU@vE.clu\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"title\": \"string\",\n    \"department\": \"string\",\n    \"level\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"phoneNumber\": [\n      \"string\",\n      \"string\"\n    ],\n    \"emailDeliverabilityScore\": 6566,\n    \"linkedinURL\": \"http://laIhFSKchoFryJlCAUTMQyBV.doyZ0TMB8X\",\n    \"company\": {\n      \"name\": \"string\",\n      \"website\": \"http://RoHpEYaflqnrKzxob.kez1COwrAKT1W4bxSlQW+RGM+tmSCA,.7-OIlET94gxosb8TRAgd5KteXHEaq,Z8zWfB0X5N57r\",\n      \"domain\": \"string\",\n      \"phoneNumber\": \"string\",\n      \"industry\": \"string\",\n      \"subIndustry\": \"string\",\n      \"headCount\": \"string\",\n      \"revenue\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"country\": \"string\",\n      \"numberOfContacts\": 2842\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "701b6555-cc25-4609-bd74-af24127de67e",
+              "name": "Invalid request payload (APP-400-001).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "fetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contactIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ff73921-7812-4520-838d-fa4d4aece8bc",
+              "name": "Invalid credentials (APP-401-001).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "fetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contactIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf915642-30e9-417d-9bbe-294bec53db47",
+              "name": "Subscription missing (APP-403-001), API access denied (APP-403-002),\nor insufficient credits (APP-403-003).\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "fetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contactIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c658b096-3f45-4965-b67c-6b812f71ef21",
+              "name": "Rate limit exceeded (APP-429-001). 250 requests per minute.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "fetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contactIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "x-ratelimit-limit",
+                  "value": "3365",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-ratelimit-reset",
+                  "value": "3365",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "x-ratelimit-retry-after",
+                  "value": "3365",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71da7d04-e0ce-4e0c-aae4-e54186ac0663",
+              "name": "Server error (APP-500-001).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contact",
+                    "fetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "email",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contactIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.adapt.io/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "email"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2f199af0-2da1-4f3b-8aee-d1e1ce901240",
+    "name": "Adapt Prospect API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Adapt's Prospect API provides programmatic access to a B2B contact and company\nintelligence database of 250M+ contacts and 12M+ companies. Search, enrich, and\npurchase verified B2B contact data with 50+ attributes including verified email\naddresses, direct dial phone numbers, job titles, levels, departments,\ntechnographics, firmographics, and location data.\n\nAll endpoints are organized around REST. Requests and responses are JSON over\nHTTPS. Authentication is via two custom headers: `email` (account email) and\n`apiKey` (key from account settings). Default rate limit is 250 requests per\nminute per account.\n\n\nContact Support:\n Name: Adapt Support",
+      "type": "text/plain"
+    }
+  }
+}

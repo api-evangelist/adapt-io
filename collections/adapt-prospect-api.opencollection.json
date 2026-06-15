@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adapt Prospect API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "email",
+      "value": "{{email}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contact Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapt.io/v3/contact/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search Adapt's B2B contact database using a combination of contact and\ncompany filters. Returns contact metadata without email addresses; emails\nare revealed via the `/contact/fetch` purchase endpoint.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Company Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapt.io/v3/company/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search Adapt's company database by name, domain, industry, sub-industry,\nhead count, revenue, and location. Returns company metadata including\nthe number of contacts known per company.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Contact Enrichment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Enrich Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapt.io/v3/contact/enrich",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enrich a known contact by email address, LinkedIn URL, or by the\ncombination of first name, last name, and company domain. The `include`\nparameter controls whether email, phone, or both are returned.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Contact Purchase",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Purchase Contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapt.io/v3/contact/fetch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Purchase up to 50 contacts returned from `/contact/search` to reveal\nverified email addresses and phone numbers. Consumes email and phone\ncredits from the account's plan.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
