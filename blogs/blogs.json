@@ -3,13 +3,12 @@
   "feeds": [
     {
       "source": "https://blog.adapt.io",
-      "error": "URLError"
-    },
-    {
-      "source": "https://www.adapt.io/directory/industry",
-      "error": "HTTPError"
+      "feed_url": "https://blog.adapt.io/feed/",
+      "title": "Adapt Blog",
+      "saved": 0,
+      "error": "ECONNREFUSED — host unreachable across /feed/, /rss/, /feed.xml, /index.xml and HTML root"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-21T17:00:00Z"
 }
