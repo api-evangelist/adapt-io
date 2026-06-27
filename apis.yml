@@ -79,7 +79,7 @@ common:
     url: https://www.adapt.io/api-docs/v3/
   - type: GettingStarted
     url: https://www.adapt.io/api-docs/v3/
-  - type: SignUp
+  - type: Signup
     url: https://app.adapt.io/users/sign_up
   - type: Login
     url: https://app.adapt.io/users/sign_in

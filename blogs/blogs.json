@@ -3,12 +3,11 @@
   "feeds": [
     {
       "source": "https://blog.adapt.io",
-      "feed_url": "https://blog.adapt.io/feed/",
-      "title": "Adapt Blog",
       "saved": 0,
-      "error": "ECONNREFUSED — host unreachable across /feed/, /rss/, /feed.xml, /index.xml and HTML root"
+      "error": "DNS ENOTFOUND blog.adapt.io; fell back to www.adapt.io/blog (no in-window posts)"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-21T17:00:00Z"
+  "fetched": "2026-06-27T12:21:20Z",
+  "agent_pulled": "2026-06-27"
 }
