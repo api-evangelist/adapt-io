@@ -1,0 +1,23 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/adapt-prospect-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: emailAuth
+  type: apiKey
+  in: header
+  parameter: email
+  description: Account email used to register with Adapt.
+  sources:
+  - openapi/adapt-prospect-api-openapi.yml
+- name: apiKeyAuth
+  type: apiKey
+  in: header
+  parameter: apiKey
+  description: API key from the Adapt account settings page.
+  sources:
+  - openapi/adapt-prospect-api-openapi.yml
