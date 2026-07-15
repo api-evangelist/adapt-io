@@ -71,6 +71,8 @@ apis:
       - type: Examples
         url: examples/adapt-contact-enrich-example.json
 common:
+  - type: AgenticAccess
+    url: agentic-access/adapt-io-agentic-access.yml
   - type: DomainSecurity
     url: security/adapt-io-domain-security.yml
   - type: Authentication
