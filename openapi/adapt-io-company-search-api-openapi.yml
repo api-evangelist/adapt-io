@@ -1,0 +1,231 @@
+openapi: 3.0.3
+info:
+  title: Adapt Prospect Company Search API
+  description: 'Adapt''s Prospect API provides programmatic access to a B2B contact and company
+
+    intelligence database of 250M+ contacts and 12M+ companies. Search, enrich, and
+
+    purchase verified B2B contact data with 50+ attributes including verified email
+
+    addresses, direct dial phone numbers, job titles, levels, departments,
+
+    technographics, firmographics, and location data.
+
+
+    All endpoints are organized around REST. Requests and responses are JSON over
+
+    HTTPS. Authentication is via two custom headers: `email` (account email) and
+
+    `apiKey` (key from account settings). Default rate limit is 250 requests per
+
+    minute per account.
+
+    '
+  version: v3
+  contact:
+    name: Adapt Support
+    url: https://www.adapt.io
+  license:
+    name: Adapt Terms of Service
+    url: https://www.adapt.io/terms-of-service
+servers:
+- url: https://api.adapt.io/v3
+  description: Adapt API v3 production base URL
+security:
+- emailAuth: []
+  apiKeyAuth: []
+tags:
+- name: Company Search
+  description: Search the company database using firmographic filters.
+paths:
+  /company/search:
+    post:
+      tags:
+      - Company Search
+      summary: Search Companies
+      description: 'Search Adapt''s company database by name, domain, industry, sub-industry,
+
+        head count, revenue, and location. Returns company metadata including
+
+        the number of contacts known per company.
+
+        '
+      operationId: searchCompanies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanySearchRequest'
+      responses:
+        '200':
+          description: Search results
+          headers:
+            x-call-credit-type:
+              schema:
+                type: string
+            search-remaining-credits:
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanySearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  schemas:
+    Company:
+      type: object
+      properties:
+        name:
+          type: string
+        website:
+          type: string
+          format: uri
+        domain:
+          type: string
+        phoneNumber:
+          type: string
+        industry:
+          type: string
+        subIndustry:
+          type: string
+        headCount:
+          type: string
+        revenue:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        numberOfContacts:
+          type: integer
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Adapt internal application code (e.g. APP-400-001).
+        message:
+          type: string
+    CompanySearchResponse:
+      type: object
+      properties:
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company'
+        cursorMark:
+          type: string
+        totalResults:
+          type: integer
+    CompanySearchRequest:
+      type: object
+      properties:
+        name:
+          type: array
+          items:
+            type: string
+        domain:
+          type: array
+          items:
+            type: string
+        headCount:
+          type: array
+          items:
+            type: string
+        revenue:
+          type: array
+          items:
+            type: string
+        industry:
+          type: array
+          items:
+            type: string
+        subIndustry:
+          type: array
+          items:
+            type: string
+        city:
+          type: array
+          items:
+            type: string
+        state:
+          type: array
+          items:
+            type: string
+        country:
+          type: array
+          items:
+            type: string
+        limit:
+          type: integer
+        cursorMark:
+          type: string
+  responses:
+    ServerError:
+      description: Server error (APP-500-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid credentials (APP-401-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request payload (APP-400-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: 'Subscription missing (APP-403-001), API access denied (APP-403-002),
+
+        or insufficient credits (APP-403-003).
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded (APP-429-001). 250 requests per minute.
+      headers:
+        x-ratelimit-limit:
+          schema:
+            type: integer
+        x-ratelimit-reset:
+          schema:
+            type: integer
+        x-ratelimit-retry-after:
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    emailAuth:
+      type: apiKey
+      in: header
+      name: email
+      description: Account email used to register with Adapt.
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: apiKey
+      description: API key from the Adapt account settings page.

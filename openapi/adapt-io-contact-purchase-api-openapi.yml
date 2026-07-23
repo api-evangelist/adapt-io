@@ -1,0 +1,227 @@
+openapi: 3.0.3
+info:
+  title: Adapt Prospect Company Search Contact Purchase API
+  description: 'Adapt''s Prospect API provides programmatic access to a B2B contact and company
+
+    intelligence database of 250M+ contacts and 12M+ companies. Search, enrich, and
+
+    purchase verified B2B contact data with 50+ attributes including verified email
+
+    addresses, direct dial phone numbers, job titles, levels, departments,
+
+    technographics, firmographics, and location data.
+
+
+    All endpoints are organized around REST. Requests and responses are JSON over
+
+    HTTPS. Authentication is via two custom headers: `email` (account email) and
+
+    `apiKey` (key from account settings). Default rate limit is 250 requests per
+
+    minute per account.
+
+    '
+  version: v3
+  contact:
+    name: Adapt Support
+    url: https://www.adapt.io
+  license:
+    name: Adapt Terms of Service
+    url: https://www.adapt.io/terms-of-service
+servers:
+- url: https://api.adapt.io/v3
+  description: Adapt API v3 production base URL
+security:
+- emailAuth: []
+  apiKeyAuth: []
+tags:
+- name: Contact Purchase
+  description: Purchase contacts returned from search to reveal email and phone.
+paths:
+  /contact/fetch:
+    post:
+      tags:
+      - Contact Purchase
+      summary: Purchase Contacts
+      description: 'Purchase up to 50 contacts returned from `/contact/search` to reveal
+
+        verified email addresses and phone numbers. Consumes email and phone
+
+        credits from the account''s plan.
+
+        '
+      operationId: purchaseContacts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactFetchRequest'
+      responses:
+        '200':
+          description: Purchased contacts with email and phone details
+          headers:
+            x-call-credit-type:
+              schema:
+                type: string
+            email-remaining-credits:
+              schema:
+                type: integer
+            phone-remaining-credits:
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contact'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  schemas:
+    Company:
+      type: object
+      properties:
+        name:
+          type: string
+        website:
+          type: string
+          format: uri
+        domain:
+          type: string
+        phoneNumber:
+          type: string
+        industry:
+          type: string
+        subIndustry:
+          type: string
+        headCount:
+          type: string
+        revenue:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        numberOfContacts:
+          type: integer
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Adapt internal application code (e.g. APP-400-001).
+        message:
+          type: string
+    ContactFetchRequest:
+      type: object
+      required:
+      - contactIds
+      properties:
+        contactIds:
+          type: array
+          maxItems: 50
+          items:
+            type: string
+    Contact:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        firstName:
+          type: string
+        lastName:
+          type: string
+        title:
+          type: string
+        department:
+          type: string
+        level:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        phoneNumber:
+          type: array
+          items:
+            type: string
+        emailDeliverabilityScore:
+          type: integer
+        linkedinURL:
+          type: string
+          format: uri
+        company:
+          $ref: '#/components/schemas/Company'
+  responses:
+    ServerError:
+      description: Server error (APP-500-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid credentials (APP-401-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request payload (APP-400-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: 'Subscription missing (APP-403-001), API access denied (APP-403-002),
+
+        or insufficient credits (APP-403-003).
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded (APP-429-001). 250 requests per minute.
+      headers:
+        x-ratelimit-limit:
+          schema:
+            type: integer
+        x-ratelimit-reset:
+          schema:
+            type: integer
+        x-ratelimit-retry-after:
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    emailAuth:
+      type: apiKey
+      in: header
+      name: email
+      description: Account email used to register with Adapt.
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: apiKey
+      description: API key from the Adapt account settings page.
