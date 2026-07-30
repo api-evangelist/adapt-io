@@ -13,9 +13,22 @@ description: >-
   CRM enrichment, lead scoring, ICP list building, and data hygiene, with CRM exports to Salesforce, HubSpot, Pipedrive,
   Zoho, Outreach, and Salesgear.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Provider
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/adapt-io.png
 tags:
   - B2B Data
   - Contact Data
@@ -36,41 +49,105 @@ created: '2026-05-25'
 modified: '2026-05-25'
 specificationVersion: '0.20'
 apis:
-  - aid: adapt-io:adapt-prospect-api
-    name: Adapt Prospect API
-    description: >-
-      REST API for searching Adapt's B2B contact and company database, enriching known contacts by
-      email/LinkedIn/name+domain, and purchasing contacts to reveal verified email addresses and phone numbers. JSON
-      over HTTPS with header-based authentication (email + apiKey). Default rate limit of 250 requests per minute per
-      account; pagination via cursorMark; credit consumption surfaced through `x-call-credit-type` and
-      `*-remaining-credits` response headers.
-    humanURL: https://www.adapt.io/api-docs/v3/
-    baseURL: https://api.adapt.io/v3
-    version: v3
-    tags:
-      - Contacts
-      - Companies
-      - Enrichment
-      - Search
-      - B2B Data
-    properties:
-      - type: Documentation
-        url: https://www.adapt.io/api-docs/v3/
-      - type: Documentation
-        url: https://www.adapt.io/platform/api
-      - type: OpenAPI
-        url: openapi/adapt-prospect-api-openapi.yml
-      - type: JSONSchema
-        url: json-schema/adapt-contact-schema.json
-      - type: JSONSchema
-        url: json-schema/adapt-company-schema.json
-      - type: JSONLD
-        url: json-ld/adapt-io-context.jsonld
-      - type: Examples
-        url: examples/adapt-contact-search-example.json
-      - type: Examples
-        url: examples/adapt-contact-enrich-example.json
+- aid: adapt-io:adapt-io-company-search-api
+  name: Adapt Company Search API
+  description: Search the company database using firmographic filters.
+  humanURL: https://www.adapt.io/api-docs/v3/
+  baseURL: https://api.adapt.io/v3
+  tags:
+  - Company Search
+  properties:
+  - type: OpenAPI
+    url: openapi/adapt-io-company-search-api-openapi.yml
+  - type: Documentation
+    url: https://www.adapt.io/api-docs/v3/
+  - type: Documentation
+    url: https://www.adapt.io/platform/api
+  - type: JSONSchema
+    url: json-schema/adapt-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/adapt-company-schema.json
+  - type: JSONLD
+    url: json-ld/adapt-io-context.jsonld
+  - type: Examples
+    url: examples/adapt-contact-search-example.json
+  - type: Examples
+    url: examples/adapt-contact-enrich-example.json
+- aid: adapt-io:adapt-io-contact-enrichment-api
+  name: Adapt Contact Enrichment API
+  description: Enrich a known contact with verified email and phone data.
+  humanURL: https://www.adapt.io/api-docs/v3/
+  baseURL: https://api.adapt.io/v3
+  tags:
+  - Contact Enrichment
+  properties:
+  - type: OpenAPI
+    url: openapi/adapt-io-contact-enrichment-api-openapi.yml
+  - type: Documentation
+    url: https://www.adapt.io/api-docs/v3/
+  - type: Documentation
+    url: https://www.adapt.io/platform/api
+  - type: JSONSchema
+    url: json-schema/adapt-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/adapt-company-schema.json
+  - type: JSONLD
+    url: json-ld/adapt-io-context.jsonld
+  - type: Examples
+    url: examples/adapt-contact-search-example.json
+  - type: Examples
+    url: examples/adapt-contact-enrich-example.json
+- aid: adapt-io:adapt-io-contact-purchase-api
+  name: Adapt Contact Purchase API
+  description: Purchase contacts returned from search to reveal email and phone.
+  humanURL: https://www.adapt.io/api-docs/v3/
+  baseURL: https://api.adapt.io/v3
+  tags:
+  - Contact Purchase
+  properties:
+  - type: OpenAPI
+    url: openapi/adapt-io-contact-purchase-api-openapi.yml
+  - type: Documentation
+    url: https://www.adapt.io/api-docs/v3/
+  - type: Documentation
+    url: https://www.adapt.io/platform/api
+  - type: JSONSchema
+    url: json-schema/adapt-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/adapt-company-schema.json
+  - type: JSONLD
+    url: json-ld/adapt-io-context.jsonld
+  - type: Examples
+    url: examples/adapt-contact-search-example.json
+  - type: Examples
+    url: examples/adapt-contact-enrich-example.json
+- aid: adapt-io:adapt-io-contact-search-api
+  name: Adapt Contact Search API
+  description: Search the contact database using contact and company filters.
+  humanURL: https://www.adapt.io/api-docs/v3/
+  baseURL: https://api.adapt.io/v3
+  tags:
+  - Contact Search
+  properties:
+  - type: OpenAPI
+    url: openapi/adapt-io-contact-search-api-openapi.yml
+  - type: Documentation
+    url: https://www.adapt.io/api-docs/v3/
+  - type: Documentation
+    url: https://www.adapt.io/platform/api
+  - type: JSONSchema
+    url: json-schema/adapt-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/adapt-company-schema.json
+  - type: JSONLD
+    url: json-ld/adapt-io-context.jsonld
+  - type: Examples
+    url: examples/adapt-contact-search-example.json
+  - type: Examples
+    url: examples/adapt-contact-enrich-example.json
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/adapt/overview
   - type: AgenticAccess
     url: agentic-access/adapt-io-agentic-access.yml
   - type: DomainSecurity
