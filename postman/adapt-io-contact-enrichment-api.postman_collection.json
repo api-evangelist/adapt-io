@@ -1,0 +1,491 @@
+{
+  "info": {
+    "_postman_id": "fb5d2c71-8b54-467f-b3e7-7a239f4193a4",
+    "name": "Adapt Prospect Company Search Contact Enrichment API",
+    "description": "Adapt's Prospect API provides programmatic access to a B2B contact and company\nintelligence database of 250M+ contacts and 12M+ companies. Search, enrich, and\npurchase verified B2B contact data with 50+ attributes including verified email\naddresses, direct dial phone numbers, job titles, levels, departments,\ntechnographics, firmographics, and location data.\n\nAll endpoints are organized around REST. Requests and responses are JSON over\nHTTPS. Authentication is via two custom headers: `email` (account email) and\n`apiKey` (key from account settings). Default rate limit is 250 requests per\nminute per account.\n\n\nContact Support:\n Name: Adapt Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:28:10.000Z",
+    "updatedAt": "2026-07-28T00:28:11.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fb5d2c71-8b54-467f-b3e7-7a239f4193a4"
+  },
+  "item": [
+    {
+      "name": "contact",
+      "item": [
+        {
+          "name": "enrich",
+          "item": [
+            {
+              "name": "Enrich Contact",
+              "id": "d3180a31-9e27-4aae-85d9-a6cee741bbd0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"linkedinURL\": \"<uri>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"include\": [\n    \"EMAIL\",\n    \"EMAIL\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contact/enrich",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contact",
+                    "enrich"
+                  ]
+                },
+                "description": "Enrich a known contact by email address, LinkedIn URL, or by the\ncombination of first name, last name, and company domain. The `include`\nparameter controls whether email, phone, or both are returned.\n"
+              },
+              "response": [
+                {
+                  "id": "6a8d14ec-80fd-4346-9b12-36c1453737e6",
+                  "name": "Enriched contact",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "email",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"linkedinURL\": \"<uri>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"include\": [\n    \"EMAIL\",\n    \"EMAIL\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contact/enrich",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contact",
+                        "enrich"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-call-credit-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "enrich-remaining-credits",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"email\": \"<email>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"title\": \"<string>\",\n  \"department\": \"<string>\",\n  \"level\": \"<string>\",\n  \"city\": \"<string>\",\n  \"state\": \"<string>\",\n  \"country\": \"<string>\",\n  \"phoneNumber\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"emailDeliverabilityScore\": \"<integer>\",\n  \"linkedinURL\": \"<uri>\",\n  \"company\": {\n    \"name\": \"<string>\",\n    \"website\": \"<uri>\",\n    \"domain\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"industry\": \"<string>\",\n    \"subIndustry\": \"<string>\",\n    \"headCount\": \"<string>\",\n    \"revenue\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"numberOfContacts\": \"<integer>\"\n  }\n}",
+                  "createdAt": "2026-07-28T00:28:11.000Z",
+                  "updatedAt": "2026-07-28T00:28:11.000Z",
+                  "uid": "35240-6a8d14ec-80fd-4346-9b12-36c1453737e6"
+                },
+                {
+                  "id": "615612d3-7824-42a7-acb6-353a576bcd47",
+                  "name": "Invalid request payload (APP-400-001).",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "email",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"linkedinURL\": \"<uri>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"include\": [\n    \"EMAIL\",\n    \"EMAIL\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contact/enrich",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contact",
+                        "enrich"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:28:11.000Z",
+                  "updatedAt": "2026-07-28T00:28:11.000Z",
+                  "uid": "35240-615612d3-7824-42a7-acb6-353a576bcd47"
+                },
+                {
+                  "id": "fef89bae-b7e9-403e-908e-95abe8bf3541",
+                  "name": "Invalid credentials (APP-401-001).",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "email",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"linkedinURL\": \"<uri>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"include\": [\n    \"EMAIL\",\n    \"EMAIL\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contact/enrich",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contact",
+                        "enrich"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:28:11.000Z",
+                  "updatedAt": "2026-07-28T00:28:11.000Z",
+                  "uid": "35240-fef89bae-b7e9-403e-908e-95abe8bf3541"
+                },
+                {
+                  "id": "2e2617e2-9bc8-4ce7-a9ba-8ed651fc0aa8",
+                  "name": "Subscription missing (APP-403-001), API access denied (APP-403-002),\nor insufficient credits (APP-403-003).\n",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "email",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"linkedinURL\": \"<uri>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"include\": [\n    \"EMAIL\",\n    \"EMAIL\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contact/enrich",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contact",
+                        "enrich"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:28:11.000Z",
+                  "updatedAt": "2026-07-28T00:28:11.000Z",
+                  "uid": "35240-2e2617e2-9bc8-4ce7-a9ba-8ed651fc0aa8"
+                },
+                {
+                  "id": "07ebbd9f-e762-434d-b911-fc8dd1992946",
+                  "name": "Rate limit exceeded (APP-429-001). 250 requests per minute.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "email",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"linkedinURL\": \"<uri>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"include\": [\n    \"EMAIL\",\n    \"EMAIL\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contact/enrich",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contact",
+                        "enrich"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-ratelimit-limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-ratelimit-reset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-ratelimit-retry-after",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:28:11.000Z",
+                  "updatedAt": "2026-07-28T00:28:11.000Z",
+                  "uid": "35240-07ebbd9f-e762-434d-b911-fc8dd1992946"
+                },
+                {
+                  "id": "227a2e90-6fca-44e6-9344-84c2567abe35",
+                  "name": "Server error (APP-500-001).",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "email",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"linkedinURL\": \"<uri>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"include\": [\n    \"EMAIL\",\n    \"EMAIL\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contact/enrich",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contact",
+                        "enrich"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:28:11.000Z",
+                  "updatedAt": "2026-07-28T00:28:11.000Z",
+                  "uid": "35240-227a2e90-6fca-44e6-9344-84c2567abe35"
+                }
+              ],
+              "createdAt": "2026-07-28T00:28:11.000Z",
+              "updatedAt": "2026-07-28T00:28:11.000Z",
+              "uid": "35240-d3180a31-9e27-4aae-85d9-a6cee741bbd0"
+            }
+          ],
+          "id": "cbb261aa-f199-4ccf-a855-76861c83d92a",
+          "createdAt": "2026-07-28T00:28:11.000Z",
+          "updatedAt": "2026-07-28T00:28:11.000Z",
+          "uid": "35240-cbb261aa-f199-4ccf-a855-76861c83d92a"
+        }
+      ],
+      "id": "e4bd57fe-d3bf-4f8d-8a5f-f70bfb8c67d5",
+      "createdAt": "2026-07-28T00:28:11.000Z",
+      "updatedAt": "2026-07-28T00:28:11.000Z",
+      "uid": "35240-e4bd57fe-d3bf-4f8d-8a5f-f70bfb8c67d5"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "email",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.adapt.io/v3"
+    }
+  ]
+}

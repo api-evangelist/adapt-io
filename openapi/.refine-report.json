@@ -1,0 +1,20 @@
+{
+  "provider": "adapt-io",
+  "sources": [
+    "adapt-io-company-search-api-openapi.yml",
+    "adapt-io-contact-enrichment-api-openapi.yml",
+    "adapt-io-contact-purchase-api-openapi.yml",
+    "adapt-io-contact-search-api-openapi.yml"
+  ],
+  "outputs": [
+    "adapt-io-company-search-api-openapi.yml",
+    "adapt-io-contact-enrichment-api-openapi.yml",
+    "adapt-io-contact-purchase-api-openapi.yml",
+    "adapt-io-contact-search-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

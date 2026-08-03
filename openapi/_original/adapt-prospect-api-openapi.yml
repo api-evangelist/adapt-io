@@ -1,0 +1,532 @@
+openapi: 3.0.3
+info:
+  title: Adapt Prospect API
+  description: |
+    Adapt's Prospect API provides programmatic access to a B2B contact and company
+    intelligence database of 250M+ contacts and 12M+ companies. Search, enrich, and
+    purchase verified B2B contact data with 50+ attributes including verified email
+    addresses, direct dial phone numbers, job titles, levels, departments,
+    technographics, firmographics, and location data.
+
+    All endpoints are organized around REST. Requests and responses are JSON over
+    HTTPS. Authentication is via two custom headers: `email` (account email) and
+    `apiKey` (key from account settings). Default rate limit is 250 requests per
+    minute per account.
+  version: v3
+  contact:
+    name: Adapt Support
+    url: https://www.adapt.io
+  license:
+    name: Adapt Terms of Service
+    url: https://www.adapt.io/terms-of-service
+servers:
+  - url: https://api.adapt.io/v3
+    description: Adapt API v3 production base URL
+security:
+  - emailAuth: []
+    apiKeyAuth: []
+tags:
+  - name: Contact Search
+    description: Search the contact database using contact and company filters.
+  - name: Company Search
+    description: Search the company database using firmographic filters.
+  - name: Contact Enrichment
+    description: Enrich a known contact with verified email and phone data.
+  - name: Contact Purchase
+    description: Purchase contacts returned from search to reveal email and phone.
+paths:
+  /contact/search:
+    post:
+      tags:
+        - Contact Search
+      summary: Search Contacts
+      description: |
+        Search Adapt's B2B contact database using a combination of contact and
+        company filters. Returns contact metadata without email addresses; emails
+        are revealed via the `/contact/fetch` purchase endpoint.
+      operationId: searchContacts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactSearchRequest'
+      responses:
+        '200':
+          description: Search results
+          headers:
+            x-call-credit-type:
+              schema:
+                type: string
+              description: Credit types consumed by this call.
+            search-remaining-credits:
+              schema:
+                type: integer
+              description: Search credits remaining for the account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactSearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /company/search:
+    post:
+      tags:
+        - Company Search
+      summary: Search Companies
+      description: |
+        Search Adapt's company database by name, domain, industry, sub-industry,
+        head count, revenue, and location. Returns company metadata including
+        the number of contacts known per company.
+      operationId: searchCompanies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanySearchRequest'
+      responses:
+        '200':
+          description: Search results
+          headers:
+            x-call-credit-type:
+              schema:
+                type: string
+            search-remaining-credits:
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanySearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /contact/enrich:
+    post:
+      tags:
+        - Contact Enrichment
+      summary: Enrich Contact
+      description: |
+        Enrich a known contact by email address, LinkedIn URL, or by the
+        combination of first name, last name, and company domain. The `include`
+        parameter controls whether email, phone, or both are returned.
+      operationId: enrichContact
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactEnrichRequest'
+      responses:
+        '200':
+          description: Enriched contact
+          headers:
+            x-call-credit-type:
+              schema:
+                type: string
+            enrich-remaining-credits:
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /contact/fetch:
+    post:
+      tags:
+        - Contact Purchase
+      summary: Purchase Contacts
+      description: |
+        Purchase up to 50 contacts returned from `/contact/search` to reveal
+        verified email addresses and phone numbers. Consumes email and phone
+        credits from the account's plan.
+      operationId: purchaseContacts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactFetchRequest'
+      responses:
+        '200':
+          description: Purchased contacts with email and phone details
+          headers:
+            x-call-credit-type:
+              schema:
+                type: string
+            email-remaining-credits:
+              schema:
+                type: integer
+            phone-remaining-credits:
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contact'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  securitySchemes:
+    emailAuth:
+      type: apiKey
+      in: header
+      name: email
+      description: Account email used to register with Adapt.
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: apiKey
+      description: API key from the Adapt account settings page.
+  schemas:
+    ContactSearchRequest:
+      type: object
+      properties:
+        name:
+          type: array
+          items:
+            type: string
+        firstName:
+          type: array
+          items:
+            type: string
+        lastName:
+          type: array
+          items:
+            type: string
+        title:
+          type: array
+          items:
+            type: string
+        excludeTitle:
+          type: array
+          items:
+            type: string
+        titleExactMatch:
+          type: boolean
+        department:
+          type: array
+          items:
+            type: string
+            enum:
+              - Engineering
+              - Finance
+              - HR
+              - IT
+              - Marketing
+              - Operations
+              - Sales
+              - Support
+              - Other
+        level:
+          type: array
+          items:
+            type: string
+            enum:
+              - C-Level
+              - VP-Level
+              - Director-Level
+              - Manager-Level
+              - Staff
+              - Other
+        companyName:
+          type: array
+          items:
+            type: string
+        companyDomain:
+          type: array
+          items:
+            type: string
+        companyHeadCount:
+          type: array
+          items:
+            type: string
+        companyRevenue:
+          type: array
+          items:
+            type: string
+        companyIndustry:
+          type: array
+          items:
+            type: string
+        companySubIndustry:
+          type: array
+          items:
+            type: string
+        technology:
+          type: array
+          items:
+            type: string
+        locationPreference:
+          type: string
+          enum: [contact, company, '*', AND]
+        city:
+          type: array
+          items:
+            type: string
+        state:
+          type: array
+          items:
+            type: string
+        country:
+          type: array
+          items:
+            type: string
+        dontDisplayOwnedContact:
+          type: boolean
+        minimumEmailDeliverabilityScore:
+          type: integer
+          enum: [75, 85, 95]
+        required:
+          type: array
+          items:
+            type: string
+            enum: [EMAIL]
+        limit:
+          type: integer
+        cursorMark:
+          type: string
+    ContactSearchResponse:
+      type: object
+      properties:
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        cursorMark:
+          type: string
+        totalResults:
+          type: integer
+    CompanySearchRequest:
+      type: object
+      properties:
+        name:
+          type: array
+          items:
+            type: string
+        domain:
+          type: array
+          items:
+            type: string
+        headCount:
+          type: array
+          items:
+            type: string
+        revenue:
+          type: array
+          items:
+            type: string
+        industry:
+          type: array
+          items:
+            type: string
+        subIndustry:
+          type: array
+          items:
+            type: string
+        city:
+          type: array
+          items:
+            type: string
+        state:
+          type: array
+          items:
+            type: string
+        country:
+          type: array
+          items:
+            type: string
+        limit:
+          type: integer
+        cursorMark:
+          type: string
+    CompanySearchResponse:
+      type: object
+      properties:
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company'
+        cursorMark:
+          type: string
+        totalResults:
+          type: integer
+    ContactEnrichRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        linkedinURL:
+          type: string
+          format: uri
+        firstName:
+          type: string
+        lastName:
+          type: string
+        domain:
+          type: string
+        include:
+          type: array
+          items:
+            type: string
+            enum: [EMAIL, PHONE]
+    ContactFetchRequest:
+      type: object
+      required: [contactIds]
+      properties:
+        contactIds:
+          type: array
+          maxItems: 50
+          items:
+            type: string
+    Contact:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        firstName:
+          type: string
+        lastName:
+          type: string
+        title:
+          type: string
+        department:
+          type: string
+        level:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        phoneNumber:
+          type: array
+          items:
+            type: string
+        emailDeliverabilityScore:
+          type: integer
+        linkedinURL:
+          type: string
+          format: uri
+        company:
+          $ref: '#/components/schemas/Company'
+    Company:
+      type: object
+      properties:
+        name:
+          type: string
+        website:
+          type: string
+          format: uri
+        domain:
+          type: string
+        phoneNumber:
+          type: string
+        industry:
+          type: string
+        subIndustry:
+          type: string
+        headCount:
+          type: string
+        revenue:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        numberOfContacts:
+          type: integer
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Adapt internal application code (e.g. APP-400-001).
+        message:
+          type: string
+  responses:
+    BadRequest:
+      description: Invalid request payload (APP-400-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid credentials (APP-401-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: |
+        Subscription missing (APP-403-001), API access denied (APP-403-002),
+        or insufficient credits (APP-403-003).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded (APP-429-001). 250 requests per minute.
+      headers:
+        x-ratelimit-limit:
+          schema:
+            type: integer
+        x-ratelimit-reset:
+          schema:
+            type: integer
+        x-ratelimit-retry-after:
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Server error (APP-500-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

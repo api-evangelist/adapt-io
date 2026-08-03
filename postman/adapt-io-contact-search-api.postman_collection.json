@@ -1,0 +1,491 @@
+{
+  "info": {
+    "_postman_id": "6a9b746b-3331-48eb-87d9-349a4787c2a9",
+    "name": "Adapt Prospect Company Search Contact Search API",
+    "description": "Adapt's Prospect API provides programmatic access to a B2B contact and company\nintelligence database of 250M+ contacts and 12M+ companies. Search, enrich, and\npurchase verified B2B contact data with 50+ attributes including verified email\naddresses, direct dial phone numbers, job titles, levels, departments,\ntechnographics, firmographics, and location data.\n\nAll endpoints are organized around REST. Requests and responses are JSON over\nHTTPS. Authentication is via two custom headers: `email` (account email) and\n`apiKey` (key from account settings). Default rate limit is 250 requests per\nminute per account.\n\n\nContact Support:\n Name: Adapt Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:28:12.000Z",
+    "updatedAt": "2026-07-28T00:28:12.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6a9b746b-3331-48eb-87d9-349a4787c2a9"
+  },
+  "item": [
+    {
+      "name": "contact",
+      "item": [
+        {
+          "name": "search",
+          "item": [
+            {
+              "name": "Search Contacts",
+              "id": "80b64e83-3340-404b-98b3-b31196cfed26",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"excludeTitle\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"titleExactMatch\": \"<boolean>\",\n  \"department\": [\n    \"Finance\",\n    \"Operations\"\n  ],\n  \"level\": [\n    \"Other\",\n    \"Manager-Level\"\n  ],\n  \"companyName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyDomain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyHeadCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyRevenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companySubIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"technology\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"locationPreference\": \"company\",\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dontDisplayOwnedContact\": \"<boolean>\",\n  \"minimumEmailDeliverabilityScore\": 75,\n  \"required\": [\n    \"EMAIL\",\n    \"EMAIL\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contact/search",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contact",
+                    "search"
+                  ]
+                },
+                "description": "Search Adapt's B2B contact database using a combination of contact and\ncompany filters. Returns contact metadata without email addresses; emails\nare revealed via the `/contact/fetch` purchase endpoint.\n"
+              },
+              "response": [
+                {
+                  "id": "8b4917cf-e03a-497e-bcf3-95f79c213d4b",
+                  "name": "Search results",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "email",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"excludeTitle\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"titleExactMatch\": \"<boolean>\",\n  \"department\": [\n    \"Finance\",\n    \"Operations\"\n  ],\n  \"level\": [\n    \"Other\",\n    \"Manager-Level\"\n  ],\n  \"companyName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyDomain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyHeadCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyRevenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companySubIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"technology\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"locationPreference\": \"company\",\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dontDisplayOwnedContact\": \"<boolean>\",\n  \"minimumEmailDeliverabilityScore\": 75,\n  \"required\": [\n    \"EMAIL\",\n    \"EMAIL\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contact/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contact",
+                        "search"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Credit types consumed by this call.",
+                        "type": "text/plain"
+                      },
+                      "key": "x-call-credit-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Search credits remaining for the account.",
+                        "type": "text/plain"
+                      },
+                      "key": "search-remaining-credits",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"contacts\": [\n    {\n      \"id\": \"<string>\",\n      \"email\": \"<email>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"title\": \"<string>\",\n      \"department\": \"<string>\",\n      \"level\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"phoneNumber\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"emailDeliverabilityScore\": \"<integer>\",\n      \"linkedinURL\": \"<uri>\",\n      \"company\": {\n        \"name\": \"<string>\",\n        \"website\": \"<uri>\",\n        \"domain\": \"<string>\",\n        \"phoneNumber\": \"<string>\",\n        \"industry\": \"<string>\",\n        \"subIndustry\": \"<string>\",\n        \"headCount\": \"<string>\",\n        \"revenue\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"country\": \"<string>\",\n        \"numberOfContacts\": \"<integer>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"email\": \"<email>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"title\": \"<string>\",\n      \"department\": \"<string>\",\n      \"level\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"phoneNumber\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"emailDeliverabilityScore\": \"<integer>\",\n      \"linkedinURL\": \"<uri>\",\n      \"company\": {\n        \"name\": \"<string>\",\n        \"website\": \"<uri>\",\n        \"domain\": \"<string>\",\n        \"phoneNumber\": \"<string>\",\n        \"industry\": \"<string>\",\n        \"subIndustry\": \"<string>\",\n        \"headCount\": \"<string>\",\n        \"revenue\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"country\": \"<string>\",\n        \"numberOfContacts\": \"<integer>\"\n      }\n    }\n  ],\n  \"cursorMark\": \"<string>\",\n  \"totalResults\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T00:28:13.000Z",
+                  "updatedAt": "2026-07-28T00:28:13.000Z",
+                  "uid": "35240-8b4917cf-e03a-497e-bcf3-95f79c213d4b"
+                },
+                {
+                  "id": "453e90fa-0148-4d4b-a330-240cf783ef4d",
+                  "name": "Invalid request payload (APP-400-001).",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "email",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"excludeTitle\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"titleExactMatch\": \"<boolean>\",\n  \"department\": [\n    \"Finance\",\n    \"Operations\"\n  ],\n  \"level\": [\n    \"Other\",\n    \"Manager-Level\"\n  ],\n  \"companyName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyDomain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyHeadCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyRevenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companySubIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"technology\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"locationPreference\": \"company\",\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dontDisplayOwnedContact\": \"<boolean>\",\n  \"minimumEmailDeliverabilityScore\": 75,\n  \"required\": [\n    \"EMAIL\",\n    \"EMAIL\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contact/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contact",
+                        "search"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:28:13.000Z",
+                  "updatedAt": "2026-07-28T00:28:13.000Z",
+                  "uid": "35240-453e90fa-0148-4d4b-a330-240cf783ef4d"
+                },
+                {
+                  "id": "6e640c9e-bed5-4468-a941-40f365ec4fe7",
+                  "name": "Invalid credentials (APP-401-001).",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "email",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"excludeTitle\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"titleExactMatch\": \"<boolean>\",\n  \"department\": [\n    \"Finance\",\n    \"Operations\"\n  ],\n  \"level\": [\n    \"Other\",\n    \"Manager-Level\"\n  ],\n  \"companyName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyDomain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyHeadCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyRevenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companySubIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"technology\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"locationPreference\": \"company\",\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dontDisplayOwnedContact\": \"<boolean>\",\n  \"minimumEmailDeliverabilityScore\": 75,\n  \"required\": [\n    \"EMAIL\",\n    \"EMAIL\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contact/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contact",
+                        "search"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:28:13.000Z",
+                  "updatedAt": "2026-07-28T00:28:13.000Z",
+                  "uid": "35240-6e640c9e-bed5-4468-a941-40f365ec4fe7"
+                },
+                {
+                  "id": "285e4481-67a7-41c6-aadc-26ccc0a4837c",
+                  "name": "Subscription missing (APP-403-001), API access denied (APP-403-002),\nor insufficient credits (APP-403-003).\n",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "email",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"excludeTitle\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"titleExactMatch\": \"<boolean>\",\n  \"department\": [\n    \"Finance\",\n    \"Operations\"\n  ],\n  \"level\": [\n    \"Other\",\n    \"Manager-Level\"\n  ],\n  \"companyName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyDomain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyHeadCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyRevenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companySubIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"technology\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"locationPreference\": \"company\",\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dontDisplayOwnedContact\": \"<boolean>\",\n  \"minimumEmailDeliverabilityScore\": 75,\n  \"required\": [\n    \"EMAIL\",\n    \"EMAIL\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contact/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contact",
+                        "search"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:28:13.000Z",
+                  "updatedAt": "2026-07-28T00:28:13.000Z",
+                  "uid": "35240-285e4481-67a7-41c6-aadc-26ccc0a4837c"
+                },
+                {
+                  "id": "a9dc5b08-fe9c-48ce-84e0-6916c4c08c78",
+                  "name": "Rate limit exceeded (APP-429-001). 250 requests per minute.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "email",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"excludeTitle\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"titleExactMatch\": \"<boolean>\",\n  \"department\": [\n    \"Finance\",\n    \"Operations\"\n  ],\n  \"level\": [\n    \"Other\",\n    \"Manager-Level\"\n  ],\n  \"companyName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyDomain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyHeadCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyRevenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companySubIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"technology\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"locationPreference\": \"company\",\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dontDisplayOwnedContact\": \"<boolean>\",\n  \"minimumEmailDeliverabilityScore\": 75,\n  \"required\": [\n    \"EMAIL\",\n    \"EMAIL\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contact/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contact",
+                        "search"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-ratelimit-limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-ratelimit-reset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-ratelimit-retry-after",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:28:13.000Z",
+                  "updatedAt": "2026-07-28T00:28:13.000Z",
+                  "uid": "35240-a9dc5b08-fe9c-48ce-84e0-6916c4c08c78"
+                },
+                {
+                  "id": "057f1288-d02b-40c0-a2a0-224df78cef69",
+                  "name": "Server error (APP-500-001).",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "email",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"firstName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lastName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"excludeTitle\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"titleExactMatch\": \"<boolean>\",\n  \"department\": [\n    \"Finance\",\n    \"Operations\"\n  ],\n  \"level\": [\n    \"Other\",\n    \"Manager-Level\"\n  ],\n  \"companyName\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyDomain\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyHeadCount\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyRevenue\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companyIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companySubIndustry\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"technology\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"locationPreference\": \"company\",\n  \"city\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"state\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"country\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"dontDisplayOwnedContact\": \"<boolean>\",\n  \"minimumEmailDeliverabilityScore\": 75,\n  \"required\": [\n    \"EMAIL\",\n    \"EMAIL\"\n  ],\n  \"limit\": \"<integer>\",\n  \"cursorMark\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/contact/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "contact",
+                        "search"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T00:28:13.000Z",
+                  "updatedAt": "2026-07-28T00:28:13.000Z",
+                  "uid": "35240-057f1288-d02b-40c0-a2a0-224df78cef69"
+                }
+              ],
+              "createdAt": "2026-07-28T00:28:13.000Z",
+              "updatedAt": "2026-07-28T00:28:13.000Z",
+              "uid": "35240-80b64e83-3340-404b-98b3-b31196cfed26"
+            }
+          ],
+          "id": "13907716-40e9-4d1f-ad38-4be5ae7badcd",
+          "createdAt": "2026-07-28T00:28:13.000Z",
+          "updatedAt": "2026-07-28T00:28:13.000Z",
+          "uid": "35240-13907716-40e9-4d1f-ad38-4be5ae7badcd"
+        }
+      ],
+      "id": "8d66e20d-1b05-4af6-aa60-113e301bb2ee",
+      "createdAt": "2026-07-28T00:28:13.000Z",
+      "updatedAt": "2026-07-28T00:28:13.000Z",
+      "uid": "35240-8d66e20d-1b05-4af6-aa60-113e301bb2ee"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "email",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.adapt.io/v3"
+    }
+  ]
+}
