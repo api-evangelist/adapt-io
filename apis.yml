@@ -46,7 +46,7 @@ tags:
   - Sales
 url: https://raw.githubusercontent.com/api-evangelist/adapt-io/refs/heads/main/apis.yml
 created: '2026-05-25'
-modified: '2026-05-25'
+modified: '2026-08-13'
 specificationVersion: '0.20'
 apis:
 - aid: adapt-io:adapt-io-company-search-api
@@ -59,6 +59,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/adapt-io-company-search-api-openapi.yml
+  - type: Overlay
+    url: overlays/adapt-io-company-search-api-overlay.yaml
   - type: Documentation
     url: https://www.adapt.io/api-docs/v3/
   - type: Documentation
@@ -83,6 +85,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/adapt-io-contact-enrichment-api-openapi.yml
+  - type: Overlay
+    url: overlays/adapt-io-contact-enrichment-api-overlay.yaml
   - type: Documentation
     url: https://www.adapt.io/api-docs/v3/
   - type: Documentation
@@ -107,6 +111,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/adapt-io-contact-purchase-api-openapi.yml
+  - type: Overlay
+    url: overlays/adapt-io-contact-purchase-api-overlay.yaml
   - type: Documentation
     url: https://www.adapt.io/api-docs/v3/
   - type: Documentation
@@ -131,6 +137,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/adapt-io-contact-search-api-openapi.yml
+  - type: Overlay
+    url: overlays/adapt-io-contact-search-api-overlay.yaml
   - type: Documentation
     url: https://www.adapt.io/api-docs/v3/
   - type: Documentation
@@ -162,10 +170,10 @@ common:
     url: https://www.adapt.io/api-docs/v3/
   - type: GettingStarted
     url: https://www.adapt.io/api-docs/v3/
-  - type: Signup
-    url: https://app.adapt.io/users/sign_up
+  - type: SignUp
+    url: https://www.adapt.io/free-trial
   - type: Login
-    url: https://app.adapt.io/users/sign_in
+    url: https://www.adapt.io/login.htm
   - type: Pricing
     url: https://www.adapt.io/pricing
   - type: Plans
@@ -188,21 +196,45 @@ common:
   - type: Directory
     url: https://www.adapt.io/directory/industry
   - type: Blog
-    url: https://blog.adapt.io
+    url: https://www.adapt.io/blog/
   - type: Company
-    url: https://www.adapt.io/about-us
+    url: https://www.adapt.io/about
   - type: Customers
-    url: https://www.adapt.io/customers
+    url: https://www.adapt.io/customer-stories
   - type: ContactUs
-    url: https://www.adapt.io/contact-us
+    url: https://www.adapt.io/contact-us/
   - type: PrivacyPolicy
-    url: https://www.adapt.io/privacy-policy
+    url: https://www.adapt.io/privacy.htm
   - type: TermsOfService
-    url: https://www.adapt.io/terms-of-service
+    url: https://www.adapt.io/termsAndConditions.htm
   - type: LinkedIn
     url: https://www.linkedin.com/company/adapt-io
   - type: Twitter
     url: https://twitter.com/adapt_io
+  - type: Packages
+    url: packages/adapt-io-packages.yml
+  - type: MCPServer
+    url: mcp/adapt-io-mcp.yml
+  - type: LLMsTxt
+    url: llms/adapt-io-llms.txt
+  - type: Conventions
+    url: conventions/adapt-io-conventions.yml
+  - type: ErrorCatalog
+    url: errors/adapt-io-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/adapt-io-lifecycle.yml
+  - type: Conformance
+    url: conformance/adapt-io-conformance.yml
+  - type: DataModel
+    url: data-model/adapt-io-data-model.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: APIReference
+    url: https://www.adapt.io/api-docs/v3/
+  - type: Support
+    url: https://www.adapt.io/contact-us/
+  - type: Partners
+    url: https://www.adapt.io/adapt-partnership
   - type: Features
     data:
       - 250M+ verified B2B contact database with 50+ attributes per record
@@ -228,3 +260,8 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v1
