@@ -1,0 +1,117 @@
+generated: '2026-08-13'
+method: probed
+source: live HTTPS probes of every Adapt host named in apis.yml and openapi/ servers[]
+provider: Adapt
+providerId: adapt-io
+description: >-
+  Probe of the standard /.well-known/ discovery surface across every Adapt host.
+  Every path returned a 404 or an SPA catch-all. Adapt publishes no well-known
+  documents, so NO WellKnown or SecurityTxt pointer is emitted in apis.yml —
+  this file records a verified absence, not a presence.
+result: none
+documents_found: 0
+notes:
+  - >-
+    www.adapt.io and app.adapt.io are WordPress/Next.js fronts that answer every
+    unknown path with an HTTP 404 carrying a 17,562-byte HTML error page.
+  - >-
+    api.adapt.io answers unknown paths with a 146-byte nginx "404 Not Found" page —
+    a clean negative, no soft-200.
+  - >-
+    leads.adapt.io (the Adapt web app referenced from the API docs) is a single-page
+    app whose catch-all returns HTTP 200 with a 2,457-byte HTML shell for EVERY path,
+    including /.well-known/agent-card.json and /llms.txt. These are recorded as
+    misses, not hits — the body is an HTML document, not a well-known document.
+hosts:
+  - host: www.adapt.io
+    probes:
+      - path: /.well-known/security.txt
+        status: 404
+        result: miss
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        result: miss
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        result: miss
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        result: miss
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        result: miss
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        result: miss
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        result: miss
+        file: null
+      - path: /llms.txt
+        status: 404
+        result: miss
+        file: null
+  - host: api.adapt.io
+    probes:
+      - path: /.well-known/security.txt
+        status: 404
+        result: miss
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        result: miss
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        result: miss
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        result: miss
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        result: miss
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        result: miss
+        file: null
+  - host: app.adapt.io
+    probes:
+      - path: /.well-known/security.txt
+        status: 404
+        result: miss
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        result: miss
+        file: null
+  - host: leads.adapt.io
+    probes:
+      - path: /.well-known/agent-card.json
+        status: 200
+        result: miss
+        file: null
+        note: >-
+          SPA catch-all. Body is "<!doctype html><html lang=en>..." (2,457 bytes) —
+          the same shell served for / and for every other path. Not a document.
+      - path: /llms.txt
+        status: 200
+        result: miss
+        file: null
+        note: Same SPA catch-all shell as above.
+robots:
+  url: https://www.adapt.io/robots.txt
+  status: 200
+  note: >-
+    robots.txt opens with "User-Agent: * / Disallow: /" and then allow-lists named
+    search crawlers (Googlebot, Bingbot, Slurp, Yandex, Baidu, DuckDuckBot,
+    AhrefsSiteAudit). Any AI or agent user-agent not on that list is disallowed
+    site-wide, including the /api-docs/v3/ reference.

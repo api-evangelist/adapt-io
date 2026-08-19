@@ -1,0 +1,86 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — Adapt Prospect Company Search Contact Search API
+  version: 1.0.0
+extends: openapi/adapt-io-contact-search-api-openapi.yml
+x-generated: '2026-08-13'
+x-method: generated
+x-source: https://www.adapt.io/api-docs/v3/ + repo artifacts (conventions, errors, finops, rate-limits)
+actions:
+- target: $.info
+  description: Repair the dead license URL and add the published support contact. adapt.io/terms-of-service
+    returns 404; the live document is termsAndConditions.htm (probed 200, 2026-08-13). success@adapt.io
+    is named in the Rate Limiting section of the reference.
+  update:
+    license:
+      name: Adapt Terms and Conditions
+      url: https://www.adapt.io/termsAndConditions.htm
+    contact:
+      name: Adapt Support
+      url: https://www.adapt.io/contact-us/
+      email: success@adapt.io
+    x-provenance:
+      authored-by: API Evangelist
+      derived-from: https://www.adapt.io/api-docs/v3/
+      note: Adapt publishes no OpenAPI. This description is generated from the provider’s hand-written
+        Slate reference.
+    x-api-access:
+      plan: Custom (enterprise) only
+      note: Free, Starter and Basic tiers do not issue Prospect API credentials.
+      keys: https://leads.adapt.io/profile/settings
+- target: $
+  description: Document the account-level rate limit and the credit-metering headers that every response
+    carries.
+  update:
+    x-rate-limit:
+      limit: 250
+      window: 1 minute
+      scope: account
+      algorithm: fixed-window
+      status: 429
+      headers:
+      - x-ratelimit-limit
+      - x-ratelimit-reset
+      - x-ratelimit-retry-after
+      increase-contact: success@adapt.io
+      source: https://www.adapt.io/api-docs/v3/
+    x-error-envelope:
+      media-type: application/json
+      rfc9457: false
+      fields:
+      - message
+      - code
+      - data
+      note: HTTP 200 is not unconditionally success — branch on `code`. APP-200-002 means no results found.
+      catalog: errors/adapt-io-problem-types.yml
+- target: $.paths['/contact/search'].post
+  description: Bind the operation to its credit lane, its documented internal response codes, and its
+    agent consequence class.
+  update:
+    x-credit-type: search credits
+    x-credit-balance-header: search-remaining-credits
+    x-internal-codes:
+    - APP-200-001
+    - APP-200-002
+    - APP-400-001
+    - APP-401-001
+    - APP-401-002
+    - APP-403-001
+    - APP-403-002
+    - APP-403-003
+    - APP-429-001
+    - APP-500-001
+    x-consequence: read
+    x-idempotent: false
+- target: $.paths['/contact/search'].post
+  description: Declare the cursor pagination contract so a client can page without reading prose.
+  update:
+    x-pagination:
+      style: cursor
+      request:
+        cursor: cursorMark
+        size: limit
+      response:
+        cursor: cursorMark
+        total: totalResults
+      note: Opaque cursor echoed from the previous response; omit on the first page.

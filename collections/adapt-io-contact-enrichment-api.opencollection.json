@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adapt Prospect Company Search Contact Enrichment API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "email",
+      "value": "{{email}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contact Enrichment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Enrich Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapt.io/v3/contact/enrich",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enrich a known contact by email address, LinkedIn URL, or by the\ncombination of first name, last name, and company domain. The `include`\nparameter controls whether email, phone, or both are returned.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

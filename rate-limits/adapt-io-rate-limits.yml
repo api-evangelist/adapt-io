@@ -4,8 +4,21 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Adapt
 providerId: adapt-io
 created: '2026-05-25'
-modified: '2026-05-25'
+modified: '2026-08-13'
+generated: '2026-08-13'
+method: searched
+source: https://www.adapt.io/api-docs/v3/
 reconciled: true
+limit_count: 1
+quota_count: 4
+verified: '2026-08-13'
+verification_note: >-
+  Re-read the "Rate Limiting" section of https://www.adapt.io/api-docs/v3/ (HTTP 200) on
+  2026-08-13. 250 requests per minute per account is still the published figure, and the
+  three documented response headers are unchanged. Adapt publishes NO x-ratelimit-remaining
+  header — only limit, reset and retry-after — and retry-after is "sent only when the rate
+  limit is reached", so a client cannot see how close it is to the ceiling before hitting
+  it. Higher limits are negotiated by emailing success@adapt.io.
 tags:
   - B2B Data
   - Rate Limiting
@@ -19,9 +32,15 @@ sources:
   - https://www.adapt.io/pricing
 headers:
   limit: x-ratelimit-limit
-  remaining: x-ratelimit-remaining
+  remaining: null
   reset: x-ratelimit-reset
   retryAfter: x-ratelimit-retry-after
+headersNote: >-
+  Corrected 2026-08-13. The published reference documents exactly three rate-limit
+  headers — x-ratelimit-limit, x-ratelimit-reset and x-ratelimit-retry-after. There is no
+  remaining-requests header; an earlier revision of this file listed
+  x-ratelimit-remaining, which Adapt does not document. Remaining CREDIT balances are a
+  different signal and are returned per operation (see quotas below).
 responseCodes:
   throttled: 429
   quotaExceeded: 403

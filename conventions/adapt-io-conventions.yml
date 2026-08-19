@@ -1,0 +1,167 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.adapt.io/api-docs/v3/
+provider: Adapt
+providerId: adapt-io
+description: >-
+  Cross-cutting runtime semantics for the Adapt Prospect API v3 — the rules a client or
+  agent needs that are not visible in any single operation. Read from the published
+  developer reference and cross-checked against openapi/.
+base_url: https://api.adapt.io/v3
+transport:
+  protocol: HTTPS only
+  methods: [POST]
+  note: >-
+    Every operation is a POST with a JSON body, including the two search operations and
+    enrichment. There are no GET endpoints and no path or query parameters — filters
+    travel in the request body.
+  content_type: application/json
+  accepts: application/json
+authentication:
+  style: two custom headers
+  headers:
+    - name: email
+      value: The email address the Adapt account is registered with.
+    - name: apiKey
+      value: The API key from https://leads.adapt.io/profile/settings
+  bearer: false
+  oauth: false
+  note: >-
+    Not Authorization/Bearer and not an X- prefixed key. Both headers must be sent on
+    every request. See authentication/adapt-io-authentication.yml.
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    Adapt documents no idempotency key, no request deduplication window, and no
+    replay-safe retry. This matters most for POST /contact/fetch (purchaseContacts),
+    which spends email and phone credits: a retried or duplicated call after a timeout
+    has no documented protection against double-spending credits. Callers should track
+    already-purchased contact ids client-side and use the dontDisplayOwnedContact
+    search flag to avoid re-purchasing.
+pagination:
+  style: cursor
+  request_params:
+    - name: cursorMark
+      in: body
+      type: string
+      description: Opaque cursor echoed from the previous response. Omit on the first page.
+    - name: limit
+      in: body
+      type: integer
+      description: Number of records to return in the call.
+  response_fields:
+    - name: cursorMark
+      description: Cursor to pass on the next call.
+    - name: totalResults
+      description: Total records matching the criteria.
+  operations: [searchContacts, searchCompanies]
+  note: >-
+    Cursor values look Solr-derived (e.g. "AoNFCEGTPvI4NTcyYjkzNjVlNGIwODQ5MThkNGQ3M2M2").
+    No documented cursor expiry, no page-size ceiling stated, and no ordering guarantee.
+    Enrichment and purchase are unpaginated.
+response_envelope:
+  fields:
+    - message
+    - code
+    - data
+    - cursorMark
+    - totalResults
+  note: >-
+    Every response — success and error — is wrapped in {message, code, ...}. `data` is
+    an OBJECT for enrichContact and an ARRAY for searchContacts, searchCompanies and
+    purchaseContacts. cursorMark and totalResults appear on the search operations only.
+    NOTE: the repo's openapi/ documents the search payload as a typed `contacts` /
+    `companies` array; the published reference names that array `data`. Treat the docs
+    as authoritative for the wire format.
+  error_shape: See errors/adapt-io-problem-types.yml
+field_selection:
+  request_shaping:
+    - operation: enrichContact
+      param: include
+      type: array
+      values: ['EMAIL', 'PHONE']
+      default: '[] — response may contain neither email nor mobile number'
+      description: >-
+        Opt IN to the billable fields. Omitting `include` returns the contact without
+        email or phone.
+    - operation: searchContacts
+      param: required
+      type: array
+      values: ['EMAIL']
+      default: "['EMAIL']"
+      description: >-
+        Filters the RESULT SET, not the fields. required=['EMAIL'] returns only
+        contacts that have an email; required=[] returns contacts with and without.
+  sparse_fieldsets: false
+  expansion: false
+  note: >-
+    The company object is always embedded in a contact record; there is no expand
+    parameter and no way to suppress it.
+filtering:
+  boolean_logic: >-
+    Fields are AND-ed across parameters and OR-ed within an array. The reference calls
+    out companyIndustry and companySubIndustry explicitly as OR. Specifying both
+    industry and sub-industry widens rather than narrows the result, because industry
+    is the superset.
+  case_sensitivity: >-
+    city, state and country values must match Adapt's reference lists EXACTLY, case
+    sensitive. The controlled vocabularies (industry, sub-industry, technology,
+    location) are published as Google Sheets linked from the reference, not as an API
+    endpoint.
+  location_preference:
+    param: locationPreference
+    values: ['contact', 'company', '*', 'AND']
+    default: '*'
+  suppression: >-
+    Account-level suppression lists (emails and domains, uploaded at
+    leads.adapt.io/profile/suppression-list) silently filter API results. The same
+    query can return different results for two accounts.
+metadata:
+  custom_fields: false
+  note: Adapt records carry no customer-writable metadata; the API is read/purchase only.
+request_tracing:
+  request_id_header: null
+  correlation: none
+  note: >-
+    No request id is returned on success or failure. There is no documented way to
+    reference an individual call when contacting support.
+versioning:
+  style: path
+  current: v3
+  base: https://api.adapt.io/v3
+  note: See lifecycle/adapt-io-lifecycle.yml
+rate_limiting:
+  limit: 250 requests per minute per account
+  algorithm: fixed-window
+  headers: [x-ratelimit-limit, x-ratelimit-reset, x-ratelimit-retry-after]
+  status: 429
+  note: See rate-limits/adapt-io-rate-limits.yml
+metering:
+  style: credit lanes surfaced in response headers
+  headers:
+    - name: x-call-credit-type
+      type: array
+      description: Which credit type(s) the call consumed.
+    - name: search-remaining-credits
+      operations: [searchContacts, searchCompanies]
+    - name: enrich-remaining-credits
+      operations: [enrichContact]
+    - name: email-remaining-credits
+      operations: [purchaseContacts]
+    - name: phone-remaining-credits
+      operations: [purchaseContacts]
+  note: >-
+    Balance is returned per call in headers, which is unusually good — an agent can read
+    its remaining budget from every response without a separate usage endpoint. See
+    finops/adapt-io-finops.yml.
+webhooks:
+  supported: false
+  note: No callbacks, no event stream, no push surface of any kind.
+cross_links:
+  - authentication/adapt-io-authentication.yml
+  - errors/adapt-io-problem-types.yml
+  - lifecycle/adapt-io-lifecycle.yml
+  - rate-limits/adapt-io-rate-limits.yml
+  - finops/adapt-io-finops.yml
+  - data-model/adapt-io-data-model.yml

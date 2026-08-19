@@ -1,11 +1,51 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/adapt-prospect-api-openapi.yml
+generated: '2026-08-13'
+method: searched
+source: https://www.adapt.io/api-docs/v3/
+docs: https://www.adapt.io/api-docs/v3/
+derived_from: openapi/adapt-io-company-search-api-openapi.yml, openapi/adapt-io-contact-enrichment-api-openapi.yml,
+  openapi/adapt-io-contact-purchase-api-openapi.yml, openapi/adapt-io-contact-search-api-openapi.yml
 summary:
   types:
   - apiKey
   api_key_in:
   - header
+  oauth: false
+  openid_connect: false
+  mutual_tls: false
+  bearer: false
+  schemes_required_together: true
+credentials:
+  issuance: >-
+    Keys are issued in the Adapt web app account settings page. There is no key-management
+    API and no programmatic key rotation.
+  management_url: https://leads.adapt.io/profile/settings
+  gated: true
+  gate: >-
+    API access is available on Adapt's Custom (enterprise) plan only. Free, Starter and
+    Basic tiers do not expose Prospect API credentials — an account without API access
+    fails with APP-403-002 ("You don't have access to this API"), and an account with no
+    subscription fails with APP-403-001.
+  rotation_policy: not published
+  expiry: not published
+  scopes: none — the key carries full account privileges across all four operations
+transport:
+  https_required: true
+  evidence: >-
+    "All of Adapt's APIs are organized around REST, and all requests must be made over
+    SSL." — https://www.adapt.io/api-docs/v3/
+findings:
+  - >-
+    Both headers must be sent together on every request; either one alone fails with
+    APP-401-001. This is unusual — the account identifier travels in a header named
+    `email` rather than being encoded in the key itself.
+  - >-
+    Neither header uses a conventional name (`Authorization`, `X-API-Key`), so generic
+    API clients, gateways and agent runtimes will not pick the credentials up from a
+    standard auth configuration.
+  - >-
+    A single credential pair grants every operation including the credit-spending
+    purchase call. There is no read-only key, no scoping, and no documented rotation or
+    expiry, so a leaked key can drain an account's email and phone credits.
 schemes:
 - name: emailAuth
   type: apiKey
@@ -13,11 +53,17 @@ schemes:
   parameter: email
   description: Account email used to register with Adapt.
   sources:
-  - openapi/adapt-prospect-api-openapi.yml
+  - openapi/adapt-io-company-search-api-openapi.yml
+  - openapi/adapt-io-contact-enrichment-api-openapi.yml
+  - openapi/adapt-io-contact-purchase-api-openapi.yml
+  - openapi/adapt-io-contact-search-api-openapi.yml
 - name: apiKeyAuth
   type: apiKey
   in: header
   parameter: apiKey
   description: API key from the Adapt account settings page.
   sources:
-  - openapi/adapt-prospect-api-openapi.yml
+  - openapi/adapt-io-company-search-api-openapi.yml
+  - openapi/adapt-io-contact-enrichment-api-openapi.yml
+  - openapi/adapt-io-contact-purchase-api-openapi.yml
+  - openapi/adapt-io-contact-search-api-openapi.yml

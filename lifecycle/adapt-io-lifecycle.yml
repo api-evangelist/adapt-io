@@ -1,0 +1,93 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://www.adapt.io/api-docs/v3/ plus live probes of the v1/v2/v3 documentation
+  paths and adapt.io status/changelog candidates
+provider: Adapt
+providerId: adapt-io
+description: >-
+  Versioning, deprecation and operational-transparency posture for the Adapt Prospect
+  API. Adapt versions in the URL path and labels v3 "current", but publishes no
+  deprecation policy, no sunset dates, no changelog and no status page.
+versioning:
+  scheme: path
+  pattern: https://api.adapt.io/v3/{resource}/{action}
+  current: v3
+  current_label: 'Version 3 (current)'
+  header_negotiation: false
+  media_type_versioning: false
+  note: >-
+    The reference renders a "Version" selector that offers only "Version 3 (current)".
+    Earlier documentation paths are gone.
+versions:
+  - version: v3
+    status: current
+    docs: https://www.adapt.io/api-docs/v3/
+    docs_status: 200
+    base_url: https://api.adapt.io/v3
+  - version: v2
+    status: withdrawn
+    docs: https://www.adapt.io/api-docs/v2/
+    docs_status: 404
+    note: >-
+      Probed 2026-08-13. Documentation removed with no redirect, no tombstone and no
+      published sunset date.
+  - version: v1
+    status: withdrawn
+    docs: https://www.adapt.io/api-docs/v1/
+    docs_status: 404
+    note: Probed 2026-08-13. Same — removed without notice.
+deprecation:
+  policy_published: false
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  notice_period: null
+  deprecated_operations: []
+  note: >-
+    No deprecation policy exists on the site or in the reference. No operation in
+    openapi/ carries `deprecated: true`. Prior API versions were retired by deleting
+    their documentation, which is the evidence that there is no notice process.
+status_page:
+  published: false
+  url: null
+  probes:
+    - url: https://status.adapt.io
+      status: 000
+      note: DNS does not resolve.
+    - url: https://www.adapt.io/status
+      status: 404
+  note: >-
+    Adapt operates no status page, no uptime history and no incident feed. An API
+    consumer has no way to distinguish an outage from their own error.
+changelog:
+  published: false
+  url: null
+  probes:
+    - url: https://www.adapt.io/changelog
+      status: 404
+  note: >-
+    No dated changelog for the API. The reference is a static Slate document with no
+    revision history. Product news appears only in the marketing blog at
+    https://www.adapt.io/blog/, which is not an API changelog.
+sla:
+  published: false
+  url: null
+  note: >-
+    No uptime or latency commitment is published. The Terms
+    (https://www.adapt.io/termsAndConditions.htm) carry no service-level schedule.
+support:
+  email: success@adapt.io
+  source: >-
+    Named in the Rate Limiting section of https://www.adapt.io/api-docs/v3/ as the
+    contact for a higher rate limit.
+  contact_page: https://www.adapt.io/contact-us/
+  contact_page_status: 200
+access_lifecycle:
+  api_availability: Custom (enterprise) plan only
+  key_management: https://leads.adapt.io/profile/settings
+  note: >-
+    Self-serve Free, Starter and Basic tiers do not issue Prospect API credentials —
+    see plans/adapt-io-plans-pricing.yml. There is no self-serve path from signup to a
+    first API call.

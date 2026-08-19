@@ -1,0 +1,167 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/_original/adapt-prospect-api-openapi.yml plus the Output fields tables at
+  https://www.adapt.io/api-docs/v3/
+provider: Adapt
+providerId: adapt-io
+description: >-
+  Entity-relationship graph for the Adapt Prospect API v3. The model is small and flat:
+  a Contact belongs to a Company, both carry an array of typed PhoneNumbers, and search
+  responses wrap either entity in a cursor-paged envelope. There are no writable
+  resources — the only state change is purchasing a Contact, which reveals fields on an
+  existing record rather than creating one.
+entities:
+  - name: Contact
+    description: A B2B individual record. The unit of purchase.
+    identifier:
+      field: id
+      type: string
+      format: 24-character hex (MongoDB ObjectId shape, e.g. 5c05fc5d4a381d0242943e02)
+      note: >-
+        No prefix scheme. The id returned by searchContacts is the token passed to
+        purchaseContacts.
+    fields:
+      - {name: id, type: string, description: Unique contact id}
+      - {name: firstName, type: string}
+      - {name: lastName, type: string}
+      - {name: title, type: string, description: Job title}
+      - {name: department, type: array<string>, enum: [Engineering, 'Finance & Administration', Human Resources, 'IT & IS', Marketing, Operations, Sales, Support, Other]}
+      - {name: level, type: string, enum: [C-Level, VP-Level, Director-Level, Manager-Level, Staff, Other]}
+      - {name: city, type: string}
+      - {name: state, type: string}
+      - {name: country, type: string}
+      - {name: linkedin, type: string, description: LinkedIn profile URL}
+      - {name: twitter, type: string}
+      - {name: facebook, type: string}
+      - {name: emailDeliverabilityScore, type: integer, enum: [95, 85, 75], description: '95 High, 85 Medium, 75 Low'}
+      - name: email
+        type: string
+        gated: true
+        description: >-
+          Returned only after purchase (purchaseContacts), or by enrichContact with
+          include=["EMAIL"].
+      - name: phoneNumber
+        type: array<PhoneNumber>
+        gated: true
+        description: >-
+          Returned only after purchase (purchaseContacts), or by enrichContact with
+          include=["PHONE"].
+      - {name: company, type: Company, description: Always embedded}
+    gated_fields:
+      - email
+      - phoneNumber
+    note: >-
+      searchContacts deliberately omits email and phoneNumber. This is the product's
+      pivot: search is cheap and returns identity, purchase is billable and returns
+      contactability.
+  - name: Company
+    description: >-
+      A firmographic record. Embedded in every Contact, and returned standalone by
+      searchCompanies.
+    identifier:
+      field: domain / website
+      type: string
+      note: >-
+        Company has NO surrogate id in any documented response. It is keyed by domain or
+        website, which means a company cannot be referenced stably the way a contact can.
+    fields:
+      - {name: name, type: string}
+      - {name: website, type: string}
+      - {name: domain, type: string, note: Present in the spec; the published examples return `website`}
+      - {name: street, type: string, description: HQ street}
+      - {name: city, type: string, description: HQ city}
+      - {name: state, type: string, description: HQ state}
+      - {name: country, type: string, description: HQ country}
+      - {name: zipcode, type: string, description: HQ zipcode}
+      - {name: phoneNumber, type: array<PhoneNumber>}
+      - {name: linkedin, type: string}
+      - {name: twitter, type: string}
+      - {name: facebook, type: string}
+      - {name: industry, type: string, vocabulary: adapt-industry}
+      - {name: subIndustry, type: array<string>, vocabulary: adapt-sub-industry}
+      - {name: headCount, type: string, enum: ['0 - 25', '25 - 100', '100 - 250', '250 - 1000', '1K - 10K', '10K - 50K', '50K - 100K', '> 100K']}
+      - {name: revenue, type: string, enum: ['$0 - 1M', '$1 - 10M', '$10 - 50M', '$50 - 100M', '$100 - 250M', '$250 - 500M', '$500M - 1B', '> $1B']}
+      - {name: numberOfContacts, type: integer, description: Contacts Adapt holds for this company. Returned by searchCompanies only.}
+  - name: PhoneNumber
+    description: A typed phone number. Value object, no identifier.
+    fields:
+      - {name: number, type: string, description: 'E.164-ish formatted string, e.g. "+1 650-419-0564"'}
+      - {name: type, type: string, enum: [direct_line, mobile_number, company_line, other]}
+    note: >-
+      company_line appears on Company; direct_line, mobile_number and other appear on
+      Contact.
+relationships:
+  - from: Contact
+    to: Company
+    type: belongs_to
+    via: company
+    binding: embedded object
+    cardinality: 'one'
+  - from: Company
+    to: Contact
+    type: has_many
+    via: numberOfContacts
+    binding: count only
+    cardinality: 'many'
+    note: >-
+      There is no expand or "list contacts at this company" operation. The traversal is
+      done client-side by calling searchContacts with companyDomain.
+  - from: Contact
+    to: PhoneNumber
+    type: has_many
+    via: phoneNumber
+    binding: embedded array
+  - from: Company
+    to: PhoneNumber
+    type: has_many
+    via: phoneNumber
+    binding: embedded array
+envelopes:
+  - name: ContactSearchResponse
+    wraps: Contact
+    fields: [message, code, data, cursorMark, totalResults]
+  - name: CompanySearchResponse
+    wraps: Company
+    fields: [message, code, data, cursorMark, totalResults]
+  - name: ContactEnrichResponse
+    wraps: Contact
+    fields: [message, code, data]
+    note: data is a single OBJECT here, not an array.
+  - name: ContactFetchResponse
+    wraps: Contact
+    fields: [message, code, data]
+controlled_vocabularies:
+  - name: adapt-industry
+    published_as: Google Sheet linked from the API reference
+    url: https://docs.google.com/spreadsheets/d/1E6mj35veBUB1jjW3j0caIk94EFEK8hLygh3ZPJMx1_k/edit#gid=0
+    machine_readable: false
+  - name: adapt-sub-industry
+    published_as: Google Sheet linked from the API reference
+    url: https://docs.google.com/spreadsheets/d/1E6mj35veBUB1jjW3j0caIk94EFEK8hLygh3ZPJMx1_k/edit#gid=1352374198
+    machine_readable: false
+  - name: adapt-technology
+    published_as: Google Sheet linked from the API reference
+    url: https://docs.google.com/spreadsheets/d/1E6mj35veBUB1jjW3j0caIk94EFEK8hLygh3ZPJMx1_k/edit#gid=1732701238
+    machine_readable: false
+  - name: adapt-location
+    published_as: Google Sheet linked from the API reference
+    url: https://docs.google.com/spreadsheets/d/1E6mj35veBUB1jjW3j0caIk94EFEK8hLygh3ZPJMx1_k/edit#gid=901938120
+    machine_readable: false
+    note: >-
+      city/state/country filters must match these values exactly and case-sensitively.
+findings:
+  - >-
+    Four of Adapt's controlled vocabularies — industry, sub-industry, technology and
+    location — are distributed as Google Sheets rather than API endpoints or enums in a
+    spec. A client cannot validate a filter value without a human opening a spreadsheet,
+    and an exact-match requirement makes that a hard failure mode rather than a warning.
+  - >-
+    Company has no stable identifier. Deduplicating or joining Adapt companies against
+    another system requires matching on domain.
+renders:
+  json_schema:
+    - json-schema/adapt-contact-schema.json
+    - json-schema/adapt-company-schema.json
+  json_ld: json-ld/adapt-io-context.jsonld
+  vocabulary: vocabulary/adapt-io-vocabulary.yml

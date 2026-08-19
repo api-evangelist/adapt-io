@@ -4,8 +4,21 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Adapt
 providerId: adapt-io
 created: '2026-05-25'
-modified: '2026-05-25'
+modified: '2026-08-13'
+generated: '2026-08-13'
+method: searched
+source: https://www.adapt.io/pricing
 reconciled: true
+plan_count: 4
+verified: '2026-08-13'
+verification_note: >-
+  Re-read https://www.adapt.io/pricing (HTTP 200) on 2026-08-13. The published tiers and
+  allotments still match this file exactly — Free $0/mo (25 email, 25 enrichment credits,
+  25 contacts/day), Starter $49/mo (500/500, 50 contacts/day), Basic $99/mo (1,000 email,
+  100 phone, 1,000 enrichment credits, 100 contacts/day), Custom "Contact Us". The page
+  advertises a 7-day free trial with no credit card and 20% off annual billing. Prospect
+  API access remains absent from all three self-serve tiers and is a Custom-plan feature
+  only, which is why an API consumer cannot price this API without talking to sales.
 tags:
   - B2B Data
   - Lead Intelligence

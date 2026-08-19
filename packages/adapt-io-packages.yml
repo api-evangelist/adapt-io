@@ -1,0 +1,86 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  registry.npmjs.org, pypi.org, rubygems.org, api.github.com search, and the Adapt
+  developer docs at https://www.adapt.io/api-docs/v3/
+provider: Adapt
+providerId: adapt-io
+description: >-
+  Adapt publishes NO first-party client libraries or SDKs for the Prospect API v3.
+  The API documentation ships shell/cURL examples only and names no package in any
+  language. Registry searches return nothing owned by Adapt. The only first-party
+  distributed client is the Adapt Prospector browser extension, which is an end-user
+  product rather than a developer SDK — it is recorded below for completeness and is
+  NOT counted as an SDK.
+package_count: 0
+sdk_count: 0
+registries_searched:
+  - registry: npm
+    query: 'text=adapt.io'
+    url: https://registry.npmjs.org/-/v1/search?text=adapt.io
+    status: 200
+    result: 0 packages
+  - registry: npm
+    query: adapt-io
+    url: https://registry.npmjs.org/adapt-io
+    status: 404
+    result: not published
+  - registry: npm
+    query: '@adapt-io/sdk'
+    url: https://registry.npmjs.org/@adapt-io/sdk
+    status: 404
+    result: not published
+  - registry: pypi
+    query: adapt-io
+    url: https://pypi.org/pypi/adapt-io/json
+    status: 404
+    result: not published
+  - registry: rubygems
+    query: adapt-io
+    url: https://rubygems.org/api/v1/gems/adapt-io.json
+    status: 404
+    result: not published
+  - registry: github
+    query: 'adapt.io in:name,description,readme prospect'
+    url: https://api.github.com/search/repositories
+    status: 200
+    result: >-
+      No Adapt-owned repository. github.com/adapt-io and github.com/adaptio both
+      return 404 — Adapt operates no public GitHub organization.
+false_positives:
+  - name: adaptio
+    registry: pypi
+    url: https://pypi.org/project/adaptio/
+    reason: >-
+      An async concurrency-control library by an unrelated author (Haskely). Nothing
+      to do with adapt.io.
+  - name: adapt.py
+    registry: pypi
+    url: https://pypi.org/project/adapt.py/
+    reason: >-
+      A client for AdaptChat (github.com/AdaptChat), an unrelated chat platform. It
+      does not wrap api.adapt.io.
+packages: []
+distributions:
+  - name: Adapt Prospector
+    kind: browser-extension
+    official: true
+    registry: chrome-web-store
+    id: lkfklokpfbpcmpdacencdkjncpojdgff
+    url: https://chromewebstore.google.com/detail/adapt-prospector/lkfklokpfbpcmpdacencdkjncpojdgff
+    version: null
+    published: null
+    note: >-
+      Checked 2026-08-13. The Chrome Web Store detail page returns HTTP 200 but is
+      fully JS-rendered — the served HTML carries no version or last-updated string,
+      and Google publishes no unauthenticated metadata endpoint for extension
+      listings. Version and publish date are therefore unknown, not unrecorded. This
+      is an end-user prospecting extension for LinkedIn and company websites, not a
+      client library for the Prospect API.
+findings:
+  - >-
+    A consumer integrating the Prospect API v3 must hand-roll an HTTP client. There
+    is no first-party SDK, no CLI, and no code sample beyond cURL in any language.
+  - >-
+    Because there is no published package, there is no release cadence to read — the
+    usual SDK-decay signal is simply unavailable for this provider.

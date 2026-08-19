@@ -1,0 +1,159 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.adapt.io/api-docs/v3/
+provider: Adapt
+providerId: adapt-io
+description: >-
+  Error catalog for the Adapt Prospect API v3, read verbatim from the "Error Handling"
+  and per-operation "Response Types" tables in the published developer reference, and
+  cross-checked against the 4xx/5xx responses in openapi/. Adapt does NOT use RFC 9457
+  problem+json — it returns application/json with a proprietary two-field envelope plus
+  an internal APP-nnn-nnn code that is more specific than the HTTP status.
+format: proprietary
+media_type: application/json
+rfc9457: false
+envelope:
+  fields:
+    - name: message
+      type: string
+      description: Human-readable status message for the request (e.g. "Success").
+    - name: code
+      type: string
+      description: >-
+        Adapt internal application code in the form APP-<http status>-<nnn>. This is
+        the field to branch on — a single HTTP status maps to several distinct codes.
+    - name: data
+      type: object|array|null
+      description: >-
+        Present on 200 responses only. Object for enrichment, array for search and
+        purchase.
+  example: |
+    {
+      "message": "Success",
+      "code": "APP-200-001",
+      "data": { }
+    }
+notes:
+  - >-
+    HTTP 200 is NOT unconditionally a success. APP-200-002 ("No results found") is
+    returned with a 200 status, so a client that branches on HTTP status alone will
+    treat an empty match as a hit. Branch on `code`.
+  - >-
+    Adapt returns no `type`, `title`, `detail`, or `instance` member, and no
+    request/correlation id in the error envelope. There is no documented way to
+    reference a specific failed call in a support ticket.
+  - >-
+    Rate-limit and credit exhaustion are distinct: 429/APP-429-001 is throughput,
+    403/APP-403-003 is quota. Retrying a 403 will never succeed.
+problem_types:
+  - code: APP-200-001
+    status: 200
+    title: Success
+    description: The request succeeded and the requested data is in the response body.
+    retryable: false
+    operations: [searchContacts, searchCompanies, enrichContact, purchaseContacts]
+  - code: APP-200-002
+    status: 200
+    title: No results found
+    description: >-
+      The request was valid but matched nothing. For enrichContact this means the
+      requested contact information could not be found.
+    remediation: >-
+      Broaden the filters, or for enrichment try an alternate input combination
+      (linkedinURL instead of email, or firstName + lastName + domain).
+    retryable: false
+    operations: [searchContacts, searchCompanies, enrichContact]
+  - code: APP-400-001
+    status: 400
+    title: Invalid request
+    description: >-
+      The request payload is malformed, or a required input combination is missing.
+      Enrichment requires one of email, linkedinURL, or firstName + lastName + domain.
+    remediation: >-
+      Validate the JSON body against the request schema and confirm at least one
+      supported filter/input combination is present.
+    retryable: false
+    operations: [searchContacts, searchCompanies, enrichContact, purchaseContacts]
+  - code: APP-400-002
+    status: 400
+    title: You exceeded the maximum contact Ids to be passed
+    description: >-
+      The contactIds array on POST /contact/fetch exceeded the documented default
+      limit of 50 ids per request.
+    remediation: Chunk contactIds into batches of 50 or fewer.
+    retryable: false
+    operations: [purchaseContacts]
+  - code: APP-401-001
+    status: 401
+    title: Invalid email or apiKey
+    description: >-
+      The `email` and/or `apiKey` request headers do not identify a valid Adapt
+      account.
+    remediation: >-
+      Re-read the key from the Adapt account settings page
+      (https://leads.adapt.io/profile/settings). Both headers are required.
+    retryable: false
+    operations: [searchContacts, searchCompanies, enrichContact, purchaseContacts]
+  - code: APP-401-002
+    status: 401
+    title: Your account is blocked
+    description: The Adapt account has been blocked.
+    remediation: Contact Adapt support at success@adapt.io.
+    retryable: false
+    operations: [searchContacts, searchCompanies, enrichContact, purchaseContacts]
+  - code: APP-403-001
+    status: 403
+    title: Subscription doesn't exist
+    description: The account carries no active Adapt subscription.
+    remediation: Activate a plan; API access requires the Custom (enterprise) plan.
+    retryable: false
+    operations: [searchContacts, searchCompanies, enrichContact, purchaseContacts]
+  - code: APP-403-002
+    status: 403
+    title: You don't have access to this API
+    description: >-
+      The subscription exists but does not include API access. Adapt's self-serve
+      Free, Starter and Basic tiers do not expose Prospect API credentials.
+    remediation: Upgrade to the Custom plan, which negotiates API access.
+    retryable: false
+    operations: [searchContacts, searchCompanies, enrichContact, purchaseContacts]
+  - code: APP-403-003
+    status: 403
+    title: You don't have enough credits
+    description: >-
+      The relevant credit lane (search, enrichment, email or phone) is exhausted for
+      the billing period.
+    remediation: >-
+      Read the remaining balance from the response headers
+      (search-remaining-credits, enrich-remaining-credits, email-remaining-credits,
+      phone-remaining-credits) and top up or upgrade the plan. Retrying does not help.
+    retryable: false
+    operations: [searchContacts, searchCompanies, enrichContact, purchaseContacts]
+  - code: APP-429-001
+    status: 429
+    title: You reached the rate Limiting
+    description: >-
+      The account exceeded 250 requests per minute. Response carries x-ratelimit-limit,
+      x-ratelimit-reset and x-ratelimit-retry-after.
+    remediation: >-
+      Sleep for x-ratelimit-retry-after seconds, then retry. Contact success@adapt.io
+      for a higher limit.
+    retryable: true
+    operations: [searchContacts, searchCompanies, enrichContact, purchaseContacts]
+  - code: APP-500-001
+    status: 500
+    title: Internal server error
+    description: An unhandled error on Adapt's side.
+    remediation: Retry with exponential backoff; escalate to success@adapt.io if persistent.
+    retryable: true
+    operations: [searchContacts, searchCompanies, enrichContact, purchaseContacts]
+observed:
+  - url: https://api.adapt.io/v3/openapi.json
+    status: 500
+    body: >-
+      {"timestamp":"...","status":500,"error":"Internal Server Error","path":"/v3/openapi.json"}
+    note: >-
+      Probed 2026-08-13. Unknown paths under /v3 return a Spring Boot default error
+      body — NOT the documented {message, code} envelope. The documented error contract
+      covers the four published operations only; the framework leaks a different shape
+      outside them.

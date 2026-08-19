@@ -1,0 +1,93 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/_original/adapt-prospect-api-openapi.yml
+provider: Adapt
+providerId: adapt-io
+status: candidate
+description: >-
+  Adapt ships NO Model Context Protocol server — hosted or local. This is a CANDIDATE
+  tool surface derived from the four published Prospect API v3 operations, showing what
+  an MCP server over Adapt would expose. Nothing here is served by Adapt today.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: derived
+search:
+  - target: npm registry (adapt.io, adapt-io, @adapt-io/*)
+    result: no MCP package published
+  - target: github.com/adapt-io and github.com/adaptio
+    result: 404 — no public GitHub organization
+  - target: https://www.adapt.io/api-docs/v3/
+    result: no mention of MCP, agents, or tool calling
+  - target: https://www.adapt.io/platform/api
+    result: no mention of MCP
+  - target: /.well-known/ probe across www, api, app and leads adapt.io hosts
+    result: see well-known/adapt-io-well-known.yml — every path 404 or SPA shell
+auth_model:
+  scheme: two custom headers
+  headers:
+    - name: email
+      description: The email address the Adapt account is registered with.
+    - name: apiKey
+      description: The API key from the Adapt account settings page (leads.adapt.io/profile/settings).
+  note: >-
+    API access is gated to Adapt's Custom (enterprise) plan. A hypothetical MCP server
+    would need both header values injected per session; there is no OAuth surface.
+tools:
+  - name: search_contacts
+    status: candidate
+    rest:
+      operationId: searchContacts
+      method: POST
+      path: /contact/search
+    description: >-
+      Search Adapt's B2B contact database by contact attributes (name, title, level,
+      department) and company attributes (industry, head count, revenue, location,
+      technology). Returns contacts WITHOUT email addresses; each carries an id used
+      to purchase the record.
+    consequence: read
+    credits: search credits
+  - name: search_companies
+    status: candidate
+    rest:
+      operationId: searchCompanies
+      method: POST
+      path: /company/search
+    description: >-
+      Search the company database by name, domain, industry, sub-industry, head count,
+      revenue and location. Returns company records plus numberOfContacts.
+    consequence: read
+    credits: search credits
+  - name: enrich_contact
+    status: candidate
+    rest:
+      operationId: enrichContact
+      method: POST
+      path: /contact/enrich
+    description: >-
+      Enrich a known contact from one of three input combinations — email, linkedinURL,
+      or firstName + lastName + domain — optionally including EMAIL and/or PHONE.
+    consequence: read
+    credits: enrichment credits
+  - name: purchase_contacts
+    status: candidate
+    rest:
+      operationId: purchaseContacts
+      method: POST
+      path: /contact/fetch
+    description: >-
+      Reveal email and phone for up to 50 contact ids returned by search_contacts.
+      This SPENDS email and phone credits and is irreversible.
+    consequence: write
+    credits: email credits, phone credits
+    human_in_the_loop: recommended
+    note: >-
+      The only billing-affecting operation in the surface. An agent should confirm
+      before calling it — see agentic-access/adapt-io-agentic-access.yml.
+coverage:
+  rest_operations: 4
+  candidate_tools: 4
+  uncovered_operations: 0

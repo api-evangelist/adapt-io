@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adapt Prospect Company Search Contact Purchase API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "email",
+      "value": "{{email}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contact Purchase",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Purchase Contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapt.io/v3/contact/fetch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Purchase up to 50 contacts returned from `/contact/search` to reveal\nverified email addresses and phone numbers. Consumes email and phone\ncredits from the account's plan.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,46 @@
+generated: '2026-08-13'
+method: generated
+source: >-
+  openapi/ (real operationIds) + https://www.adapt.io/api-docs/v3/ +
+  conventions/adapt-io-conventions.yml + errors/adapt-io-problem-types.yml
+provider: Adapt
+providerId: adapt-io
+description: >-
+  Packaged Agent Skills for the Adapt Prospect API v3, one per marquee flow. Every skill
+  is grounded in a real published operationId — searchContacts, searchCompanies,
+  enrichContact, purchaseContacts — and carries the provider's own error codes, credit
+  lanes and pagination rules. Adapt publishes no skills or AGENTS.md of its own; these
+  are API Evangelist generations.
+provider_published_skills: false
+skill_count: 3
+skills:
+  - name: adapt-io-build-and-purchase-prospect-list
+    file: skills/adapt-io-build-and-purchase-prospect-list.md
+    summary: >-
+      Search the contact database, page with cursorMark, gate on credit balance, then
+      purchase contactability for a deduplicated id list in chunks of 50.
+    operations: [searchContacts, purchaseContacts]
+    consequence: write
+    human_in_the_loop: required before purchase
+  - name: adapt-io-enrich-known-contact
+    file: skills/adapt-io-enrich-known-contact.md
+    summary: >-
+      Enrich one partially-known contact via email, linkedinURL, or firstName + lastName
+      + domain, opting into EMAIL/PHONE and falling back cleanly on APP-200-002.
+    operations: [enrichContact]
+    consequence: read
+    human_in_the_loop: not required
+  - name: adapt-io-account-research-and-sizing
+    file: skills/adapt-io-account-research-and-sizing.md
+    summary: >-
+      Size a target market with company search, rank accounts by numberOfContacts, then
+      drill into buying roles before spending any contact credits.
+    operations: [searchCompanies, searchContacts]
+    consequence: read
+    human_in_the_loop: not required
+shared_rules:
+  - Authentication is two custom headers, `email` and `apiKey`, on every request.
+  - Every operation is a POST with a JSON body. There are no GET endpoints.
+  - Branch on the `code` field, never on HTTP status alone — APP-200-002 is a miss at HTTP 200.
+  - 429/APP-429-001 is retryable after x-ratelimit-retry-after; 403/APP-403-003 is credit exhaustion and never is.
+  - No idempotency key exists on the credit-spending operation; track purchased ids client-side.

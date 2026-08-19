@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adapt Prospect Company Search Contact Search API",
+    "version": "v3"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "email",
+      "value": "{{email}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contact Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.adapt.io/v3/contact/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search Adapt's B2B contact database using a combination of contact and\ncompany filters. Returns contact metadata without email addresses; emails\nare revealed via the `/contact/fetch` purchase endpoint.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,139 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/_original/adapt-prospect-api-openapi.yml, https://www.adapt.io/api-docs/v3/,
+  security/adapt-io-domain-security.yml, well-known/adapt-io-well-known.yml
+provider: Adapt
+providerId: adapt-io
+description: >-
+  Cross-cutting standards conformance for the Adapt Prospect API v3, asserted only where
+  there is evidence. Adapt is a B2B contact-data provider: no financial, health or
+  telecom regime applies. It publishes no compliance certifications, so no Compliance
+  pointer is emitted in apis.yml.
+conformance:
+  - id: rest
+    name: REST over HTTPS with JSON
+    conforms: true
+    evidence: >-
+      "All of Adapt's APIs are organized around REST, and all requests must be made over
+      SSL. All request and response bodies, including errors, are encoded in JSON."
+      — https://www.adapt.io/api-docs/v3/
+  - id: http-semantics
+    name: Conventional HTTP method semantics
+    conforms: false
+    evidence: >-
+      All four operations are POST, including the two read-only search operations and
+      enrichment. Reads are not safe/cacheable via GET, so no HTTP caching layer applies.
+  - id: openapi
+    name: OpenAPI description published by the provider
+    conforms: false
+    evidence: >-
+      Probed 2026-08-13: api.adapt.io/openapi.json, /openapi.yaml, /swagger.json,
+      /api-docs, /docs, /redoc all 404; /v3/openapi.json returns a Spring Boot 500;
+      www.adapt.io/openapi.json 404. The reference is hand-written Slate HTML. The
+      OpenAPI in openapi/ is an API Evangelist generation from that reference.
+  - id: oauth2
+    name: OAuth 2.0
+    conforms: false
+    evidence: >-
+      Authentication is two static custom headers (email + apiKey). No authorization
+      server; /.well-known/oauth-authorization-server 404 on every host.
+  - id: oidc
+    name: OpenID Connect
+    conforms: false
+    evidence: /.well-known/openid-configuration returns 404 on www, api and app hosts.
+  - id: rfc9457
+    name: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    evidence: >-
+      Errors are application/json with a proprietary {message, code} envelope carrying
+      APP-nnn-nnn internal codes. No application/problem+json media type, no type/title/
+      detail/instance members. See errors/adapt-io-problem-types.yml.
+  - id: rfc8594
+    name: RFC 8594 Sunset header / deprecation signalling
+    conforms: false
+    evidence: >-
+      No Sunset or Deprecation headers documented; v1 and v2 documentation was removed
+      without notice. See lifecycle/adapt-io-lifecycle.yml.
+  - id: idempotency
+    name: Idempotency keys on unsafe operations
+    conforms: false
+    evidence: >-
+      No idempotency key documented on POST /contact/fetch, the credit-spending
+      operation. See conventions/adapt-io-conventions.yml.
+  - id: pagination
+    name: Cursor-based pagination
+    conforms: true
+    evidence: >-
+      searchContacts and searchCompanies accept `cursorMark` + `limit` and return
+      `cursorMark` + `totalResults` — a consistent opaque-cursor scheme across both
+      search operations. Documented at https://www.adapt.io/api-docs/v3/
+  - id: rate-limit-headers
+    name: Rate-limit signalling in response headers
+    conforms: true
+    partial: true
+    evidence: >-
+      Returns x-ratelimit-limit, x-ratelimit-reset and x-ratelimit-retry-after. These are
+      the legacy X- prefixed forms, not the IETF draft RateLimit-* fields, and there is no
+      x-ratelimit-remaining. Documented at https://www.adapt.io/api-docs/v3/
+  - id: json-schema
+    name: JSON Schema definitions for the data model
+    conforms: true
+    partial: true
+    evidence: >-
+      Not published by Adapt. json-schema/adapt-contact-schema.json and
+      adapt-company-schema.json in this repo are API Evangelist derivations from the
+      published output-field tables.
+  - id: tls
+    name: TLS 1.2+ on all API and web hosts
+    conforms: true
+    evidence: >-
+      Probed: www.adapt.io and api.adapt.io both negotiate TLSv1.3. See
+      security/adapt-io-domain-security.yml.
+  - id: hsts
+    name: HTTP Strict Transport Security
+    conforms: false
+    evidence: >-
+      No Strict-Transport-Security header on www.adapt.io or api.adapt.io. Several site
+      redirects (e.g. /api-docs/ and /integrations) land on http:// before upgrading.
+  - id: dnssec
+    name: DNSSEC on the primary domain
+    conforms: false
+    evidence: 'adapt.io: DNSSEC not enabled, no CAA records. SPF and DMARC (p=quarantine) present.'
+  - id: security-txt
+    name: RFC 9116 security.txt
+    conforms: false
+    evidence: /.well-known/security.txt returns 404 on www, api and app adapt.io.
+  - id: soc2
+    name: SOC 2
+    conforms: false
+    evidence: >-
+      No SOC 2 claim found on adapt.io. Probed /security, /compliance, /trust,
+      /security-policy — all 404. Note that web searches for "adapt SOC 2" surface
+      adapt.com (an unrelated Work-AI company) and adapty.io (an unrelated subscription
+      platform); neither is this provider.
+  - id: iso27001
+    name: ISO/IEC 27001
+    conforms: false
+    evidence: No certification claim published on adapt.io.
+  - id: gdpr
+    name: GDPR
+    conforms: unknown
+    evidence: >-
+      Adapt sells EU-resident contact data and publishes a privacy policy at
+      https://www.adapt.io/privacy.htm (HTTP 200), but no dedicated GDPR/CCPA compliance
+      page exists — /gdpr, /ccpa, /data-privacy, /do-not-sell all 404. Recorded as
+      unknown rather than false: a policy exists, a conformance claim does not.
+not_applicable:
+  - id: fhir
+    reason: Not a healthcare data provider.
+  - id: fapi
+    reason: Not a financial-grade API.
+  - id: psd2
+    reason: Not a payments or banking provider.
+  - id: scim
+    reason: No identity provisioning surface.
+  - id: odata
+    reason: Not an OData service.
+  - id: json:api
+    reason: Proprietary response envelope, not JSON:API.
