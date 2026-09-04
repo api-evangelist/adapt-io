@@ -36,9 +36,11 @@ accessModel:
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
+  - rate-limits
+  - security
+  generated: '2026-09-03'
   method: derived
-position: Provider
+position: Producing
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/adapt-io.png
 tags:
@@ -240,8 +242,9 @@ common:
     url: https://twitter.com/adapt_io
   - type: Packages
     url: packages/adapt-io-packages.yml
-  - type: MCPServer
+  - type: X-MCPServerCandidate
     url: mcp/adapt-io-mcp.yml
+    note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
   - type: LLMsTxt
     url: llms/adapt-io-llms.txt
   - type: Conventions
