@@ -1,26 +1,9 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Adapt Prospect Company Search Contact Enrichment API
+  title: Adapt Prospect Contact Enrichment API
   description: 'Adapt''s Prospect API provides programmatic access to a B2B contact and company
 
-    intelligence database of 250M+ contacts and 12M+ companies. Search, enrich, and
-
-    purchase verified B2B contact data with 50+ attributes including verified email
-
-    addresses, direct dial phone numbers, job titles, levels, departments,
-
-    technographics, firmographics, and location data.
-
-
-    All endpoints are organized around REST. Requests and responses are JSON over
-
-    HTTPS. Authentication is via two custom headers: `email` (account email) and
-
-    `apiKey` (key from account settings). Default rate limit is 250 requests per
-
-    minute per account.
-
-    '
+    intelligence database of 250M+ contacts and 12M+ companies.'
   version: v3
   contact:
     name: Adapt Support
@@ -47,9 +30,7 @@ paths:
 
         combination of first name, last name, and company domain. The `include`
 
-        parameter controls whether email, phone, or both are returned.
-
-        '
+        parameter controls whether email, phone, or both are returned.'
       operationId: enrichContact
       requestBody:
         required: true
@@ -83,64 +64,6 @@ paths:
           $ref: '#/components/responses/ServerError'
 components:
   schemas:
-    Company:
-      type: object
-      properties:
-        name:
-          type: string
-        website:
-          type: string
-          format: uri
-        domain:
-          type: string
-        phoneNumber:
-          type: string
-        industry:
-          type: string
-        subIndustry:
-          type: string
-        headCount:
-          type: string
-        revenue:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        numberOfContacts:
-          type: integer
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Adapt internal application code (e.g. APP-400-001).
-        message:
-          type: string
-    ContactEnrichRequest:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-        linkedinURL:
-          type: string
-          format: uri
-        firstName:
-          type: string
-        lastName:
-          type: string
-        domain:
-          type: string
-        include:
-          type: array
-          items:
-            type: string
-            enum:
-            - EMAIL
-            - PHONE
     Contact:
       type: object
       properties:
@@ -176,31 +99,67 @@ components:
           format: uri
         company:
           $ref: '#/components/schemas/Company'
+    ContactEnrichRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        linkedinURL:
+          type: string
+          format: uri
+        firstName:
+          type: string
+        lastName:
+          type: string
+        domain:
+          type: string
+        include:
+          type: array
+          items:
+            type: string
+            enum:
+            - EMAIL
+            - PHONE
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Adapt internal application code (e.g. APP-400-001).
+        message:
+          type: string
+    Company:
+      type: object
+      properties:
+        name:
+          type: string
+        website:
+          type: string
+          format: uri
+        domain:
+          type: string
+        phoneNumber:
+          type: string
+        industry:
+          type: string
+        subIndustry:
+          type: string
+        headCount:
+          type: string
+        revenue:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        numberOfContacts:
+          type: integer
   responses:
-    ServerError:
-      description: Server error (APP-500-001).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Invalid credentials (APP-401-001).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request payload (APP-400-001).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: 'Subscription missing (APP-403-001), API access denied (APP-403-002),
-
-        or insufficient credits (APP-403-003).
-
-        '
       content:
         application/json:
           schema:
@@ -217,6 +176,28 @@ components:
         x-ratelimit-retry-after:
           schema:
             type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: 'Subscription missing (APP-403-001), API access denied (APP-403-002),
+
+        or insufficient credits (APP-403-003).
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Server error (APP-500-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request payload (APP-400-001).
       content:
         application/json:
           schema:

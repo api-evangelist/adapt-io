@@ -1,26 +1,9 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Adapt Prospect Company Search API
   description: 'Adapt''s Prospect API provides programmatic access to a B2B contact and company
 
-    intelligence database of 250M+ contacts and 12M+ companies. Search, enrich, and
-
-    purchase verified B2B contact data with 50+ attributes including verified email
-
-    addresses, direct dial phone numbers, job titles, levels, departments,
-
-    technographics, firmographics, and location data.
-
-
-    All endpoints are organized around REST. Requests and responses are JSON over
-
-    HTTPS. Authentication is via two custom headers: `email` (account email) and
-
-    `apiKey` (key from account settings). Default rate limit is 250 requests per
-
-    minute per account.
-
-    '
+    intelligence database of 250M+ contacts and 12M+ companies.'
   version: v3
   contact:
     name: Adapt Support
@@ -47,9 +30,7 @@ paths:
 
         head count, revenue, and location. Returns company metadata including
 
-        the number of contacts known per company.
-
-        '
+        the number of contacts known per company.'
       operationId: searchCompanies
       requestBody:
         required: true
@@ -82,7 +63,60 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
+  responses:
+    Unauthorized:
+      description: Invalid credentials (APP-401-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded (APP-429-001). 250 requests per minute.
+      headers:
+        x-ratelimit-limit:
+          schema:
+            type: integer
+        x-ratelimit-reset:
+          schema:
+            type: integer
+        x-ratelimit-retry-after:
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: 'Subscription missing (APP-403-001), API access denied (APP-403-002),
+
+        or insufficient credits (APP-403-003).
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Server error (APP-500-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request payload (APP-400-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Adapt internal application code (e.g. APP-400-001).
+        message:
+          type: string
     Company:
       type: object
       properties:
@@ -110,25 +144,6 @@ components:
         country:
           type: string
         numberOfContacts:
-          type: integer
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Adapt internal application code (e.g. APP-400-001).
-        message:
-          type: string
-    CompanySearchResponse:
-      type: object
-      properties:
-        companies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Company'
-        cursorMark:
-          type: string
-        totalResults:
           type: integer
     CompanySearchRequest:
       type: object
@@ -173,51 +188,17 @@ components:
           type: integer
         cursorMark:
           type: string
-  responses:
-    ServerError:
-      description: Server error (APP-500-001).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Invalid credentials (APP-401-001).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request payload (APP-400-001).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: 'Subscription missing (APP-403-001), API access denied (APP-403-002),
-
-        or insufficient credits (APP-403-003).
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded (APP-429-001). 250 requests per minute.
-      headers:
-        x-ratelimit-limit:
-          schema:
-            type: integer
-        x-ratelimit-reset:
-          schema:
-            type: integer
-        x-ratelimit-retry-after:
-          schema:
-            type: integer
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    CompanySearchResponse:
+      type: object
+      properties:
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company'
+        cursorMark:
+          type: string
+        totalResults:
+          type: integer
   securitySchemes:
     emailAuth:
       type: apiKey
