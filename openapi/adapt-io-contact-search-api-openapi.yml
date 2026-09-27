@@ -66,23 +66,36 @@ paths:
           $ref: '#/components/responses/ServerError'
 components:
   schemas:
-    Contact:
+    ContactSearchResponse:
       type: object
       properties:
-        id:
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        cursorMark:
           type: string
-        email:
+        totalResults:
+          type: integer
+    Company:
+      type: object
+      properties:
+        name:
           type: string
-          format: email
-        firstName:
+        website:
           type: string
-        lastName:
+          format: uri
+        domain:
           type: string
-        title:
+        phoneNumber:
           type: string
-        department:
+        industry:
           type: string
-        level:
+        subIndustry:
+          type: string
+        headCount:
+          type: string
+        revenue:
           type: string
         city:
           type: string
@@ -90,17 +103,16 @@ components:
           type: string
         country:
           type: string
-        phoneNumber:
-          type: array
-          items:
-            type: string
-        emailDeliverabilityScore:
+        numberOfContacts:
           type: integer
-        linkedinURL:
+    Error:
+      type: object
+      properties:
+        code:
           type: string
-          format: uri
-        company:
-          $ref: '#/components/schemas/Company'
+          description: Adapt internal application code (e.g. APP-400-001).
+        message:
+          type: string
     ContactSearchRequest:
       type: object
       properties:
@@ -216,44 +228,23 @@ components:
           type: integer
         cursorMark:
           type: string
-    ContactSearchResponse:
+    Contact:
       type: object
       properties:
-        contacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contact'
-        cursorMark:
+        id:
           type: string
-        totalResults:
-          type: integer
-    Error:
-      type: object
-      properties:
-        code:
+        email:
           type: string
-          description: Adapt internal application code (e.g. APP-400-001).
-        message:
+          format: email
+        firstName:
           type: string
-    Company:
-      type: object
-      properties:
-        name:
+        lastName:
           type: string
-        website:
+        title:
           type: string
-          format: uri
-        domain:
+        department:
           type: string
-        phoneNumber:
-          type: string
-        industry:
-          type: string
-        subIndustry:
-          type: string
-        headCount:
-          type: string
-        revenue:
+        level:
           type: string
         city:
           type: string
@@ -261,11 +252,20 @@ components:
           type: string
         country:
           type: string
-        numberOfContacts:
+        phoneNumber:
+          type: array
+          items:
+            type: string
+        emailDeliverabilityScore:
           type: integer
+        linkedinURL:
+          type: string
+          format: uri
+        company:
+          $ref: '#/components/schemas/Company'
   responses:
-    Unauthorized:
-      description: Invalid credentials (APP-401-001).
+    BadRequest:
+      description: Invalid request payload (APP-400-001).
       content:
         application/json:
           schema:
@@ -296,14 +296,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    ServerError:
-      description: Server error (APP-500-001).
+    Unauthorized:
+      description: Invalid credentials (APP-401-001).
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request payload (APP-400-001).
+    ServerError:
+      description: Server error (APP-500-001).
       content:
         application/json:
           schema:

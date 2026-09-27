@@ -64,6 +64,42 @@ paths:
           $ref: '#/components/responses/ServerError'
 components:
   schemas:
+    Company:
+      type: object
+      properties:
+        name:
+          type: string
+        website:
+          type: string
+          format: uri
+        domain:
+          type: string
+        phoneNumber:
+          type: string
+        industry:
+          type: string
+        subIndustry:
+          type: string
+        headCount:
+          type: string
+        revenue:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        numberOfContacts:
+          type: integer
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Adapt internal application code (e.g. APP-400-001).
+        message:
+          type: string
     Contact:
       type: object
       properties:
@@ -121,45 +157,9 @@ components:
             enum:
             - EMAIL
             - PHONE
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Adapt internal application code (e.g. APP-400-001).
-        message:
-          type: string
-    Company:
-      type: object
-      properties:
-        name:
-          type: string
-        website:
-          type: string
-          format: uri
-        domain:
-          type: string
-        phoneNumber:
-          type: string
-        industry:
-          type: string
-        subIndustry:
-          type: string
-        headCount:
-          type: string
-        revenue:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        numberOfContacts:
-          type: integer
   responses:
-    Unauthorized:
-      description: Invalid credentials (APP-401-001).
+    BadRequest:
+      description: Invalid request payload (APP-400-001).
       content:
         application/json:
           schema:
@@ -190,14 +190,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    ServerError:
-      description: Server error (APP-500-001).
+    Unauthorized:
+      description: Invalid credentials (APP-401-001).
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request payload (APP-400-001).
+    ServerError:
+      description: Server error (APP-500-001).
       content:
         application/json:
           schema:
