@@ -65,46 +65,52 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
+  responses:
+    Forbidden:
+      description: 'Subscription missing (APP-403-001), API access denied (APP-403-002),
+
+        or insufficient credits (APP-403-003).
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid credentials (APP-401-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Server error (APP-500-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request payload (APP-400-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded (APP-429-001). 250 requests per minute.
+      headers:
+        x-ratelimit-limit:
+          schema:
+            type: integer
+        x-ratelimit-reset:
+          schema:
+            type: integer
+        x-ratelimit-retry-after:
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    ContactSearchResponse:
-      type: object
-      properties:
-        contacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Contact'
-        cursorMark:
-          type: string
-        totalResults:
-          type: integer
-    Company:
-      type: object
-      properties:
-        name:
-          type: string
-        website:
-          type: string
-          format: uri
-        domain:
-          type: string
-        phoneNumber:
-          type: string
-        industry:
-          type: string
-        subIndustry:
-          type: string
-        headCount:
-          type: string
-        revenue:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        numberOfContacts:
-          type: integer
     Error:
       type: object
       properties:
@@ -228,6 +234,34 @@ components:
           type: integer
         cursorMark:
           type: string
+    Company:
+      type: object
+      properties:
+        name:
+          type: string
+        website:
+          type: string
+          format: uri
+        domain:
+          type: string
+        phoneNumber:
+          type: string
+        industry:
+          type: string
+        subIndustry:
+          type: string
+        headCount:
+          type: string
+        revenue:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        numberOfContacts:
+          type: integer
     Contact:
       type: object
       properties:
@@ -263,51 +297,17 @@ components:
           format: uri
         company:
           $ref: '#/components/schemas/Company'
-  responses:
-    BadRequest:
-      description: Invalid request payload (APP-400-001).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded (APP-429-001). 250 requests per minute.
-      headers:
-        x-ratelimit-limit:
-          schema:
-            type: integer
-        x-ratelimit-reset:
-          schema:
-            type: integer
-        x-ratelimit-retry-after:
-          schema:
-            type: integer
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: 'Subscription missing (APP-403-001), API access denied (APP-403-002),
-
-        or insufficient credits (APP-403-003).
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Invalid credentials (APP-401-001).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ServerError:
-      description: Server error (APP-500-001).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    ContactSearchResponse:
+      type: object
+      properties:
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        cursorMark:
+          type: string
+        totalResults:
+          type: integer
   securitySchemes:
     emailAuth:
       type: apiKey

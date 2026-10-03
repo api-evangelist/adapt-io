@@ -68,7 +68,60 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
+  responses:
+    Forbidden:
+      description: 'Subscription missing (APP-403-001), API access denied (APP-403-002),
+
+        or insufficient credits (APP-403-003).
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid credentials (APP-401-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Server error (APP-500-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request payload (APP-400-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded (APP-429-001). 250 requests per minute.
+      headers:
+        x-ratelimit-limit:
+          schema:
+            type: integer
+        x-ratelimit-reset:
+          schema:
+            type: integer
+        x-ratelimit-retry-after:
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Adapt internal application code (e.g. APP-400-001).
+        message:
+          type: string
     Company:
       type: object
       properties:
@@ -97,14 +150,16 @@ components:
           type: string
         numberOfContacts:
           type: integer
-    Error:
+    ContactFetchRequest:
       type: object
+      required:
+      - contactIds
       properties:
-        code:
-          type: string
-          description: Adapt internal application code (e.g. APP-400-001).
-        message:
-          type: string
+        contactIds:
+          type: array
+          maxItems: 50
+          items:
+            type: string
     Contact:
       type: object
       properties:
@@ -140,61 +195,6 @@ components:
           format: uri
         company:
           $ref: '#/components/schemas/Company'
-    ContactFetchRequest:
-      type: object
-      required:
-      - contactIds
-      properties:
-        contactIds:
-          type: array
-          maxItems: 50
-          items:
-            type: string
-  responses:
-    BadRequest:
-      description: Invalid request payload (APP-400-001).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded (APP-429-001). 250 requests per minute.
-      headers:
-        x-ratelimit-limit:
-          schema:
-            type: integer
-        x-ratelimit-reset:
-          schema:
-            type: integer
-        x-ratelimit-retry-after:
-          schema:
-            type: integer
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: 'Subscription missing (APP-403-001), API access denied (APP-403-002),
-
-        or insufficient credits (APP-403-003).
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Invalid credentials (APP-401-001).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ServerError:
-      description: Server error (APP-500-001).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     emailAuth:
       type: apiKey
