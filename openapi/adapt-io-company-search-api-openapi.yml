@@ -64,12 +64,8 @@ paths:
           $ref: '#/components/responses/ServerError'
 components:
   responses:
-    Forbidden:
-      description: 'Subscription missing (APP-403-001), API access denied (APP-403-002),
-
-        or insufficient credits (APP-403-003).
-
-        '
+    ServerError:
+      description: Server error (APP-500-001).
       content:
         application/json:
           schema:
@@ -80,14 +76,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    ServerError:
-      description: Server error (APP-500-001).
+    BadRequest:
+      description: Invalid request payload (APP-400-001).
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request payload (APP-400-001).
+    Forbidden:
+      description: 'Subscription missing (APP-403-001), API access denied (APP-403-002),
+
+        or insufficient credits (APP-403-003).
+
+        '
       content:
         application/json:
           schema:
@@ -109,6 +109,17 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    CompanySearchResponse:
+      type: object
+      properties:
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company'
+        cursorMark:
+          type: string
+        totalResults:
+          type: integer
     Error:
       type: object
       properties:
@@ -144,17 +155,6 @@ components:
         country:
           type: string
         numberOfContacts:
-          type: integer
-    CompanySearchResponse:
-      type: object
-      properties:
-        companies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Company'
-        cursorMark:
-          type: string
-        totalResults:
           type: integer
     CompanySearchRequest:
       type: object
