@@ -63,6 +63,51 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 components:
+  responses:
+    Forbidden:
+      description: 'Subscription missing (APP-403-001), API access denied (APP-403-002),
+
+        or insufficient credits (APP-403-003).
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    RateLimited:
+      description: Rate limit exceeded (APP-429-001). 250 requests per minute.
+      headers:
+        x-ratelimit-limit:
+          schema:
+            type: integer
+        x-ratelimit-reset:
+          schema:
+            type: integer
+        x-ratelimit-retry-after:
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request payload (APP-400-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ServerError:
+      description: Server error (APP-500-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Invalid credentials (APP-401-001).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Contact:
       type: object
@@ -99,28 +144,6 @@ components:
           format: uri
         company:
           $ref: '#/components/schemas/Company'
-    ContactEnrichRequest:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-        linkedinURL:
-          type: string
-          format: uri
-        firstName:
-          type: string
-        lastName:
-          type: string
-        domain:
-          type: string
-        include:
-          type: array
-          items:
-            type: string
-            enum:
-            - EMAIL
-            - PHONE
     Error:
       type: object
       properties:
@@ -157,51 +180,28 @@ components:
           type: string
         numberOfContacts:
           type: integer
-  responses:
-    ServerError:
-      description: Server error (APP-500-001).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Invalid credentials (APP-401-001).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request payload (APP-400-001).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: 'Subscription missing (APP-403-001), API access denied (APP-403-002),
-
-        or insufficient credits (APP-403-003).
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    RateLimited:
-      description: Rate limit exceeded (APP-429-001). 250 requests per minute.
-      headers:
-        x-ratelimit-limit:
-          schema:
-            type: integer
-        x-ratelimit-reset:
-          schema:
-            type: integer
-        x-ratelimit-retry-after:
-          schema:
-            type: integer
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    ContactEnrichRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        linkedinURL:
+          type: string
+          format: uri
+        firstName:
+          type: string
+        lastName:
+          type: string
+        domain:
+          type: string
+        include:
+          type: array
+          items:
+            type: string
+            enum:
+            - EMAIL
+            - PHONE
   securitySchemes:
     emailAuth:
       type: apiKey
