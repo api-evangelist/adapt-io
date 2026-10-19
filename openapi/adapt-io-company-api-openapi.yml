@@ -1,0 +1,102 @@
+openapi: 3.2.0
+info:
+  description: Saleslift Enrich APIs for all your data needs!
+  version: 1.0.0
+  title: Saleslift Company API
+  termsOfService: /termsAndConditions.htm
+  contact:
+    name: api@saleslift.io
+servers:
+- url: http://localhost:8080/api
+tags:
+- name: Company
+paths:
+  /company/search/v1-hold:
+    post:
+      tags:
+      - Company
+      summary: Search and Filter Companies
+      description: Search Companies based on title, department, level , headcount, annual revenue and much more
+      operationId: search
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '401':
+          description: Authentication Failed
+        '402':
+          description: Insufficient API credits
+        '204':
+          description: Resource not found
+        '403':
+          description: API Access Denied
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanySearchEndpointRequest'
+        description: Filter Companies based on various criteria like name, industry, head count, revenue and much more
+        required: true
+components:
+  schemas:
+    CompanySearchEndpointRequest:
+      type: object
+      properties:
+        companyName:
+          type: array
+          description: company name
+          items:
+            type: string
+        nameDomain:
+          type: array
+          description: company domain
+          items:
+            type: string
+        numberOfEmployees:
+          type: array
+          description: number of employees
+          items:
+            type: string
+        revenue:
+          type: array
+          description: revenue
+          items:
+            type: string
+        industryName:
+          type: array
+          description: industry
+          items:
+            type: string
+        subIndustry:
+          type: array
+          description: sub industry
+          items:
+            type: string
+        city:
+          type: array
+          description: city
+          items:
+            type: string
+        country:
+          type: array
+          description: country
+          items:
+            type: string
+        state:
+          type: array
+          description: state
+          items:
+            type: string
+        zipCode:
+          type: array
+          description: zipcode
+          items:
+            type: string
+        limit:
+          type: integer
+          format: int32
+          description: number of requests
+        cursorMark:
+          type: string
+          description: cursorMark is used to paginate, in the first request '*' we to sent for its values and for sub subsequent requests, its value will be obtained from the previous request

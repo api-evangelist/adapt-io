@@ -1,0 +1,67 @@
+openapi: 3.2.0
+info:
+  description: Saleslift Enrich APIs for all your data needs!
+  version: 1.0.0
+  title: Saleslift Webhooks API
+  termsOfService: /termsAndConditions.htm
+  contact:
+    name: api@saleslift.io
+servers:
+- url: http://localhost:8080/api
+tags:
+- name: Webhooks
+paths:
+  /webhooks/create:
+    post:
+      tags:
+      - Webhooks
+      summary: Create a webhook
+      description: Create webhook to subscribe a contact
+      operationId: createWebhook
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '401':
+          description: Authentication Failed
+        '500':
+          description: Internal Error
+        '403':
+          description: API Access Denied
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+        description: Metadata to create the webhook
+        required: true
+  /webhooks/update:
+    put:
+      tags:
+      - Webhooks
+      summary: Update a webhook
+      description: Update webhook to subscribe a contact
+      operationId: updateWebhook
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '401':
+          description: Authentication Failed
+        '500':
+          description: Internal Error
+        '403':
+          description: API Access Denied
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+        description: Metadata to update the webhook
+        required: true

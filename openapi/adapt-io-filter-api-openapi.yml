@@ -1,0 +1,239 @@
+openapi: 3.2.0
+info:
+  description: Saleslift Enrich APIs for all your data needs!
+  version: 1.0.0
+  title: Saleslift Filter API
+  termsOfService: /termsAndConditions.htm
+  contact:
+    name: api@saleslift.io
+servers:
+- url: http://localhost:8080/api
+tags:
+- name: Filter
+paths:
+  /filter/contacts:
+    post:
+      tags:
+      - Filter
+      summary: Search and Filter Contacts
+      description: Search Contacts based on title, department, level , headcount, annual revenue and much more
+      operationId: getCompanyId
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Authentication Failed
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdvancedSearchContactRequest'
+        description: Filter contacts based on various criteria like name, company , title, head count, revenue and much more
+        required: true
+  /filter/contacts/domain:
+    post:
+      tags:
+      - Filter
+      operationId: getContactsByDomain
+      responses:
+        default:
+          description: successful operation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdvancedSearchContactRequest'
+      summary: Get contacts by domain
+      x-summary-source: derived
+  /filter/contacts/v2:
+    post:
+      tags:
+      - Filter
+      summary: Search and Filter Contacts
+      description: Search Contacts based on title, department, level , headcount, annual revenue and much more
+      operationId: searchContact
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Authentication Failed
+        '429':
+          description: Too many requests.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdvancedSearchContactRequest'
+        description: Filter contacts based on various criteria like name, company , title, head count, revenue and much more
+        required: true
+components:
+  schemas:
+    SortParam:
+      type: object
+      properties:
+        paramName:
+          type: string
+        sortOrder:
+          type: string
+          enum:
+          - desc
+          - asc
+    AdvancedSearchContactRequest:
+      type: object
+      required:
+      - apiKey
+      - email
+      properties:
+        email:
+          type: string
+          example: gautam@saleslift.io
+          description: Email Address
+        apiKey:
+          type: string
+          example: GAUTAM_API_KEY
+          description: API Key
+        name:
+          type: array
+          description: name
+          items:
+            type: string
+        firstName:
+          type: array
+          description: first name
+          items:
+            type: string
+        lastName:
+          type: array
+          description: last name
+          items:
+            type: string
+        title:
+          type: array
+          description: title
+          items:
+            type: string
+        dept:
+          type: array
+          description: department
+          items:
+            type: string
+        level:
+          type: array
+          description: level
+          items:
+            type: string
+        companyName:
+          type: array
+          description: company name
+          items:
+            type: string
+        industryName:
+          type: array
+          description: industry name
+          items:
+            type: string
+        numberOfEmployees:
+          type: array
+          description: number of employees
+          items:
+            type: string
+        revenue:
+          type: array
+          description: revenue
+          items:
+            type: string
+        companyPrimaryDomain:
+          type: string
+          description: company primary domain
+        zipCode:
+          type: array
+          description: zipcode
+          items:
+            type: string
+        state:
+          type: array
+          description: state
+          items:
+            type: string
+        city:
+          type: array
+          description: city
+          items:
+            type: string
+        country:
+          type: array
+          description: country
+          items:
+            type: string
+        location:
+          type: array
+          description: location
+          items:
+            type: string
+        nameDomain:
+          type: array
+          description: nameDomain
+          items:
+            type: string
+        category:
+          type: array
+          description: category
+          items:
+            type: string
+        productName:
+          type: array
+          description: product name
+          items:
+            type: string
+        sortParam:
+          description: sort param
+          $ref: '#/components/schemas/SortParam'
+        enableDomainLimit:
+          type: boolean
+          description: enable the limit per domain
+          default: false
+        limitPerDomain:
+          type: integer
+          format: int32
+          description: limit per domain
+        cursorMark:
+          type: string
+          description: cursorMark is used to paginate, in the first request '*' we to sent for its values and for sub subsequent requests, its value will be obtained from the previous request
+        limit:
+          type: integer
+          format: int32
+          description: number of requests
+        searchTerm:
+          type: string
+          description: search term
+        excludeTitleKeywords:
+          type: array
+          items:
+            type: string
+        domains:
+          type: array
+          items:
+            type: string
+        emailConfidenceScore:
+          type: integer
+          format: int32
+        dontDisplayOwnedContacts:
+          type: boolean
+          default: false
+        dontDisplayDeadContacts:
+          type: boolean
+          default: false
+        titleExactMatch:
+          type: boolean
+          default: false
+        facetFieldName:
+          type: array
+          items:
+            type: string
+        includeAccount:
+          type: boolean
+          default: false

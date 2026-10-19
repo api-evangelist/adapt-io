@@ -1,0 +1,135 @@
+openapi: 3.2.0
+info:
+  description: Saleslift Enrich APIs for all your data needs!
+  version: 1.0.0
+  title: Saleslift Email API
+  termsOfService: /termsAndConditions.htm
+  contact:
+    name: api@saleslift.io
+servers:
+- url: http://localhost:8080/api
+tags:
+- name: Email
+paths:
+  /email/finder:
+    post:
+      tags:
+      - Email
+      summary: Finds the Email address
+      description: Finds the email address when first name, last name and company domain is given
+      operationId: findEmail
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailFinderRequest'
+        description: Metadata to find the email address
+        required: true
+  /email/lnfinder:
+    post:
+      tags:
+      - Email
+      summary: Finds the Email address
+      description: Finds the email address when linkedin url, company details is given
+      operationId: findLNEmail
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LPReqPayload'
+        description: Metadata to find the email address
+        required: true
+components:
+  schemas:
+    LPReqPayload:
+      type: object
+      properties:
+        fullName:
+          type: string
+        linkedInProfileUrl:
+          type: string
+        experience:
+          type: array
+          items:
+            $ref: '#/components/schemas/LPExperience'
+        memberId:
+          type: string
+        address:
+          type: string
+        connections:
+          type: integer
+          format: int32
+        metaData:
+          type: object
+        salesNavigator:
+          type: boolean
+          default: false
+        parsed:
+          type: boolean
+          default: false
+    LPExperience:
+      type: object
+      properties:
+        companyUrl:
+          type: string
+        domain:
+          type: string
+        companyName:
+          type: string
+        companyId:
+          type: string
+        title:
+          type: string
+        address:
+          type: string
+        activelyWorking:
+          type: boolean
+          default: false
+        verifiedDomain:
+          type: boolean
+          default: false
+    EmailFinderRequest:
+      type: object
+      required:
+      - domain
+      - endpoint
+      - firstName
+      - lastName
+      properties:
+        firstName:
+          type: string
+          example: Gautam
+          description: first name
+        lastName:
+          type: string
+          example: Balasubramanian
+          description: last name
+        domain:
+          type: string
+          example: saleslift.io
+          description: domain
+        endpoint:
+          type: string
+          example: https://www.saleslift.io/email/finder
+          description: endpoint
+      description: MetaData to find the email address
+      xml:
+        name: EmailFinderRequest

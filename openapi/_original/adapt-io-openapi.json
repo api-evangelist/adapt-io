@@ -1,0 +1,3774 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Saleslift Enrich APIs for all your data needs!",
+    "version" : "1.0.0",
+    "title" : "Saleslift Api",
+    "termsOfService" : "/termsAndConditions.htm",
+    "contact" : {
+      "name" : "api@saleslift.io"
+    }
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/api",
+  "tags" : [ {
+    "name" : "contribution"
+  }, {
+    "name" : "webhooks"
+  }, {
+    "name" : "health"
+  }, {
+    "name" : "contact"
+  }, {
+    "name" : "email"
+  }, {
+    "name" : "emailid"
+  }, {
+    "name" : "account"
+  }, {
+    "name" : "company"
+  }, {
+    "name" : "filter"
+  } ],
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/account/emailDomain" : {
+      "post" : {
+        "tags" : [ "account" ],
+        "operationId" : "getCompanyEmailDomain",
+        "produces" : [ "application/xml", "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CompanyEmailDomainRequest"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/company/search/v1-hold" : {
+      "post" : {
+        "tags" : [ "company" ],
+        "summary" : "Search and Filter Companies",
+        "description" : "Search Companies based on title, department, level , headcount, annual revenue and much more",
+        "operationId" : "search",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "search Companies API",
+          "description" : "Filter Companies based on various criteria like name, industry, head count, revenue and much more",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/CompanySearchEndpointRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Authentication Failed"
+          },
+          "402" : {
+            "description" : "Insufficient API credits"
+          },
+          "204" : {
+            "description" : "Resource not found"
+          },
+          "403" : {
+            "description" : "API Access Denied"
+          }
+        }
+      }
+    },
+    "/contact/async-preview/v1-hold" : {
+      "post" : {
+        "tags" : [ "contact" ],
+        "summary" : "Preview a contact(Async)",
+        "description" : "Preview the available data points based on a given social url like LinkedIn. It highlights whether all the data points are available or not and sends a callback to the given webhookUrl",
+        "operationId" : "asyncContactPreview",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PreviewEndpointRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Authentication Failed"
+          },
+          "402" : {
+            "description" : "Insufficient API credits"
+          },
+          "204" : {
+            "description" : "Resource not found"
+          },
+          "403" : {
+            "description" : "API Access Denied"
+          }
+        }
+      }
+    },
+    "/contact/enrich/v1-hold" : {
+      "post" : {
+        "tags" : [ "contact" ],
+        "summary" : "Enrich a contact",
+        "description" : "Enriches a contact with more data like first name, last name, title, department, address, phone, status",
+        "operationId" : "enrichContact",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/EnrichContactRequest"
+          }
+        }, {
+          "name" : "version",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Authentication Failed"
+          },
+          "402" : {
+            "description" : "Insufficient API credits"
+          },
+          "204" : {
+            "description" : "Resource not found"
+          },
+          "403" : {
+            "description" : "API Access Denied"
+          }
+        }
+      }
+    },
+    "/contact/get/v1-hold" : {
+      "post" : {
+        "tags" : [ "contact" ],
+        "summary" : "Gets the Email address",
+        "description" : "Gets the email address when contact Id is mentioned",
+        "operationId" : "purchase",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "GetEmailRequest",
+          "description" : "Metadata to get the email address",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PurchaseEndpointRequest"
+          }
+        }, {
+          "name" : "version",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Authentication Failed"
+          },
+          "402" : {
+            "description" : "Insufficient API credits"
+          },
+          "204" : {
+            "description" : "Resource not found"
+          },
+          "403" : {
+            "description" : "API Access Denied"
+          }
+        }
+      }
+    },
+    "/contact/preview/v1-hold" : {
+      "post" : {
+        "tags" : [ "contact" ],
+        "summary" : "Preview a contact",
+        "description" : "Preview the available data points based on a given social url like LinkedIn. It highlights whether all the data points are available or not",
+        "operationId" : "contactPreview",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/PreviewEndpointRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Authentication Failed"
+          },
+          "402" : {
+            "description" : "Insufficient API credits"
+          },
+          "204" : {
+            "description" : "Resource not found"
+          },
+          "403" : {
+            "description" : "API Access Denied"
+          }
+        }
+      }
+    },
+    "/contact/search/v1-hold" : {
+      "post" : {
+        "tags" : [ "contact" ],
+        "summary" : "Search and Filter Contacts",
+        "description" : "Search Contacts based on title, department, level , headcount, annual revenue and much more",
+        "operationId" : "search",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "search Contacts API",
+          "description" : "Filter contacts based on various criteria like name, company , title, head count, revenue and much more",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/SearchEndpointRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Authentication Failed"
+          },
+          "402" : {
+            "description" : "Insufficient API credits"
+          },
+          "204" : {
+            "description" : "Resource not found"
+          },
+          "403" : {
+            "description" : "API Access Denied"
+          }
+        }
+      }
+    },
+    "/contact/subscribe/v1-hold" : {
+      "post" : {
+        "tags" : [ "contact" ],
+        "summary" : "Subscribe Contact",
+        "description" : "Subscribe a contact, that is purchased already.",
+        "operationId" : "subscribeContact",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "contactId",
+          "description" : "Metadata to subscribe a contact",
+          "required" : true,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Authentication Failed"
+          },
+          "412" : {
+            "description" : "Contact not owned"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          },
+          "403" : {
+            "description" : "API Access Denied"
+          },
+          "429" : {
+            "description" : "You reached the limit. Please try after a minute."
+          }
+        }
+      }
+    },
+    "/contact/verify/subscribeContact/v1-hold" : {
+      "post" : {
+        "tags" : [ "contact" ],
+        "summary" : "Verifies subscribeContact webhook",
+        "description" : "",
+        "operationId" : "verifySubscribe",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          }
+        }
+      }
+    },
+    "/contribution/verificationStatus" : {
+      "post" : {
+        "tags" : [ "contribution" ],
+        "summary" : "Stores Data from Instantly",
+        "description" : "Stores email validation status info from instantly",
+        "operationId" : "saveInstantlyEmailValidationStatusRequest",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          }
+        }
+      }
+    },
+    "/email/finder" : {
+      "post" : {
+        "tags" : [ "email" ],
+        "summary" : "Finds the Email address",
+        "description" : "Finds the email address when first name, last name and company domain is given",
+        "operationId" : "findEmail",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "EmailFinderRequest",
+          "description" : "Metadata to find the email address",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/EmailFinderRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Authentication Failed"
+          },
+          "404" : {
+            "description" : "Resource not found"
+          }
+        }
+      }
+    },
+    "/email/lnfinder" : {
+      "post" : {
+        "tags" : [ "email" ],
+        "summary" : "Finds the Email address",
+        "description" : "Finds the email address when linkedin url, company details is given",
+        "operationId" : "findLNEmail",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "LPReqPayload",
+          "description" : "Metadata to find the email address",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/LPReqPayload"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Authentication Failed"
+          },
+          "404" : {
+            "description" : "Resource not found"
+          }
+        }
+      }
+    },
+    "/emailid/enrich" : {
+      "post" : {
+        "tags" : [ "emailid" ],
+        "summary" : "Enriches the Email address",
+        "description" : "Enriches the email with more data like first name, last name, title, department, address, phone, status",
+        "operationId" : "enrich",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "EnrichEmailRequest",
+          "description" : "Enrich email with additional data",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/EnrichEmailRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Authentication Failed"
+          },
+          "404" : {
+            "description" : "Resource not found"
+          }
+        }
+      }
+    },
+    "/emailid/enrichBulk" : {
+      "post" : {
+        "tags" : [ "emailid" ],
+        "summary" : "Enriches multiple Email addresses",
+        "description" : "Enriches multiple emails with more data like first name, last name, title, department, address, phone, status",
+        "operationId" : "enrichBulk",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Authentication Failed"
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "429" : {
+            "description" : "Too Many Requests"
+          }
+        }
+      }
+    },
+    "/emailid/find" : {
+      "post" : {
+        "tags" : [ "emailid" ],
+        "summary" : "Finds the Email address",
+        "description" : "Finds the email address when first name, last name and company domain is given",
+        "operationId" : "find",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "FindEmailRequest",
+          "description" : "Metadata to find the email address",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/FindEmailRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Authentication Failed"
+          },
+          "404" : {
+            "description" : "Resource not found"
+          }
+        }
+      }
+    },
+    "/emailid/findBulk" : {
+      "post" : {
+        "tags" : [ "emailid" ],
+        "summary" : "Finds the Email addresses as bulk",
+        "description" : "Finds the email addresses as bulk when first name, last name and company domain is given",
+        "operationId" : "findBulkEmail",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/FindBulkEmailRequest"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Authentication Failed"
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "429" : {
+            "description" : "Too Many Requests"
+          }
+        }
+      }
+    },
+    "/emailid/get" : {
+      "post" : {
+        "tags" : [ "emailid" ],
+        "summary" : "Gets the Email address",
+        "description" : "Gets the email address when contact Id is mentioned",
+        "operationId" : "get",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "GetEmailRequest",
+          "description" : "Metadata to get the email address",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/GetEmailRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Authentication Failed"
+          },
+          "404" : {
+            "description" : "Resource not found"
+          }
+        }
+      }
+    },
+    "/emailid/getContact" : {
+      "post" : {
+        "tags" : [ "emailid" ],
+        "summary" : "Get Contact",
+        "description" : "Get contact details  from the social url",
+        "operationId" : "getContactFromLiURL",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "GetContact",
+          "description" : "Get contact from the social url",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/GetContactFromLiURL"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Authentication Failed"
+          },
+          "404" : {
+            "description" : "Resource not found"
+          }
+        }
+      }
+    },
+    "/filter/contacts" : {
+      "post" : {
+        "tags" : [ "filter" ],
+        "summary" : "Search and Filter Contacts",
+        "description" : "Search Contacts based on title, department, level , headcount, annual revenue and much more",
+        "operationId" : "getCompanyId",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "search Contacts API",
+          "description" : "Filter contacts based on various criteria like name, company , title, head count, revenue and much more",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AdvancedSearchContactRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Authentication Failed"
+          }
+        }
+      }
+    },
+    "/filter/contacts/domain" : {
+      "post" : {
+        "tags" : [ "filter" ],
+        "operationId" : "getContactsByDomain",
+        "produces" : [ "application/xml", "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AdvancedSearchContactRequest"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/filter/contacts/v2" : {
+      "post" : {
+        "tags" : [ "filter" ],
+        "summary" : "Search and Filter Contacts",
+        "description" : "Search Contacts based on title, department, level , headcount, annual revenue and much more",
+        "operationId" : "searchContact",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "search Contacts API",
+          "description" : "Filter contacts based on various criteria like name, company , title, head count, revenue and much more",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/AdvancedSearchContactRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Authentication Failed"
+          },
+          "429" : {
+            "description" : "Too many requests."
+          }
+        }
+      }
+    },
+    "/health/check" : {
+      "get" : {
+        "tags" : [ "health" ],
+        "summary" : "Health check URL",
+        "description" : "",
+        "operationId" : "healthCheck",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          }
+        }
+      }
+    },
+    "/webhooks/create" : {
+      "post" : {
+        "tags" : [ "webhooks" ],
+        "summary" : "Create a webhook",
+        "description" : "Create webhook to subscribe a contact",
+        "operationId" : "createWebhook",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "createWebhookRequest",
+          "description" : "Metadata to create the webhook",
+          "required" : true,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Authentication Failed"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          },
+          "403" : {
+            "description" : "API Access Denied"
+          }
+        }
+      }
+    },
+    "/webhooks/update" : {
+      "put" : {
+        "tags" : [ "webhooks" ],
+        "summary" : "Update a webhook",
+        "description" : "Update webhook to subscribe a contact",
+        "operationId" : "updateWebhook",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "updateWebhookRequest",
+          "description" : "Metadata to update the webhook",
+          "required" : true,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : ""
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Authentication Failed"
+          },
+          "500" : {
+            "description" : "Internal Error"
+          },
+          "403" : {
+            "description" : "API Access Denied"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "EmailFinderRequest" : {
+      "type" : "object",
+      "required" : [ "domain", "endpoint", "firstName", "lastName" ],
+      "properties" : {
+        "firstName" : {
+          "type" : "string",
+          "example" : "Gautam",
+          "description" : "first name"
+        },
+        "lastName" : {
+          "type" : "string",
+          "example" : "Balasubramanian",
+          "description" : "last name"
+        },
+        "domain" : {
+          "type" : "string",
+          "example" : "saleslift.io",
+          "description" : "domain"
+        },
+        "endpoint" : {
+          "type" : "string",
+          "example" : "https://www.saleslift.io/email/finder",
+          "description" : "endpoint"
+        }
+      },
+      "description" : "MetaData to find the email address",
+      "xml" : {
+        "name" : "EmailFinderRequest"
+      }
+    },
+    "InclusionExclusionListService" : {
+      "type" : "object"
+    },
+    "Serializable" : {
+      "type" : "object"
+    },
+    "Company" : {
+      "type" : "object",
+      "properties" : {
+        "companyId" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string",
+          "enum" : [ "ACTIVE", "DUPLICATE", "INACTIVE" ]
+        },
+        "primaryDomain" : {
+          "type" : "string"
+        },
+        "website" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "street" : {
+          "type" : "string"
+        },
+        "linkedinFollowers" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "companyContactsCount" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "city" : {
+          "type" : "string"
+        },
+        "state" : {
+          "type" : "string"
+        },
+        "country" : {
+          "type" : "string"
+        },
+        "zip" : {
+          "type" : "string"
+        },
+        "fbLikes" : {
+          "type" : "string"
+        },
+        "fbFollows" : {
+          "type" : "string"
+        },
+        "founded" : {
+          "type" : "string"
+        },
+        "pingerInvalid" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "emailDomainUpdateTime" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "employeeCount" : {
+          "type" : "string"
+        },
+        "revenue" : {
+          "type" : "string"
+        },
+        "totalFunding" : {
+          "type" : "string"
+        },
+        "seoPath" : {
+          "type" : "string"
+        },
+        "oldSeoPaths" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string"
+        },
+        "phoneNumber" : {
+          "type" : "string"
+        },
+        "phoneArray" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "phoneScoreMap" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "phoneV2" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "$ref" : "#/definitions/Serializable"
+          }
+        },
+        "twitter" : {
+          "type" : "string"
+        },
+        "linkedInCompanyPageUrl" : {
+          "type" : "string"
+        },
+        "linkedin" : {
+          "type" : "string"
+        },
+        "vimeo" : {
+          "type" : "string"
+        },
+        "googlePlus" : {
+          "type" : "string"
+        },
+        "youtube" : {
+          "type" : "string"
+        },
+        "facebook" : {
+          "type" : "string"
+        },
+        "blog" : {
+          "type" : "string"
+        },
+        "career" : {
+          "type" : "string"
+        },
+        "about" : {
+          "type" : "string"
+        },
+        "team" : {
+          "type" : "string"
+        },
+        "contactUs" : {
+          "type" : "string"
+        },
+        "pinterest" : {
+          "type" : "string"
+        },
+        "slideshare" : {
+          "type" : "string"
+        },
+        "instagram" : {
+          "type" : "string"
+        },
+        "industry" : {
+          "type" : "string"
+        },
+        "sicCode" : {
+          "type" : "string"
+        },
+        "naicsCode" : {
+          "type" : "string"
+        },
+        "subIndustry" : {
+          "type" : "string"
+        },
+        "emailDomains" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "emailPatterns" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "specialities" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "source" : {
+          "type" : "string"
+        },
+        "creatorId" : {
+          "type" : "string"
+        },
+        "updatorId" : {
+          "type" : "string"
+        },
+        "fortuneRank" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "stockSymbol" : {
+          "type" : "string"
+        },
+        "metro" : {
+          "type" : "string"
+        },
+        "funded" : {
+          "type" : "string"
+        },
+        "crawlStatus" : {
+          "type" : "string"
+        },
+        "shortName" : {
+          "type" : "string"
+        },
+        "liIndustry" : {
+          "type" : "string"
+        },
+        "sector" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "oldAddress" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "$ref" : "#/definitions/Serializable"
+          }
+        },
+        "stateCode" : {
+          "type" : "string"
+        },
+        "parentWebsite" : {
+          "type" : "string"
+        },
+        "similarCompanies" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "logoUrl" : {
+          "type" : "string"
+        },
+        "countryCode" : {
+          "type" : "string"
+        },
+        "contactCount" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "crawlerFields" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "revenueInfo" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        },
+        "fundingInfo" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          }
+        },
+        "crawlerFieldsMap" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "$ref" : "#/definitions/Serializable"
+            }
+          }
+        },
+        "keywords" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          }
+        },
+        "techStack" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "object"
+          }
+        },
+        "phoneScoreEntity" : {
+          "$ref" : "#/definitions/PhoneScoreEntity"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "creationTimeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "updateTimeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    },
+    "EmailResponseEntity" : {
+      "type" : "object",
+      "required" : [ "emailAddress", "emailConfidenceScore", "emailDeliverabilityScore" ],
+      "properties" : {
+        "emailAddress" : {
+          "type" : "string",
+          "example" : "gautam@saleslift.io",
+          "description" : "Email Address"
+        },
+        "emailDeliverabilityScore" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : "100",
+          "description" : "Email Deliverability score which ranges from 0 to 100"
+        },
+        "emailConfidenceScore" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : "100",
+          "description" : "Email Confidence score which ranges from 0 to 100"
+        }
+      },
+      "description" : "Email Response Entity for get / find API",
+      "xml" : {
+        "name" : "EmailResponseEntity"
+      }
+    },
+    "AsyncContactPreview" : {
+      "type" : "object",
+      "properties" : {
+        "linkedinId" : {
+          "type" : "string"
+        },
+        "webhookUrl" : {
+          "type" : "string"
+        },
+        "memberId" : {
+          "type" : "string"
+        },
+        "data" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string",
+          "enum" : [ "NEW", "DETAILS_REQUESTED", "DETAILS_RECEIVED", "PROCESSED", "FAILED_DATA_API", "FAILED_CUSTOMER_WEBHOOK", "FAILED_PARSING_DATA" ]
+        },
+        "createTime" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "updateTime" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "errorMsgFromDataTeamAPI" : {
+          "type" : "string"
+        },
+        "creationTimeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "updateTimeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    },
+    "SearchEndpointResponse" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string",
+          "example" : "pradeep@adapt.io",
+          "description" : "Email Address"
+        },
+        "firstName" : {
+          "type" : "string",
+          "example" : "Pradeep",
+          "description" : "First Name"
+        },
+        "lastName" : {
+          "type" : "string",
+          "example" : "Muruganandam",
+          "description" : "Last Name"
+        },
+        "company" : {
+          "type" : "string",
+          "example" : "Adapt",
+          "description" : "Company"
+        },
+        "companyWebsite" : {
+          "type" : "string",
+          "example" : "adapt.io",
+          "description" : "Company Website"
+        },
+        "title" : {
+          "type" : "string",
+          "example" : "Founder & CPO",
+          "description" : "Title"
+        },
+        "phoneNumbers" : {
+          "type" : "array",
+          "example" : "[{'type':'mobile','number':'+1 515....'},{'type':'other','number':'+1 515....'}]",
+          "description" : "Phone Numbers",
+          "items" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        },
+        "dept" : {
+          "type" : "array",
+          "example" : "['Engineering','Marketing']",
+          "description" : "Departments",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "level" : {
+          "type" : "string",
+          "example" : "C-Level",
+          "description" : "Level"
+        },
+        "companyStreet" : {
+          "type" : "string",
+          "example" : "Street Address",
+          "description" : "Organization HQ Street"
+        },
+        "companyCity" : {
+          "type" : "string",
+          "example" : "City",
+          "description" : "Organization HQ City"
+        },
+        "companyState" : {
+          "type" : "string",
+          "example" : "State",
+          "description" : "Organization HQ State"
+        },
+        "companyCountry" : {
+          "type" : "string",
+          "example" : "country",
+          "description" : "Organization HQ Country"
+        },
+        "companyZipcode" : {
+          "type" : "string",
+          "example" : "zipcode",
+          "description" : "Organization HQ Zipcode"
+        },
+        "city" : {
+          "type" : "string",
+          "example" : "City",
+          "description" : "Contact’s City"
+        },
+        "state" : {
+          "type" : "string",
+          "example" : "State",
+          "description" : "Contact’s State"
+        },
+        "country" : {
+          "type" : "string",
+          "example" : "country",
+          "description" : "Contact’s Country"
+        },
+        "linkedIn" : {
+          "type" : "string",
+          "example" : "LinkedIn URL",
+          "description" : "LinkedIn URL"
+        },
+        "twitter" : {
+          "type" : "string",
+          "example" : "Twitter Url",
+          "description" : "Twitter URL"
+        },
+        "facebook" : {
+          "type" : "string",
+          "example" : "Facebook URL",
+          "description" : "Facebook URL"
+        },
+        "industry" : {
+          "type" : "string",
+          "example" : "Computer Software",
+          "description" : "Industry"
+        },
+        "subIndustry" : {
+          "type" : "array",
+          "example" : "Computer Software",
+          "description" : "SubIndustry",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "companyHeadCount" : {
+          "type" : "string",
+          "example" : "1 - 25",
+          "description" : "Company Headcount"
+        },
+        "companyRevenue" : {
+          "type" : "string",
+          "example" : "$1 - 10M",
+          "description" : "Company Revenue"
+        },
+        "emailDeliverabilityScore" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : "90",
+          "description" : "Email Deliverability Score"
+        }
+      },
+      "xml" : {
+        "name" : "SearchEndpointResponse"
+      }
+    },
+    "Count" : {
+      "type" : "object",
+      "properties" : {
+        "count" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "asFilterQuery" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "PurchaseEndpointResponse" : {
+      "type" : "object",
+      "required" : [ "contactId", "emailAddress", "emailDeliverabilityScore", "id" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "example" : "53989990400404004",
+          "description" : "Contact Id"
+        },
+        "contactId" : {
+          "type" : "string",
+          "example" : "53989990400404004",
+          "description" : "Contact Id"
+        },
+        "emailAddress" : {
+          "type" : "string",
+          "example" : "gautam@saleslift.io",
+          "description" : "Email Address"
+        },
+        "emailDeliverabilityScore" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : "100",
+          "description" : "Email Deliverability score which ranges from 0 to 100"
+        },
+        "phoneNumbers" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "xml" : {
+        "name" : "PurchaseEndpointResponse"
+      }
+    },
+    "SortParam" : {
+      "type" : "object",
+      "properties" : {
+        "paramName" : {
+          "type" : "string"
+        },
+        "sortOrder" : {
+          "type" : "string",
+          "enum" : [ "desc", "asc" ]
+        }
+      }
+    },
+    "BulkEmailResponseEntity" : {
+      "type" : "object",
+      "required" : [ "domain", "emailAddress", "emailConfidenceScore", "emailDeliverabilityScore", "firstName", "lastName" ],
+      "properties" : {
+        "emailAddress" : {
+          "type" : "string",
+          "example" : "gautam@saleslift.io",
+          "description" : "Email Address"
+        },
+        "firstName" : {
+          "type" : "string",
+          "example" : "gautam",
+          "description" : "First Name"
+        },
+        "lastName" : {
+          "type" : "string",
+          "example" : "balasubramanian",
+          "description" : "Last Name"
+        },
+        "domain" : {
+          "type" : "string",
+          "example" : "adapt.io",
+          "description" : "Domain Name"
+        },
+        "emailConfidenceScore" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : "100",
+          "description" : "Email Confidence score which ranges from 0 to 100"
+        },
+        "emailDeliverabilityScore" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : "100",
+          "description" : "Email Deliverability score which ranges from 0 to 100"
+        }
+      },
+      "description" : "Bulk Email Response Entity API",
+      "xml" : {
+        "name" : "BulkEmailResponseEntity"
+      }
+    },
+    "PurchaseEndpointRequest" : {
+      "type" : "object",
+      "required" : [ "contactId", "contactIds" ],
+      "properties" : {
+        "contactId" : {
+          "type" : "string",
+          "example" : "53989990400404004",
+          "description" : "contactId"
+        },
+        "contactIds" : {
+          "type" : "array",
+          "example" : "[\"53989990400404004\",\"53989990400404005\"]",
+          "description" : "contactIds",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "xml" : {
+        "name" : "PurchaseEndpointRequest"
+      }
+    },
+    "ContributionAPIService" : {
+      "type" : "object"
+    },
+    "AdvancedSearchContactRequest" : {
+      "type" : "object",
+      "required" : [ "apiKey", "email" ],
+      "properties" : {
+        "email" : {
+          "type" : "string",
+          "example" : "gautam@saleslift.io",
+          "description" : "Email Address"
+        },
+        "apiKey" : {
+          "type" : "string",
+          "example" : "GAUTAM_API_KEY",
+          "description" : "API Key"
+        },
+        "name" : {
+          "type" : "array",
+          "description" : "name",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "firstName" : {
+          "type" : "array",
+          "description" : "first name",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "lastName" : {
+          "type" : "array",
+          "description" : "last name",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "title" : {
+          "type" : "array",
+          "description" : "title",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "dept" : {
+          "type" : "array",
+          "description" : "department",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "level" : {
+          "type" : "array",
+          "description" : "level",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "companyName" : {
+          "type" : "array",
+          "description" : "company name",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "industryName" : {
+          "type" : "array",
+          "description" : "industry name",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "numberOfEmployees" : {
+          "type" : "array",
+          "description" : "number of employees",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "revenue" : {
+          "type" : "array",
+          "description" : "revenue",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "companyPrimaryDomain" : {
+          "type" : "string",
+          "description" : "company primary domain"
+        },
+        "zipCode" : {
+          "type" : "array",
+          "description" : "zipcode",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "state" : {
+          "type" : "array",
+          "description" : "state",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "city" : {
+          "type" : "array",
+          "description" : "city",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "country" : {
+          "type" : "array",
+          "description" : "country",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "location" : {
+          "type" : "array",
+          "description" : "location",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "nameDomain" : {
+          "type" : "array",
+          "description" : "nameDomain",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "category" : {
+          "type" : "array",
+          "description" : "category",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "productName" : {
+          "type" : "array",
+          "description" : "product name",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "sortParam" : {
+          "description" : "sort param",
+          "$ref" : "#/definitions/SortParam"
+        },
+        "enableDomainLimit" : {
+          "type" : "boolean",
+          "description" : "enable the limit per domain",
+          "default" : false
+        },
+        "limitPerDomain" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "limit per domain"
+        },
+        "cursorMark" : {
+          "type" : "string",
+          "description" : "cursorMark is used to paginate, in the first request '*' we to sent for its values and for sub subsequent requests, its value will be obtained from the previous request"
+        },
+        "limit" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "number of requests"
+        },
+        "searchTerm" : {
+          "type" : "string",
+          "description" : "search term"
+        },
+        "excludeTitleKeywords" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "domains" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "emailConfidenceScore" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "dontDisplayOwnedContacts" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "dontDisplayDeadContacts" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "titleExactMatch" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "facetFieldName" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "includeAccount" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      }
+    },
+    "MemberContactV2DAO" : {
+      "type" : "object",
+      "properties" : {
+        "all" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/MemberContact"
+          }
+        }
+      }
+    },
+    "TitleClassifierService" : {
+      "type" : "object",
+      "properties" : {
+        "allLevel" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "allDepartments" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "MemberService" : {
+      "type" : "object"
+    },
+    "PluginInfoEntity" : {
+      "type" : "object",
+      "properties" : {
+        "pluginName" : {
+          "type" : "string"
+        },
+        "version" : {
+          "type" : "string"
+        },
+        "isAllowed" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "creationTimeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "updateTimeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    },
+    "CompanySearcher" : {
+      "type" : "object",
+      "properties" : {
+        "facets" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/FacetValue"
+            }
+          }
+        }
+      }
+    },
+    "AdvancedSearchContactResponse" : {
+      "type" : "object",
+      "required" : [ "cursorMark", "errorMessage", "hits", "result" ],
+      "properties" : {
+        "cursorMark" : {
+          "type" : "string",
+          "example" : "*",
+          "description" : "cursorMark is hash which has to be passed to get the next set of results. For the last batch, the same cursor mark will be returned. For the first request cursor mark has to *"
+        },
+        "hits" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : "100",
+          "description" : "hits denotes the total results count"
+        },
+        "result" : {
+          "type" : "array",
+          "description" : "result documents",
+          "items" : {
+            "$ref" : "#/definitions/SearchContactResponse"
+          }
+        },
+        "errorMessage" : {
+          "type" : "string",
+          "description" : "error message"
+        }
+      },
+      "description" : "Advanced Contact Search API",
+      "xml" : {
+        "name" : "AdvancedSearchContactResponse"
+      }
+    },
+    "LiDomChangeEntity" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "html" : {
+          "type" : "string"
+        },
+        "createTs" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "memberId" : {
+          "type" : "string"
+        },
+        "version" : {
+          "type" : "string"
+        },
+        "liUrl" : {
+          "type" : "string"
+        },
+        "creationTimeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "updateTimeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    },
+    "CompanyService" : {
+      "type" : "object"
+    },
+    "APIRequestLogService" : {
+      "type" : "object"
+    },
+    "NamedListObject" : {
+      "type" : "object"
+    },
+    "ContactSearcher" : {
+      "type" : "object",
+      "properties" : {
+        "facets" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/FacetValue"
+            }
+          }
+        }
+      }
+    },
+    "FieldStatsInfo" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "min" : {
+          "type" : "object"
+        },
+        "max" : {
+          "type" : "object"
+        },
+        "sum" : {
+          "type" : "object"
+        },
+        "count" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "countDistinct" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "distinctValues" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object"
+          }
+        },
+        "missing" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "mean" : {
+          "type" : "object"
+        },
+        "sumOfSquares" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "stddev" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "cardinality" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "facets" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "array"
+          }
+        },
+        "percentiles" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "number",
+            "format" : "double"
+          }
+        }
+      }
+    },
+    "LiPluginServiceImpl" : {
+      "type" : "object",
+      "properties" : {
+        "liDomChangeDAO" : {
+          "$ref" : "#/definitions/LiDomChangeDAO"
+        },
+        "pluginInfoDAO" : {
+          "$ref" : "#/definitions/PluginInfoDAO"
+        },
+        "teamService" : {
+          "$ref" : "#/definitions/TeamService"
+        },
+        "parserLatestVersion" : {
+          "type" : "string"
+        },
+        "isServerParser" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      }
+    },
+    "BulkEmailEnrichResponse" : {
+      "type" : "object",
+      "required" : [ "hits", "results" ],
+      "properties" : {
+        "hits" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : "100",
+          "description" : "hits denotes the total results count"
+        },
+        "results" : {
+          "type" : "array",
+          "description" : "result documents",
+          "items" : {
+            "$ref" : "#/definitions/EnrichEmailResponse"
+          }
+        }
+      },
+      "description" : "Bulk Email Enrich API Response",
+      "xml" : {
+        "name" : "BulkEmailEnrichResponse"
+      }
+    },
+    "MemberContact" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "memberId" : {
+          "type" : "string"
+        },
+        "contactId" : {
+          "type" : "string"
+        },
+        "listIds" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "source" : {
+          "type" : "string"
+        },
+        "createTs" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "updateTs" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "solrUpdateTs" : {
+          "type" : "string"
+        },
+        "aiExecutionIds" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "aiResponse" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          }
+        },
+        "customFields" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "object"
+          }
+        },
+        "emailPurchased" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "creationTimeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "updateTimeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "emailCreditReduced" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "phonePurchased" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "aiProcessing" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      }
+    },
+    "ContactService" : {
+      "type" : "object"
+    },
+    "TeamService" : {
+      "type" : "object"
+    },
+    "CompanySearchEndpointRequest" : {
+      "type" : "object",
+      "properties" : {
+        "companyName" : {
+          "type" : "array",
+          "description" : "company name",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "nameDomain" : {
+          "type" : "array",
+          "description" : "company domain",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "numberOfEmployees" : {
+          "type" : "array",
+          "description" : "number of employees",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "revenue" : {
+          "type" : "array",
+          "description" : "revenue",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "industryName" : {
+          "type" : "array",
+          "description" : "industry",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "subIndustry" : {
+          "type" : "array",
+          "description" : "sub industry",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "city" : {
+          "type" : "array",
+          "description" : "city",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "country" : {
+          "type" : "array",
+          "description" : "country",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "state" : {
+          "type" : "array",
+          "description" : "state",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "zipCode" : {
+          "type" : "array",
+          "description" : "zipcode",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "limit" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "number of requests"
+        },
+        "cursorMark" : {
+          "type" : "string",
+          "description" : "cursorMark is used to paginate, in the first request '*' we to sent for its values and for sub subsequent requests, its value will be obtained from the previous request"
+        }
+      }
+    },
+    "APIUtil" : {
+      "type" : "object",
+      "properties" : {
+        "apiLogService" : {
+          "$ref" : "#/definitions/APILogService"
+        },
+        "redisConnectionService" : {
+          "$ref" : "#/definitions/RedisConnectionService"
+        },
+        "memberService" : {
+          "$ref" : "#/definitions/MemberService"
+        },
+        "titleClassifierService" : {
+          "$ref" : "#/definitions/TitleClassifierService"
+        },
+        "locationService" : {
+          "$ref" : "#/definitions/LocationService"
+        },
+        "teamService" : {
+          "$ref" : "#/definitions/TeamService"
+        }
+      }
+    },
+    "Level" : {
+      "type" : "object",
+      "properties" : {
+        "standardLevel" : {
+          "type" : "string",
+          "enum" : [ "OFF", "FATAL", "ERROR", "WARN", "INFO", "DEBUG", "TRACE", "ALL" ]
+        }
+      }
+    },
+    "MemberEntity" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "timeZone" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "employerId" : {
+          "type" : "string"
+        },
+        "forgotPasswordCode" : {
+          "type" : "string"
+        },
+        "apiKey" : {
+          "type" : "string"
+        },
+        "apiLoggedIn" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "autoLoginKey" : {
+          "type" : "string"
+        },
+        "lastLogin" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "phone" : {
+          "type" : "string"
+        },
+        "stripePhone" : {
+          "type" : "string"
+        },
+        "imageURL" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "type" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "role" : {
+          "type" : "string",
+          "enum" : [ "ROLE_MEMBER", "ROLE_TRUSTABLE_CONTRIBUTOR", "ROLE_DATA_ADMIN", "ROLE_ADMIN", "ROLE_ADMIN_AND_CUSTOM_PLAN", "SUPER_ADMIN" ]
+        },
+        "emailPreferences" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "boolean"
+          }
+        },
+        "crmPreferences" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "$ref" : "#/definitions/Serializable"
+          }
+        },
+        "jobRole" : {
+          "type" : "string"
+        },
+        "industry" : {
+          "type" : "string"
+        },
+        "activationKey" : {
+          "type" : "string"
+        },
+        "pushNotificationKey" : {
+          "type" : "string"
+        },
+        "credits" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "subscriptionCredits" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "lifeTimeCredits" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "contactsOwned" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "referrerId" : {
+          "type" : "string"
+        },
+        "enrichAPIAllowed" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "enrichAPIUsedDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "emailLookups" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "getgSignup" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "getgRefreshToken" : {
+          "type" : "string"
+        },
+        "getarRefreshToken" : {
+          "type" : "string"
+        },
+        "getarConnectedAccounts" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "$ref" : "#/definitions/Serializable"
+            }
+          }
+        },
+        "linkedInData" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "$ref" : "#/definitions/Serializable"
+            }
+          }
+        },
+        "connectedLinkedInId" : {
+          "type" : "string"
+        },
+        "connectedLinkedInData" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "getgContactUpdateTS" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "onboardingCompleted" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "secondaryEmail" : {
+          "type" : "string"
+        },
+        "secondaryEmailStatus" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "singleSessionToken" : {
+          "type" : "string"
+        },
+        "source" : {
+          "type" : "string"
+        },
+        "enterprizeAccountId" : {
+          "type" : "string"
+        },
+        "contactsUpdatesOneTimeRunStatus" : {
+          "type" : "string",
+          "enum" : [ "ELIGIBLE", "COMPLETED" ]
+        },
+        "purchaseCount" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "lastPurchaseDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "tosVersion" : {
+          "type" : "string"
+        },
+        "emailOpted" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "ipAddress" : {
+          "type" : "string"
+        },
+        "termsAcceptedTime" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "enterpriseApi" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "pageSource" : {
+          "type" : "string"
+        },
+        "companyName" : {
+          "type" : "string"
+        },
+        "smTeamSize" : {
+          "type" : "string"
+        },
+        "pageUrl" : {
+          "type" : "string"
+        },
+        "leadBuilderEnabled" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "demoRequestDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "linkedinFollowed" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "engagePushNotificationKey" : {
+          "type" : "string"
+        },
+        "create_ts" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "demoRequested" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "company" : {
+          "type" : "string"
+        },
+        "hsUpdateTs" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "activationDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "emailProcessed" : {
+          "type" : "string"
+        },
+        "views" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "downloads" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "dailyLimit" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "onboardingStatus" : {
+          "type" : "string"
+        },
+        "uiVersion" : {
+          "type" : "string"
+        },
+        "pluginInstalled" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "trialHubspotData" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "$ref" : "#/definitions/Serializable"
+          }
+        },
+        "memberOnboardingInfo" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "$ref" : "#/definitions/Serializable"
+          }
+        },
+        "salesforceRefreshToken" : {
+          "type" : "string"
+        },
+        "salesforceInstanceUrl" : {
+          "type" : "string"
+        },
+        "lbCredits" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "conciergeCredits" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "mixpanelData" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "$ref" : "#/definitions/Serializable"
+          }
+        },
+        "onboardingDetails" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "$ref" : "#/definitions/Serializable"
+          }
+        },
+        "emailUpdateHistory" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          }
+        },
+        "secondaryEmailUpdateHistory" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object"
+            }
+          }
+        },
+        "userInterestList" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "searchFilterFlags" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "$ref" : "#/definitions/Serializable"
+          }
+        },
+        "hubspotEnrichmentSteps" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "boolean"
+          }
+        },
+        "userPreferences" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "object"
+          }
+        },
+        "fairUsageDailyLbCreditsLimit" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "fairUsageDailyLbCreditsUsed" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "enrichmentCredits" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "lbCreditsPlan" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "enterpriseUser" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "creationTimeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "updateTimeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "alreadyEnriched" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "trialUsed" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "annualPlan" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      }
+    },
+    "LiDomChangeDAO" : {
+      "type" : "object",
+      "properties" : {
+        "allMemberIds" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "all" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/LiDomChangeEntity"
+          }
+        }
+      }
+    },
+    "LPReqPayload" : {
+      "type" : "object",
+      "properties" : {
+        "fullName" : {
+          "type" : "string"
+        },
+        "linkedInProfileUrl" : {
+          "type" : "string"
+        },
+        "experience" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/LPExperience"
+          }
+        },
+        "memberId" : {
+          "type" : "string"
+        },
+        "address" : {
+          "type" : "string"
+        },
+        "connections" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "metaData" : {
+          "type" : "object"
+        },
+        "salesNavigator" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "parsed" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      }
+    },
+    "PluginInfoDAO" : {
+      "type" : "object",
+      "properties" : {
+        "all" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/PluginInfoEntity"
+          }
+        }
+      }
+    },
+    "GetContactFromLiURL" : {
+      "type" : "object",
+      "required" : [ "apiKey", "socialURL", "userEmail" ],
+      "properties" : {
+        "userEmail" : {
+          "type" : "string",
+          "example" : "chidambaram@adapt.io",
+          "description" : "User's Email Address"
+        },
+        "socialURL" : {
+          "type" : "string",
+          "example" : "https://www.linkedin.com/in/sundar-pichaai-800899105/",
+          "description" : "Social URL"
+        },
+        "apiKey" : {
+          "type" : "string",
+          "example" : "CHIDAMBARAM_API_KEY",
+          "description" : "API Key"
+        }
+      },
+      "description" : "Get contact from the linkedin url",
+      "xml" : {
+        "name" : "GetContactFromLiURL"
+      }
+    },
+    "FindEmailRequest" : {
+      "type" : "object",
+      "required" : [ "apiKey", "domain", "email", "firstName", "lastName" ],
+      "properties" : {
+        "email" : {
+          "type" : "string",
+          "example" : "gautam@saleslift.io",
+          "description" : "Email Address"
+        },
+        "apiKey" : {
+          "type" : "string",
+          "example" : "GAUTAM_API_KEY",
+          "description" : "API Key"
+        },
+        "firstName" : {
+          "type" : "string",
+          "example" : "Gautam",
+          "description" : "first name"
+        },
+        "lastName" : {
+          "type" : "string",
+          "example" : "Balasubramanian",
+          "description" : "last name"
+        },
+        "domain" : {
+          "type" : "string",
+          "example" : "saleslift.io",
+          "description" : "domain"
+        }
+      },
+      "description" : "MetaData to find the email address",
+      "xml" : {
+        "name" : "FindEmailRequest"
+      }
+    },
+    "FacetField" : {
+      "type" : "object",
+      "properties" : {
+        "values" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Count"
+          }
+        },
+        "valueCount" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Logger" : {
+      "type" : "object",
+      "properties" : {
+        "level" : {
+          "$ref" : "#/definitions/Level"
+        },
+        "traceEnabled" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "debugEnabled" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "errorEnabled" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "fatalEnabled" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "infoEnabled" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "warnEnabled" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "messageFactory" : {
+          "$ref" : "#/definitions/MessageFactory"
+        },
+        "name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "SimpleOrderedMap" : {
+      "type" : "object",
+      "properties" : {
+        "immutableCopy" : {
+          "$ref" : "#/definitions/NamedListObject"
+        }
+      }
+    },
+    "GetEmailRequest" : {
+      "type" : "object",
+      "required" : [ "apiKey", "contactId", "email" ],
+      "properties" : {
+        "email" : {
+          "type" : "string",
+          "example" : "gautam@saleslift.io",
+          "description" : "Email Address"
+        },
+        "apiKey" : {
+          "type" : "string",
+          "example" : "GAUTAM_API_KEY",
+          "description" : "API Key"
+        },
+        "contactId" : {
+          "type" : "string",
+          "example" : "53989990400404004",
+          "description" : "contactId"
+        }
+      },
+      "description" : "MetaData to get the email address from contact Id",
+      "xml" : {
+        "name" : "GetEmailRequest"
+      }
+    },
+    "FacetValue" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "value" : {
+          "type" : "string"
+        }
+      }
+    },
+    "LocationService" : {
+      "type" : "object",
+      "properties" : {
+        "gdprCompliantCountries" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "allRegions" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        },
+        "allRegionList" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SearchEntity"
+          }
+        }
+      }
+    },
+    "SearchEndpointRequest" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "array",
+          "description" : "name",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "firstName" : {
+          "type" : "array",
+          "description" : "first name",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "lastName" : {
+          "type" : "array",
+          "description" : "last name",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "title" : {
+          "type" : "array",
+          "description" : "title",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "dept" : {
+          "type" : "array",
+          "description" : "department",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "level" : {
+          "type" : "array",
+          "description" : "level",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "companyName" : {
+          "type" : "array",
+          "description" : "company name",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "nameDomain" : {
+          "type" : "array",
+          "description" : "nameDomain",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "numberOfEmployees" : {
+          "type" : "array",
+          "description" : "number of employees",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "revenue" : {
+          "type" : "array",
+          "description" : "revenue",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "industryName" : {
+          "type" : "array",
+          "description" : "industry name",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "subIndustry" : {
+          "type" : "array",
+          "description" : "subIndustry name",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "city" : {
+          "type" : "array",
+          "description" : "city",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "country" : {
+          "type" : "array",
+          "description" : "country",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "state" : {
+          "type" : "array",
+          "description" : "state",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "zipCode" : {
+          "type" : "array",
+          "description" : "zipcode",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "technologies" : {
+          "type" : "array",
+          "description" : "technologies",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "dontDisplayOwnedContacts" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "limit" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "number of requests"
+        },
+        "minimumEmailDeliverabilityScore" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "Minimum email Deliverability Score"
+        },
+        "locationPreferences" : {
+          "type" : "string",
+          "description" : "Use contacts or company or both"
+        },
+        "cursorMark" : {
+          "type" : "string",
+          "description" : "cursorMark is used to paginate, in the first request '*' we to sent for its values and for sub subsequent requests, its value will be obtained from the previous request"
+        },
+        "titleExactMatch" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "excludeTitleKeywords" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "dontDisplayDeadContacts" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "displayOnlyContactsWithAnyPhoneNumbers" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "displayOnlyMobileNumberContacts" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "displayOnlyDirectDialContacts" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "offset" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "number of contact skip"
+        }
+      }
+    },
+    "MemberOwnedContactDAO" : {
+      "type" : "object",
+      "properties" : {
+        "all" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/MemberOwnedContact"
+          }
+        }
+      }
+    },
+    "UniqueFieldValueInfo" : {
+      "type" : "object",
+      "properties" : {
+        "key" : {
+          "type" : "string"
+        },
+        "count" : {
+          "type" : "integer",
+          "format" : "int64"
+        }
+      }
+    },
+    "InstantlyEmailValidationService" : {
+      "type" : "object"
+    },
+    "AsyncContactPreviewService" : {
+      "type" : "object",
+      "properties" : {
+        "newRequests" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AsyncContactPreview"
+          }
+        },
+        "dataReceivedRequests" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AsyncContactPreview"
+          }
+        }
+      }
+    },
+    "ApiCreditsAnalyticsDAO" : {
+      "type" : "object",
+      "properties" : {
+        "all" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ApiCreditsAnalytics"
+          }
+        }
+      }
+    },
+    "ContactEnrichService" : {
+      "type" : "object"
+    },
+    "LPExperience" : {
+      "type" : "object",
+      "properties" : {
+        "companyUrl" : {
+          "type" : "string"
+        },
+        "domain" : {
+          "type" : "string"
+        },
+        "companyName" : {
+          "type" : "string"
+        },
+        "companyId" : {
+          "type" : "string"
+        },
+        "title" : {
+          "type" : "string"
+        },
+        "address" : {
+          "type" : "string"
+        },
+        "activelyWorking" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "verifiedDomain" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      }
+    },
+    "MessageFactory" : {
+      "type" : "object"
+    },
+    "APILogService" : {
+      "type" : "object"
+    },
+    "SearchResult" : {
+      "type" : "object",
+      "properties" : {
+        "hits" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "entities" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SearchEntity"
+          }
+        },
+        "facetFields" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/FacetField"
+          }
+        },
+        "maxScore" : {
+          "type" : "number",
+          "format" : "float"
+        },
+        "status" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "start" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "offSet" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "cursorMark" : {
+          "type" : "string"
+        },
+        "stats" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "$ref" : "#/definitions/FieldStatsInfo"
+          }
+        },
+        "facets" : {
+          "$ref" : "#/definitions/SimpleOrderedMap"
+        },
+        "uniqueCount" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "uniqueFieldName" : {
+          "type" : "string"
+        },
+        "uniqueFieldValues" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/UniqueFieldValueInfo"
+          }
+        },
+        "highlighting" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "EnrichEmailResponse" : {
+      "type" : "object",
+      "required" : [ "city", "company", "companyHeadCount", "companyRevenue", "companyWebsite", "country", "email", "emailDeliverabilityScore", "facebook", "firstName", "industry", "lastName", "level", "linkedIn", "phone", "phoneNumbers", "phoneType", "primaryDepartment", "secondaryDepartment", "state", "street", "title", "twitter" ],
+      "properties" : {
+        "email" : {
+          "type" : "string",
+          "example" : "pradeep@adapt.io",
+          "description" : "Email Address"
+        },
+        "firstName" : {
+          "type" : "string",
+          "example" : "Pradeep",
+          "description" : "First Name"
+        },
+        "lastName" : {
+          "type" : "string",
+          "example" : "Muruganandam",
+          "description" : "Last Name"
+        },
+        "company" : {
+          "type" : "string",
+          "example" : "Adapt",
+          "description" : "Company"
+        },
+        "companyWebsite" : {
+          "type" : "string",
+          "example" : "adapt.io",
+          "description" : "Company Website"
+        },
+        "title" : {
+          "type" : "string",
+          "example" : "Founder & CPO",
+          "description" : "Title"
+        },
+        "phone" : {
+          "type" : "string",
+          "example" : "+1 515....",
+          "description" : "Phone"
+        },
+        "phoneType" : {
+          "type" : "string",
+          "example" : "Mobile",
+          "description" : "Phone Type"
+        },
+        "phoneNumbers" : {
+          "type" : "array",
+          "example" : "[{'type':'mobile','number':'+1 515....'},{'type':'other','number':'+1 515....'}]",
+          "description" : "Phone Numbers",
+          "items" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        },
+        "primaryDepartment" : {
+          "type" : "string",
+          "example" : "Engineering",
+          "description" : "Primary Department"
+        },
+        "secondaryDepartment" : {
+          "type" : "string",
+          "example" : "Marketing",
+          "description" : "Secondary Department"
+        },
+        "level" : {
+          "type" : "string",
+          "example" : "C-Level",
+          "description" : "Level"
+        },
+        "street" : {
+          "type" : "string",
+          "example" : "Street Address",
+          "description" : "Street"
+        },
+        "city" : {
+          "type" : "string",
+          "example" : "City",
+          "description" : "City"
+        },
+        "state" : {
+          "type" : "string",
+          "example" : "State",
+          "description" : "State"
+        },
+        "country" : {
+          "type" : "string",
+          "example" : "country",
+          "description" : "Country"
+        },
+        "linkedIn" : {
+          "type" : "string",
+          "example" : "LinkedIn URL",
+          "description" : "LinkedIn URL"
+        },
+        "twitter" : {
+          "type" : "string",
+          "example" : "Twitter Url",
+          "description" : "Twitter URL"
+        },
+        "facebook" : {
+          "type" : "string",
+          "example" : "Facebook URL",
+          "description" : "Facebook URL"
+        },
+        "industry" : {
+          "type" : "string",
+          "example" : "Computer Software",
+          "description" : "Industry"
+        },
+        "companyHeadCount" : {
+          "type" : "string",
+          "example" : "1 - 25",
+          "description" : "Company Headcount"
+        },
+        "companyRevenue" : {
+          "type" : "string",
+          "example" : "$1 - 10M",
+          "description" : "Company Revenue"
+        },
+        "emailDeliverabilityScore" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : "90",
+          "description" : "Email Deliverability Score"
+        }
+      },
+      "description" : "Email Response Entity for enrich API",
+      "xml" : {
+        "name" : "EnrichEmailResponse"
+      }
+    },
+    "FindBulkEmailRequest" : {
+      "type" : "object",
+      "required" : [ "domain", "firstName", "lastName" ],
+      "properties" : {
+        "firstName" : {
+          "type" : "string",
+          "example" : "Gautam",
+          "description" : "first name"
+        },
+        "lastName" : {
+          "type" : "string",
+          "example" : "Balasubramanian",
+          "description" : "last name"
+        },
+        "domain" : {
+          "type" : "string",
+          "example" : "saleslift.io",
+          "description" : "domain"
+        }
+      },
+      "description" : "MetaData to find the email addresses as bulk",
+      "xml" : {
+        "name" : "FindBulkEmailRequest"
+      }
+    },
+    "ApiCreditsAnalytics" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "teamId" : {
+          "type" : "string"
+        },
+        "month" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "year" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "creationTimeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "updateTimeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "searchAPI" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        },
+        "zeroSearchResults" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        },
+        "purchaseAPI" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        },
+        "purchaseCreditReduced" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        },
+        "enrichRequested" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        },
+        "enrichAPI" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        },
+        "enrichCreditReduced" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      }
+    },
+    "RedisConnectionService" : {
+      "type" : "object"
+    },
+    "SearchEntity" : {
+      "type" : "object"
+    },
+    "SearchContactResponse" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "firstName" : {
+          "type" : "string"
+        },
+        "lastName" : {
+          "type" : "string"
+        },
+        "emailId" : {
+          "type" : "string"
+        },
+        "title" : {
+          "type" : "string"
+        },
+        "twitterId" : {
+          "type" : "string"
+        },
+        "facebookId" : {
+          "type" : "string"
+        },
+        "linkedInId" : {
+          "type" : "string"
+        },
+        "companyName" : {
+          "type" : "string"
+        },
+        "industry" : {
+          "type" : "string"
+        },
+        "companySize" : {
+          "type" : "string"
+        },
+        "companyRevenue" : {
+          "type" : "string"
+        },
+        "city" : {
+          "type" : "string"
+        },
+        "state" : {
+          "type" : "string"
+        },
+        "street" : {
+          "type" : "string"
+        },
+        "country" : {
+          "type" : "string"
+        },
+        "zip" : {
+          "type" : "string"
+        },
+        "phoneDirect" : {
+          "type" : "string"
+        },
+        "phoneCompany" : {
+          "type" : "string"
+        },
+        "phoneMobile" : {
+          "type" : "string"
+        },
+        "phoneNumber" : {
+          "type" : "string"
+        },
+        "level" : {
+          "type" : "string"
+        },
+        "primaryDomain" : {
+          "type" : "string"
+        },
+        "address" : {
+          "type" : "string"
+        },
+        "updateTimestamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "sector" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "companyType" : {
+          "type" : "string"
+        },
+        "sicCode" : {
+          "type" : "string"
+        },
+        "deliverability" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "owned" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "dept" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "emailConfidenceScore" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "emailDeliverabilityScore" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "EnrichEmailRequest" : {
+      "type" : "object",
+      "required" : [ "apiKey", "email", "userEmail" ],
+      "properties" : {
+        "userEmail" : {
+          "type" : "string",
+          "example" : "gautam@saleslift.io",
+          "description" : "User's Email Address"
+        },
+        "email" : {
+          "type" : "string",
+          "example" : "pradeep@adapt.io",
+          "description" : "Email Id"
+        },
+        "apiKey" : {
+          "type" : "string",
+          "example" : "GAUTAM_API_KEY",
+          "description" : "API Key"
+        }
+      },
+      "description" : "MetaData to search and get details about an email id",
+      "xml" : {
+        "name" : "EnrichEmailRequest"
+      }
+    },
+    "MemberOwnedContact" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "memberId" : {
+          "type" : "string"
+        },
+        "contactId" : {
+          "type" : "string"
+        },
+        "referenceId" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "createTime" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "updateTime" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "listIds" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "source" : {
+          "type" : "string"
+        },
+        "newType" : {
+          "type" : "string"
+        },
+        "creationTimeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "updateTimeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "emailNotPurchased" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "phoneOnlyPurchased" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "notDownloaded" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "indexed" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      }
+    },
+    "PreviewEndpointRequest" : {
+      "type" : "object",
+      "required" : [ "callbackURL", "socialURL" ],
+      "properties" : {
+        "socialURL" : {
+          "type" : "string",
+          "example" : "linkedin.com/in/toddfearn",
+          "description" : "socialURL"
+        },
+        "callbackURL" : {
+          "type" : "string",
+          "description" : "callbackURL"
+        }
+      },
+      "xml" : {
+        "name" : "PreviewEndpointRequest"
+      }
+    },
+    "FindBulkEmailResponse" : {
+      "type" : "object",
+      "required" : [ "hits", "results" ],
+      "properties" : {
+        "hits" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : "100",
+          "description" : "hits denotes the total results count"
+        },
+        "results" : {
+          "type" : "array",
+          "description" : "result documents",
+          "items" : {
+            "$ref" : "#/definitions/BulkEmailResponseEntity"
+          }
+        }
+      },
+      "description" : "Find Bulk Email API Response",
+      "xml" : {
+        "name" : "FindBulkEmailResponse"
+      }
+    },
+    "CompanyEmailDomainRequest" : {
+      "type" : "object",
+      "properties" : {
+        "email" : {
+          "type" : "string"
+        },
+        "apiKey" : {
+          "type" : "string"
+        },
+        "companyName" : {
+          "type" : "string"
+        },
+        "website" : {
+          "type" : "string"
+        }
+      }
+    },
+    "PhoneScoreEntity" : {
+      "type" : "object",
+      "properties" : {
+        "type" : {
+          "type" : "string"
+        },
+        "number" : {
+          "type" : "string"
+        },
+        "score" : {
+          "type" : "string"
+        }
+      }
+    },
+    "EnrichContactRequest" : {
+      "type" : "object",
+      "properties" : {
+        "email" : {
+          "type" : "string",
+          "example" : "pradeep@adapt.io",
+          "description" : "Email Id"
+        },
+        "socialURL" : {
+          "type" : "string",
+          "example" : "https://www.linkedin.com/in/sundar-pichaai-800899105/",
+          "description" : "Social URL"
+        },
+        "firstName" : {
+          "type" : "string",
+          "example" : "Gautam",
+          "description" : "first name"
+        },
+        "lastName" : {
+          "type" : "string",
+          "example" : "Balasubramanian",
+          "description" : "last name"
+        },
+        "domain" : {
+          "type" : "string",
+          "example" : "saleslift.io",
+          "description" : "domain"
+        }
+      },
+      "description" : "MetaData to enrich contact",
+      "xml" : {
+        "name" : "EnrichContactRequest"
+      }
+    }
+  }
+}

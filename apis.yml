@@ -78,18 +78,16 @@ created: '2026-05-25'
 modified: '2026-08-13'
 specificationVersion: '0.23'
 apis:
-- aid: adapt-io:adapt-io-company-search-api
-  name: Adapt Company Search API
-  description: Search the company database using firmographic filters.
+- aid: adapt-io:adapt-io-account-api
+  name: Adapt Account API
+  description: The account API from Adapt — 1 operation(s) for account.
   humanURL: https://www.adapt.io/api-docs/v3/
   baseURL: https://api.adapt.io/v3
   tags:
-  - Company Search
+  - account
   properties:
   - type: OpenAPI
-    url: openapi/adapt-io-company-search-api-openapi.yml
-  - type: Overlay
-    url: overlays/adapt-io-company-search-api-overlay.yaml
+    url: openapi/adapt-io-account-api-openapi.yml
   - type: Documentation
     url: https://www.adapt.io/api-docs/v3/
   - type: Documentation
@@ -104,18 +102,16 @@ apis:
     url: examples/adapt-contact-search-example.json
   - type: Examples
     url: examples/adapt-contact-enrich-example.json
-- aid: adapt-io:adapt-io-contact-enrichment-api
-  name: Adapt Contact Enrichment API
-  description: Enrich a known contact with verified email and phone data.
+- aid: adapt-io:adapt-io-company-api
+  name: Adapt Company API
+  description: The company API from Adapt — 1 operation(s) for company.
   humanURL: https://www.adapt.io/api-docs/v3/
   baseURL: https://api.adapt.io/v3
   tags:
-  - Contact Enrichment
+  - company
   properties:
   - type: OpenAPI
-    url: openapi/adapt-io-contact-enrichment-api-openapi.yml
-  - type: Overlay
-    url: overlays/adapt-io-contact-enrichment-api-overlay.yaml
+    url: openapi/adapt-io-company-api-openapi.yml
   - type: Documentation
     url: https://www.adapt.io/api-docs/v3/
   - type: Documentation
@@ -130,18 +126,16 @@ apis:
     url: examples/adapt-contact-search-example.json
   - type: Examples
     url: examples/adapt-contact-enrich-example.json
-- aid: adapt-io:adapt-io-contact-purchase-api
-  name: Adapt Contact Purchase API
-  description: Purchase contacts returned from search to reveal email and phone.
+- aid: adapt-io:adapt-io-contact-api
+  name: Adapt Contact API
+  description: The contact API from Adapt — 7 operation(s) for contact.
   humanURL: https://www.adapt.io/api-docs/v3/
   baseURL: https://api.adapt.io/v3
   tags:
-  - Contact Purchase
+  - contact
   properties:
   - type: OpenAPI
-    url: openapi/adapt-io-contact-purchase-api-openapi.yml
-  - type: Overlay
-    url: overlays/adapt-io-contact-purchase-api-overlay.yaml
+    url: openapi/adapt-io-contact-api-openapi.yml
   - type: Documentation
     url: https://www.adapt.io/api-docs/v3/
   - type: Documentation
@@ -156,18 +150,136 @@ apis:
     url: examples/adapt-contact-search-example.json
   - type: Examples
     url: examples/adapt-contact-enrich-example.json
-- aid: adapt-io:adapt-io-contact-search-api
-  name: Adapt Contact Search API
-  description: Search the contact database using contact and company filters.
+- aid: adapt-io:adapt-io-contribution-api
+  name: Adapt Contribution API
+  description: The contribution API from Adapt — 1 operation(s) for contribution.
   humanURL: https://www.adapt.io/api-docs/v3/
   baseURL: https://api.adapt.io/v3
   tags:
-  - Contact Search
+  - contribution
   properties:
   - type: OpenAPI
-    url: openapi/adapt-io-contact-search-api-openapi.yml
-  - type: Overlay
-    url: overlays/adapt-io-contact-search-api-overlay.yaml
+    url: openapi/adapt-io-contribution-api-openapi.yml
+  - type: Documentation
+    url: https://www.adapt.io/api-docs/v3/
+  - type: Documentation
+    url: https://www.adapt.io/platform/api
+  - type: JSONSchema
+    url: json-schema/adapt-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/adapt-company-schema.json
+  - type: JSONLD
+    url: json-ld/adapt-io-context.jsonld
+  - type: Examples
+    url: examples/adapt-contact-search-example.json
+  - type: Examples
+    url: examples/adapt-contact-enrich-example.json
+- aid: adapt-io:adapt-io-email-api
+  name: Adapt Email API
+  description: The email API from Adapt — 2 operation(s) for email.
+  humanURL: https://www.adapt.io/api-docs/v3/
+  baseURL: https://api.adapt.io/v3
+  tags:
+  - email
+  properties:
+  - type: OpenAPI
+    url: openapi/adapt-io-email-api-openapi.yml
+  - type: Documentation
+    url: https://www.adapt.io/api-docs/v3/
+  - type: Documentation
+    url: https://www.adapt.io/platform/api
+  - type: JSONSchema
+    url: json-schema/adapt-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/adapt-company-schema.json
+  - type: JSONLD
+    url: json-ld/adapt-io-context.jsonld
+  - type: Examples
+    url: examples/adapt-contact-search-example.json
+  - type: Examples
+    url: examples/adapt-contact-enrich-example.json
+- aid: adapt-io:adapt-io-emailid-api
+  name: Adapt Emailid API
+  description: The emailid API from Adapt — 6 operation(s) for emailid.
+  humanURL: https://www.adapt.io/api-docs/v3/
+  baseURL: https://api.adapt.io/v3
+  tags:
+  - emailid
+  properties:
+  - type: OpenAPI
+    url: openapi/adapt-io-emailid-api-openapi.yml
+  - type: Documentation
+    url: https://www.adapt.io/api-docs/v3/
+  - type: Documentation
+    url: https://www.adapt.io/platform/api
+  - type: JSONSchema
+    url: json-schema/adapt-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/adapt-company-schema.json
+  - type: JSONLD
+    url: json-ld/adapt-io-context.jsonld
+  - type: Examples
+    url: examples/adapt-contact-search-example.json
+  - type: Examples
+    url: examples/adapt-contact-enrich-example.json
+- aid: adapt-io:adapt-io-filter-api
+  name: Adapt Filter API
+  description: The filter API from Adapt — 3 operation(s) for filter.
+  humanURL: https://www.adapt.io/api-docs/v3/
+  baseURL: https://api.adapt.io/v3
+  tags:
+  - filter
+  properties:
+  - type: OpenAPI
+    url: openapi/adapt-io-filter-api-openapi.yml
+  - type: Documentation
+    url: https://www.adapt.io/api-docs/v3/
+  - type: Documentation
+    url: https://www.adapt.io/platform/api
+  - type: JSONSchema
+    url: json-schema/adapt-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/adapt-company-schema.json
+  - type: JSONLD
+    url: json-ld/adapt-io-context.jsonld
+  - type: Examples
+    url: examples/adapt-contact-search-example.json
+  - type: Examples
+    url: examples/adapt-contact-enrich-example.json
+- aid: adapt-io:adapt-io-health-api
+  name: Adapt Health API
+  description: The health API from Adapt — 1 operation(s) for health.
+  humanURL: https://www.adapt.io/api-docs/v3/
+  baseURL: https://api.adapt.io/v3
+  tags:
+  - health
+  properties:
+  - type: OpenAPI
+    url: openapi/adapt-io-health-api-openapi.yml
+  - type: Documentation
+    url: https://www.adapt.io/api-docs/v3/
+  - type: Documentation
+    url: https://www.adapt.io/platform/api
+  - type: JSONSchema
+    url: json-schema/adapt-contact-schema.json
+  - type: JSONSchema
+    url: json-schema/adapt-company-schema.json
+  - type: JSONLD
+    url: json-ld/adapt-io-context.jsonld
+  - type: Examples
+    url: examples/adapt-contact-search-example.json
+  - type: Examples
+    url: examples/adapt-contact-enrich-example.json
+- aid: adapt-io:adapt-io-webhooks-api
+  name: Adapt Webhooks API
+  description: The webhooks API from Adapt — 2 operation(s) for webhooks.
+  humanURL: https://www.adapt.io/api-docs/v3/
+  baseURL: https://api.adapt.io/v3
+  tags:
+  - webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/adapt-io-webhooks-api-openapi.yml
   - type: Documentation
     url: https://www.adapt.io/api-docs/v3/
   - type: Documentation
@@ -183,6 +295,14 @@ apis:
   - type: Examples
     url: examples/adapt-contact-enrich-example.json
 common:
+  - type: Overlay
+    url: overlays/adapt-io-company-search-api-overlay.yaml
+  - type: Overlay
+    url: overlays/adapt-io-contact-enrichment-api-overlay.yaml
+  - type: Overlay
+    url: overlays/adapt-io-contact-purchase-api-overlay.yaml
+  - type: Overlay
+    url: overlays/adapt-io-contact-search-api-overlay.yaml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/adapt/overview
   - type: AgenticAccess

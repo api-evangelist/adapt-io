@@ -1,0 +1,277 @@
+openapi: 3.2.0
+info:
+  description: Saleslift Enrich APIs for all your data needs!
+  version: 1.0.0
+  title: Saleslift Emailid API
+  termsOfService: /termsAndConditions.htm
+  contact:
+    name: api@saleslift.io
+servers:
+- url: http://localhost:8080/api
+tags:
+- name: emailid
+paths:
+  /emailid/enrich:
+    post:
+      tags:
+      - emailid
+      summary: Enriches the Email address
+      description: Enriches the email with more data like first name, last name, title, department, address, phone, status
+      operationId: enrich
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrichEmailRequest'
+        description: Enrich email with additional data
+        required: true
+  /emailid/enrichBulk:
+    post:
+      tags:
+      - emailid
+      summary: Enriches multiple Email addresses
+      description: Enriches multiple emails with more data like first name, last name, title, department, address, phone, status
+      operationId: enrichBulk
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource not found
+        '429':
+          description: Too Many Requests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+  /emailid/find:
+    post:
+      tags:
+      - emailid
+      summary: Finds the Email address
+      description: Finds the email address when first name, last name and company domain is given
+      operationId: find
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FindEmailRequest'
+        description: Metadata to find the email address
+        required: true
+  /emailid/findBulk:
+    post:
+      tags:
+      - emailid
+      summary: Finds the Email addresses as bulk
+      description: Finds the email addresses as bulk when first name, last name and company domain is given
+      operationId: findBulkEmail
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource not found
+        '429':
+          description: Too Many Requests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/FindBulkEmailRequest'
+  /emailid/get:
+    post:
+      tags:
+      - emailid
+      summary: Gets the Email address
+      description: Gets the email address when contact Id is mentioned
+      operationId: get
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetEmailRequest'
+        description: Metadata to get the email address
+        required: true
+  /emailid/getContact:
+    post:
+      tags:
+      - emailid
+      summary: Get Contact
+      description: Get contact details from the social url
+      operationId: getContactFromLiURL
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Authentication Failed
+        '404':
+          description: Resource not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetContactFromLiURL'
+        description: Get contact from the social url
+        required: true
+components:
+  schemas:
+    FindEmailRequest:
+      type: object
+      required:
+      - apiKey
+      - domain
+      - email
+      - firstName
+      - lastName
+      properties:
+        email:
+          type: string
+          example: gautam@saleslift.io
+          description: Email Address
+        apiKey:
+          type: string
+          example: GAUTAM_API_KEY
+          description: API Key
+        firstName:
+          type: string
+          example: Gautam
+          description: first name
+        lastName:
+          type: string
+          example: Balasubramanian
+          description: last name
+        domain:
+          type: string
+          example: saleslift.io
+          description: domain
+      description: MetaData to find the email address
+      xml:
+        name: FindEmailRequest
+    EnrichEmailRequest:
+      type: object
+      required:
+      - apiKey
+      - email
+      - userEmail
+      properties:
+        userEmail:
+          type: string
+          example: gautam@saleslift.io
+          description: User's Email Address
+        email:
+          type: string
+          example: pradeep@adapt.io
+          description: Email Id
+        apiKey:
+          type: string
+          example: GAUTAM_API_KEY
+          description: API Key
+      description: MetaData to search and get details about an email id
+      xml:
+        name: EnrichEmailRequest
+    FindBulkEmailRequest:
+      type: object
+      required:
+      - domain
+      - firstName
+      - lastName
+      properties:
+        firstName:
+          type: string
+          example: Gautam
+          description: first name
+        lastName:
+          type: string
+          example: Balasubramanian
+          description: last name
+        domain:
+          type: string
+          example: saleslift.io
+          description: domain
+      description: MetaData to find the email addresses as bulk
+      xml:
+        name: FindBulkEmailRequest
+    GetContactFromLiURL:
+      type: object
+      required:
+      - apiKey
+      - socialURL
+      - userEmail
+      properties:
+        userEmail:
+          type: string
+          example: chidambaram@adapt.io
+          description: User's Email Address
+        socialURL:
+          type: string
+          example: https://www.linkedin.com/in/sundar-pichaai-800899105/
+          description: Social URL
+        apiKey:
+          type: string
+          example: CHIDAMBARAM_API_KEY
+          description: API Key
+      description: Get contact from the linkedin url
+      xml:
+        name: GetContactFromLiURL
+    GetEmailRequest:
+      type: object
+      required:
+      - apiKey
+      - contactId
+      - email
+      properties:
+        email:
+          type: string
+          example: gautam@saleslift.io
+          description: Email Address
+        apiKey:
+          type: string
+          example: GAUTAM_API_KEY
+          description: API Key
+        contactId:
+          type: string
+          example: '53989990400404004'
+          description: contactId
+      description: MetaData to get the email address from contact Id
+      xml:
+        name: GetEmailRequest

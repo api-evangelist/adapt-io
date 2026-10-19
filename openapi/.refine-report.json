@@ -1,26 +1,26 @@
 {
   "provider": "adapt-io",
   "sources": [
-    "_original/adapt-prospect-api-openapi.yml"
+    "_original/adapt-io-openapi.json"
   ],
   "outputs": [
-    "adapt-io-company-search-api-openapi.yml",
-    "adapt-io-contact-enrichment-api-openapi.yml",
-    "adapt-io-contact-purchase-api-openapi.yml",
-    "adapt-io-contact-search-api-openapi.yml"
+    "adapt-io-account-api-openapi.yml",
+    "adapt-io-company-api-openapi.yml",
+    "adapt-io-contact-api-openapi.yml",
+    "adapt-io-contribution-api-openapi.yml",
+    "adapt-io-email-api-openapi.yml",
+    "adapt-io-emailid-api-openapi.yml",
+    "adapt-io-filter-api-openapi.yml",
+    "adapt-io-health-api-openapi.yml",
+    "adapt-io-webhooks-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
-    "adapt-prospect-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "adapt-io-openapi.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "apis.yml register: written (+9 apis, 9 total)"
   ],
-  "skipped": [
-    "adapt-io-company-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "adapt-io-contact-enrichment-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "adapt-io-contact-purchase-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "adapt-io-contact-search-api-openapi.yml: previously refined output, superseded by openapi/_original/"
-  ]
+  "skipped": []
 }

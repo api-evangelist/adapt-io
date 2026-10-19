@@ -1,0 +1,393 @@
+openapi: 3.2.0
+info:
+  description: Saleslift Enrich APIs for all your data needs!
+  version: 1.0.0
+  title: Saleslift Contact API
+  termsOfService: /termsAndConditions.htm
+  contact:
+    name: api@saleslift.io
+servers:
+- url: http://localhost:8080/api
+tags:
+- name: Contact
+paths:
+  /contact/async-preview/v1-hold:
+    post:
+      tags:
+      - Contact
+      summary: Preview a contact(Async)
+      description: Preview the available data points based on a given social url like LinkedIn. It highlights whether all the data points are available or not and sends a callback to the given webhookUrl
+      operationId: asyncContactPreview
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '401':
+          description: Authentication Failed
+        '402':
+          description: Insufficient API credits
+        '204':
+          description: Resource not found
+        '403':
+          description: API Access Denied
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreviewEndpointRequest'
+        required: true
+  /contact/enrich/v1-hold:
+    post:
+      tags:
+      - Contact
+      summary: Enrich a contact
+      description: Enriches a contact with more data like first name, last name, title, department, address, phone, status
+      operationId: enrichContact
+      parameters:
+      - name: version
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '401':
+          description: Authentication Failed
+        '402':
+          description: Insufficient API credits
+        '204':
+          description: Resource not found
+        '403':
+          description: API Access Denied
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrichContactRequest'
+        required: true
+  /contact/get/v1-hold:
+    post:
+      tags:
+      - Contact
+      summary: Gets the Email address
+      description: Gets the email address when contact Id is mentioned
+      operationId: purchase
+      parameters:
+      - name: version
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '401':
+          description: Authentication Failed
+        '402':
+          description: Insufficient API credits
+        '204':
+          description: Resource not found
+        '403':
+          description: API Access Denied
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseEndpointRequest'
+        description: Metadata to get the email address
+        required: true
+  /contact/preview/v1-hold:
+    post:
+      tags:
+      - Contact
+      summary: Preview a contact
+      description: Preview the available data points based on a given social url like LinkedIn. It highlights whether all the data points are available or not
+      operationId: contactPreview
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '401':
+          description: Authentication Failed
+        '402':
+          description: Insufficient API credits
+        '204':
+          description: Resource not found
+        '403':
+          description: API Access Denied
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreviewEndpointRequest'
+        required: true
+  /contact/search/v1-hold:
+    post:
+      tags:
+      - Contact
+      summary: Search and Filter Contacts
+      description: Search Contacts based on title, department, level , headcount, annual revenue and much more
+      operationId: search
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '401':
+          description: Authentication Failed
+        '402':
+          description: Insufficient API credits
+        '204':
+          description: Resource not found
+        '403':
+          description: API Access Denied
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchEndpointRequest'
+        description: Filter contacts based on various criteria like name, company , title, head count, revenue and much more
+        required: true
+  /contact/subscribe/v1-hold:
+    post:
+      tags:
+      - Contact
+      summary: Subscribe Contact
+      description: Subscribe a contact, that is purchased already.
+      operationId: subscribeContact
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: Bad Request
+        '401':
+          description: Authentication Failed
+        '412':
+          description: Contact not owned
+        '500':
+          description: Internal Error
+        '403':
+          description: API Access Denied
+        '429':
+          description: You reached the limit. Please try after a minute.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+        description: Metadata to subscribe a contact
+        required: true
+  /contact/verify/subscribeContact/v1-hold:
+    post:
+      tags:
+      - Contact
+      summary: Verifies subscribeContact webhook
+      description: ''
+      operationId: verifySubscribe
+      responses:
+        '200':
+          description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+components:
+  schemas:
+    SearchEndpointRequest:
+      type: object
+      properties:
+        name:
+          type: array
+          description: name
+          items:
+            type: string
+        firstName:
+          type: array
+          description: first name
+          items:
+            type: string
+        lastName:
+          type: array
+          description: last name
+          items:
+            type: string
+        title:
+          type: array
+          description: title
+          items:
+            type: string
+        dept:
+          type: array
+          description: department
+          items:
+            type: string
+        level:
+          type: array
+          description: level
+          items:
+            type: string
+        companyName:
+          type: array
+          description: company name
+          items:
+            type: string
+        nameDomain:
+          type: array
+          description: nameDomain
+          items:
+            type: string
+        numberOfEmployees:
+          type: array
+          description: number of employees
+          items:
+            type: string
+        revenue:
+          type: array
+          description: revenue
+          items:
+            type: string
+        industryName:
+          type: array
+          description: industry name
+          items:
+            type: string
+        subIndustry:
+          type: array
+          description: subIndustry name
+          items:
+            type: string
+        city:
+          type: array
+          description: city
+          items:
+            type: string
+        country:
+          type: array
+          description: country
+          items:
+            type: string
+        state:
+          type: array
+          description: state
+          items:
+            type: string
+        zipCode:
+          type: array
+          description: zipcode
+          items:
+            type: string
+        technologies:
+          type: array
+          description: technologies
+          items:
+            type: string
+        dontDisplayOwnedContacts:
+          type: boolean
+          default: false
+        limit:
+          type: integer
+          format: int32
+          description: number of requests
+        minimumEmailDeliverabilityScore:
+          type: integer
+          format: int32
+          description: Minimum email Deliverability Score
+        locationPreferences:
+          type: string
+          description: Use contacts or company or both
+        cursorMark:
+          type: string
+          description: cursorMark is used to paginate, in the first request '*' we to sent for its values and for sub subsequent requests, its value will be obtained from the previous request
+        titleExactMatch:
+          type: boolean
+          default: false
+        excludeTitleKeywords:
+          type: array
+          items:
+            type: string
+        dontDisplayDeadContacts:
+          type: boolean
+          default: false
+        displayOnlyContactsWithAnyPhoneNumbers:
+          type: boolean
+          default: false
+        displayOnlyMobileNumberContacts:
+          type: boolean
+          default: false
+        displayOnlyDirectDialContacts:
+          type: boolean
+          default: false
+        offset:
+          type: integer
+          format: int32
+          description: number of contact skip
+    PurchaseEndpointRequest:
+      type: object
+      required:
+      - contactId
+      - contactIds
+      properties:
+        contactId:
+          type: string
+          example: '53989990400404004'
+          description: contactId
+        contactIds:
+          type: array
+          example: '["53989990400404004","53989990400404005"]'
+          description: contactIds
+          items:
+            type: string
+      xml:
+        name: PurchaseEndpointRequest
+    PreviewEndpointRequest:
+      type: object
+      required:
+      - callbackURL
+      - socialURL
+      properties:
+        socialURL:
+          type: string
+          example: linkedin.com/in/toddfearn
+          description: socialURL
+        callbackURL:
+          type: string
+          description: callbackURL
+      xml:
+        name: PreviewEndpointRequest
+    EnrichContactRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          example: pradeep@adapt.io
+          description: Email Id
+        socialURL:
+          type: string
+          example: https://www.linkedin.com/in/sundar-pichaai-800899105/
+          description: Social URL
+        firstName:
+          type: string
+          example: Gautam
+          description: first name
+        lastName:
+          type: string
+          example: Balasubramanian
+          description: last name
+        domain:
+          type: string
+          example: saleslift.io
+          description: domain
+      description: MetaData to enrich contact
+      xml:
+        name: EnrichContactRequest

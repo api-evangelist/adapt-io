@@ -1,0 +1,23 @@
+openapi: 3.2.0
+info:
+  description: Saleslift Enrich APIs for all your data needs!
+  version: 1.0.0
+  title: Saleslift Health API
+  termsOfService: /termsAndConditions.htm
+  contact:
+    name: api@saleslift.io
+servers:
+- url: http://localhost:8080/api
+tags:
+- name: Health
+paths:
+  /health/check:
+    get:
+      tags:
+      - Health
+      summary: Health check URL
+      description: ''
+      operationId: healthCheck
+      responses:
+        '200':
+          description: ''

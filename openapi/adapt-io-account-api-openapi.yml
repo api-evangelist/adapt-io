@@ -1,0 +1,41 @@
+openapi: 3.2.0
+info:
+  description: Saleslift Enrich APIs for all your data needs!
+  version: 1.0.0
+  title: Saleslift Account API
+  termsOfService: /termsAndConditions.htm
+  contact:
+    name: api@saleslift.io
+servers:
+- url: http://localhost:8080/api
+tags:
+- name: Account
+paths:
+  /account/emailDomain:
+    post:
+      tags:
+      - Account
+      operationId: getCompanyEmailDomain
+      responses:
+        default:
+          description: successful operation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompanyEmailDomainRequest'
+      summary: Get company email domain
+      x-summary-source: derived
+components:
+  schemas:
+    CompanyEmailDomainRequest:
+      type: object
+      properties:
+        email:
+          type: string
+        apiKey:
+          type: string
+        companyName:
+          type: string
+        website:
+          type: string
