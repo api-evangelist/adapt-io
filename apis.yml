@@ -84,6 +84,8 @@ apis:
   humanURL: https://www.adapt.io/api-docs/v3/
   baseURL: https://api.adapt.io/v3
   tags:
+  - Account
+  tags_raw:
   - account
   properties:
   - type: OpenAPI
@@ -108,6 +110,8 @@ apis:
   humanURL: https://www.adapt.io/api-docs/v3/
   baseURL: https://api.adapt.io/v3
   tags:
+  - Company
+  tags_raw:
   - company
   properties:
   - type: OpenAPI
@@ -132,6 +136,8 @@ apis:
   humanURL: https://www.adapt.io/api-docs/v3/
   baseURL: https://api.adapt.io/v3
   tags:
+  - Contact
+  tags_raw:
   - contact
   properties:
   - type: OpenAPI
@@ -156,6 +162,8 @@ apis:
   humanURL: https://www.adapt.io/api-docs/v3/
   baseURL: https://api.adapt.io/v3
   tags:
+  - CONTRIBUTION
+  tags_raw:
   - contribution
   properties:
   - type: OpenAPI
@@ -180,6 +188,8 @@ apis:
   humanURL: https://www.adapt.io/api-docs/v3/
   baseURL: https://api.adapt.io/v3
   tags:
+  - Email
+  tags_raw:
   - email
   properties:
   - type: OpenAPI
@@ -228,6 +238,8 @@ apis:
   humanURL: https://www.adapt.io/api-docs/v3/
   baseURL: https://api.adapt.io/v3
   tags:
+  - Filter
+  tags_raw:
   - filter
   properties:
   - type: OpenAPI
@@ -252,6 +264,8 @@ apis:
   humanURL: https://www.adapt.io/api-docs/v3/
   baseURL: https://api.adapt.io/v3
   tags:
+  - Health
+  tags_raw:
   - health
   properties:
   - type: OpenAPI
@@ -276,6 +290,8 @@ apis:
   humanURL: https://www.adapt.io/api-docs/v3/
   baseURL: https://api.adapt.io/v3
   tags:
+  - Webhook
+  tags_raw:
   - webhooks
   properties:
   - type: OpenAPI
