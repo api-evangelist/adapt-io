@@ -1,4 +1,4 @@
-# Adapt (adapt-io)
+# Adapt
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,95 +66,181 @@
 
 Adapt (adapt.io) is a B2B lead intelligence and sales acceleration platform that provides a database of 250M+ verified business contacts, 16M+ decision makers, and 12M+ company profiles, refreshed at roughly 5M records per day. Adapt sells the data three ways — through a web Prospector for list building and ABM, a LinkedIn/website Chrome extension for in-context contact discovery, and a public REST API for programmatic search, enrichment, and contact purchase. The Prospect API exposes four operations (contact search, company search, contact enrichment, and contact purchase / fetch) with 50+ firmographic, technographic, and demographic attributes per record, header- based authentication via account email + API key, and a 250 requests-per- minute rate limit. Pricing is published for self-serve Free, Starter ($49/mo) and Basic ($99/mo) tiers; API access is gated to the custom enterprise plan with negotiated email, phone, and enrichment credit allotments. Adapt is primarily used by sales, marketing, and RevOps teams for outbound campaigns, CRM enrichment, lead scoring, ICP list building, and data hygiene, with CRM exports to Salesforce, HubSpot, Pipedrive, Zoho, Outreach, and Salesgear.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/adapt-io/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/adapt-io/refs/heads/main/apis.yml)
+**Areas:** B2B Data · Contact Data · Company Data · Lead Intelligence · Sales Intelligence · Sales Acceleration · Data Enrichment · Prospecting · Lead Generation · Email Finder · Account Based Marketing · CRM Enrichment
 
-## Scope
+## Adapt on APIs.io
 
-- **Type:** Index
-- **Position:** Provider
-- **Access:** 3rd-Party
+Everything profiled for Adapt is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/adapt-io/](https://apis.io/providers/adapt-io/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (4)
 
-- B2B Data
-- Contact Data
-- Company Data
-- Lead Intelligence
-- Sales Intelligence
-- Sales Acceleration
-- Data Enrichment
-- Prospecting
-- Lead Generation
-- Email Finder
-- ABM
-- CRM Enrichment
-- Marketing
-- Sales
+- [Adapt Company Search API](https://apis.io/apis/adapt-io/adapt-io-company-search-api/) — Search the company database using firmographic filters.
+- [Adapt Contact Enrichment API](https://apis.io/apis/adapt-io/adapt-io-contact-enrichment-api/) — Enrich a known contact with verified email and phone data.
+- [Adapt Contact Purchase API](https://apis.io/apis/adapt-io/adapt-io-contact-purchase-api/) — Purchase contacts returned from search to reveal email and phone.
+- [Adapt Contact Search API](https://apis.io/apis/adapt-io/adapt-io-contact-search-api/) — Search the contact database using contact and company filters.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-25
-- **Modified:** 2026-05-25
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-### Adapt Prospect API
+Model Context Protocol servers that expose the API to agents.
 
-REST API for searching Adapt's B2B contact and company database, enriching known contacts by email/LinkedIn/name+domain, and purchasing contacts to reveal verified email addresses and phone numbers. JSON over HTTPS with header-based authentication (email + apiKey). Default rate limit of 250 requests per minute per account; pagination via cursorMark; credit consumption surfaced through `x-call-credit-type` and `*-remaining-credits` response headers.
+- [adapt-io-mcp.yml](https://apis.io/servers/adapt-io/adapt-io-mcp-yml/)
 
-- **Human URL:** [https://www.adapt.io/api-docs/v3/](https://www.adapt.io/api-docs/v3/)
-- **Base URL:** `https://api.adapt.io/v3`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Contacts
-- Companies
-- Enrichment
-- Search
-- B2B Data
+- [Adapt Io Agentic Access](https://apis.io/agentic-access/adapt-io/adapt-io-agentic-access/)
 
-#### Properties
+#### JSON Schema (2)
 
-- [Documentation](https://www.adapt.io/api-docs/v3/)
-- [Documentation](https://www.adapt.io/platform/api)
-- [OpenAPI](openapi/adapt-prospect-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/adapt-prospect-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adapt-prospect-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/adapt-contact-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/adapt-company-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/adapt-io-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Examples](examples/adapt-contact-search-example.json)
-- [Examples](examples/adapt-contact-enrich-example.json)
+The data models the API reads and writes.
 
-## Common Properties
+- [Adapt Company](https://apis.io/schemas/adapt-io/adapt-company/)
+- [Adapt Contact](https://apis.io/schemas/adapt-io/adapt-contact/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Adapt Io Context](https://apis.io/jsonld/adapt-io/adapt-io-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Adapt Vocabulary](https://apis.io/vocabularies/adapt-io/adapt-io-vocabulary/)
+
+#### Examples (2)
+
+Example requests and responses.
+
+- [Adapt Contact Enrich Example](https://apis.io/examples/adapt-io/adapt-contact-enrich-example/)
+- [Adapt Contact Search Example](https://apis.io/examples/adapt-io/adapt-contact-search-example/)
+
+#### Collections (9)
+
+Postman and Open Collection request collections.
+
+- [Adapt Prospect Company Search API](https://apis.io/collections/adapt-io/open-adapt-io-company-search-api/)
+- [Adapt Prospect Company Search Contact Enrichment API](https://apis.io/collections/adapt-io/open-adapt-io-contact-enrichment-api/)
+- [Adapt Prospect Company Search Contact Purchase API](https://apis.io/collections/adapt-io/open-adapt-io-contact-purchase-api/)
+- [Adapt Prospect Company Search Contact Search API](https://apis.io/collections/adapt-io/open-adapt-io-contact-search-api/)
+- [Adapt Prospect API](https://apis.io/collections/adapt-io/open-adapt-prospect-api/)
+- [Adapt Prospect Company Search API](https://apis.io/collections/adapt-io/postman-adapt-io-company-search-api/)
+- [Adapt Prospect Company Search Contact Enrichment API](https://apis.io/collections/adapt-io/postman-adapt-io-contact-enrichment-api/)
+- [Adapt Prospect Company Search Contact Purchase API](https://apis.io/collections/adapt-io/postman-adapt-io-contact-purchase-api/)
+- [Adapt Prospect Company Search Contact Search API](https://apis.io/collections/adapt-io/postman-adapt-io-contact-search-api/)
+
+#### Overlays (4)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Adapt Io Company Search Api Overlay](https://apis.io/overlays/adapt-io/adapt-io-company-search-api-overlay/)
+- [Adapt Io Contact Enrichment Api Overlay](https://apis.io/overlays/adapt-io/adapt-io-contact-enrichment-api-overlay/)
+- [Adapt Io Contact Purchase Api Overlay](https://apis.io/overlays/adapt-io/adapt-io-contact-purchase-api-overlay/)
+- [Adapt Io Contact Search Api Overlay](https://apis.io/overlays/adapt-io/adapt-io-contact-search-api-overlay/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Adapt — jsonschema rules](https://apis.io/rules/adapt-io/adapt-io-jsonschema-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Adapt Io Authentication](https://apis.io/security/adapt-io/adapt-io-authentication/)
+- [Adapt Io Domain Security](https://apis.io/security/adapt-io/adapt-io-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Adapt Io Plans Pricing](https://apis.io/plans/adapt-io/adapt-io-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Adapt Io Rate Limits](https://apis.io/rate-limits/adapt-io/adapt-io-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Adapt Io Finops](https://apis.io/finops/adapt-io/adapt-io-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.adapt.io)
-- [Portal](https://www.adapt.io/platform/api)
 - [Documentation](https://www.adapt.io/api-docs/v3/)
-- [Getting Started](https://www.adapt.io/api-docs/v3/)
-- [Sign Up](https://app.adapt.io/users/sign_up)
-- [Login](https://app.adapt.io/users/sign_in)
+- [Getting started](https://www.adapt.io/api-docs/v3/)
+- [API reference](https://www.adapt.io/api-docs/v3/)
 - [Pricing](https://www.adapt.io/pricing)
-- [Plans](plans/adapt-io-plans-pricing.yml)
-- [Rate Limits](rate-limits/adapt-io-rate-limits.yml)
-- [Fin Ops](finops/adapt-io-finops.yml)
-- [Product](https://www.adapt.io/platform/prospecting)
-- [Product](https://www.adapt.io/platform/api)
-- [Product](https://www.adapt.io/data-os)
-- [Product](https://www.adapt.io/our-data)
-- [Extension](https://chromewebstore.google.com/detail/adapt-prospector/lkfklokpfbpcmpdacencdkjncpojdgff)
-- [Directory](https://www.adapt.io/directory/industry)
-- [Blog](https://blog.adapt.io)
-- [Company](https://www.adapt.io/about-us)
-- [Customers](https://www.adapt.io/customers)
-- [Contact Us](https://www.adapt.io/contact-us)
-- [Privacy Policy](https://www.adapt.io/privacy-policy)
-- [Terms of Service](https://www.adapt.io/terms-of-service)
-- [LinkedIn](https://www.linkedin.com/company/adapt-io)
-- [Twitter](https://twitter.com/adapt_io)
-- [Features](undefined)
+- [Sign up](https://www.adapt.io/free-trial)
+- [Support](https://www.adapt.io/contact-us/)
+- [Blog](https://www.adapt.io/blog/)
+- [Terms of service](https://www.adapt.io/termsAndConditions.htm)
+- [Privacy policy](https://www.adapt.io/privacy.htm)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 53.9** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 50.7 |
+| Contract governance | 14.4 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 63.2 |
+| Access clarity | 84.2 |
+
+**Agent readiness 24.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/adapt-io/](https://apis.io/providers/adapt-io/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Adapt: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/adapt-io/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
